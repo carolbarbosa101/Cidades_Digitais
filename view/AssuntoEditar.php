@@ -47,7 +47,6 @@
                     <label for="recipient-cod_assunto" class="col-form-label">Código Assunto:</label>
                     <input disabled 
                       value="<?php echo $cod_assunto ?>"
-                      placeholder=""
                       type="text" 
                       class="form-control"
                       maxlength="255" 
@@ -59,7 +58,7 @@
                     <input  
                       value="<?php echo $descricao ?>"
                       name="descricao"
-                      placeholder=""
+                      placeholder="descricao do assunto"
                       type="text" 
                       class="form-control"
                       maxlength="45" 
