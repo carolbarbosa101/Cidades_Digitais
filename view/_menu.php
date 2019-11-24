@@ -17,6 +17,7 @@
     "Reajuste"=> '<i class="fas fa-sliders-h"></i>',
     "Telefone"=> '<i class="fas fa-sliders-h"></i>',
     "Tipologia"=> '<i class="fas fa-sliders-h"></i>',
+    "Tipologia"=> '<i class="fas fa-sliders-h"></i>',
     "Uacom"=> '<i class="fas fa-sliders-h"></i>',
     "Usuario"=> '<i class="fas fa-sliders-h"></i>'
 
