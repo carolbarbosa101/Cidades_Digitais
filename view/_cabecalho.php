@@ -1,5 +1,5 @@
 <?php
-define("URL", "http://localhost/Cidades_Digitais/");
+define("URL", "http://localhost:83/Cidades_Digitais/");
 //define("URL", "http://172.25.116.2:8080/Cidades_Digitais/");
   session_start();
 ?>

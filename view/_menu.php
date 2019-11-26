@@ -13,10 +13,12 @@
     "Municipios" => '<i class="fas fa-globe-asia"></i>',
     "Pid"=> '<i class="fas fa-sliders-h"></i>',
     "Prefeitos"=> '<i class="fas fa-sliders-h"></i>',
+    "PrevisaoEmpenho"=> '<i class="fas fa-sliders-h"></i>',
     "Processo"=> '<i class="fas fa-sliders-h"></i>',
     "Reajuste"=> '<i class="fas fa-sliders-h"></i>',
     "Telefone"=> '<i class="fas fa-sliders-h"></i>',
     "Tipologia"=> '<i class="fas fa-sliders-h"></i>',
+    "TipologiaPid"=> '<i class="fas fa-sliders-h"></i>',
     "Tipologia"=> '<i class="fas fa-sliders-h"></i>',
     "Uacom"=> '<i class="fas fa-sliders-h"></i>',
     "Usuario"=> '<i class="fas fa-sliders-h"></i>'

@@ -3,7 +3,9 @@
     include_once("_cabecalho.php");
 
     // Buscar todos os cadastros no banco
-    require_once("../Controller/ControleListarTipologiaPid .php");
+    require_once("../Controller/ControleListarTipologiaPid.php");
+    require_once("../Controller/ControleTipologiaSelect.php");
+    require_once("../Controller/ControlePidSelect.php");
     // $array_dados
     ?>
     
@@ -18,12 +20,12 @@
             <h3 class="mb-0">Tipologia Pid </h3>
             <small>Descrição</small>
             </span>
+            
             </div>
             <div class="col-md-6 text-right">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".cadastrar-tipologiapid-modal-lg">
-                <i class="far fa-plus-square"></i>
-                Cadastrar
-                </button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".cadastrar-tipologiapid-modal-lg">
+               Cadastrar
+             </button>
             </div>
         </div>
 
@@ -43,8 +45,9 @@
                 <table class="table">
                   <thead>
                     <tr>
-                      <th scope="col">Código PID</th>
-                      <th scope="col">Código Tipologia</th>
+                      <th scope="col">PID</th>
+                      <th scope="col">Tipologia</th>
+                      <th scope="col">Ações</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -54,15 +57,12 @@
                     foreach($array_dados as $key => $value) {
                         ?>
                         <tr>
-                          <td><?php echo $value['cod_pid'] ?></td>
+                          <td><?php echo $value['nome'] ?></td>
                           <td><?php echo $value['descricao'] ?></td>
                           <td> 
                             <span class="d-flex">
-                            <a href="<?php echo URL ?>View/AssuntoEditar.php?cod_assunto=<?php echo $value['cod_assunto'] ?>" 
-                                class="btn btn-warning mr-1">
-                                Editar
-                          </a>
-                              <button onclick="apagarDados('<?php echo URL ?>Controller/ControleApagarAssunto.php?cod_assunto=<?php echo $value['cod_assunto'] ?>')" class="btn btn-danger">Excluir</button> 
+                            
+                              <button onclick="apagarDados('<?php echo URL ?>Controller/ControleApagarTipologiaPid.php?cod_pid=<?php echo $value['cod_pid'] ?>&cod_tipologia=<?php echo $value['cod_tipologia'] ?>')" class="btn btn-danger">Excluir</button> 
                             </span>
                           </td>
                         </tr>
@@ -79,19 +79,19 @@
 
 
     <!-- Modal de Cadastro -->
-    <div class="modal fade cadastrar-assunto-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myAssuntoModalLabel" aria-hidden="true">
+    <div class="modal fade cadastrar-tipologiapid-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myTipologiaPidModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           
           <div class="modal-header">
-            <h5 class="modal-title" id="myAssuntoModalLabel">
+            <h5 class="modal-title" id="myTipologiaPidModalLabel">
               <i class="far fa-plus-square"></i>
-              Cadastrar Assunto
+              Cadastrar Pid Tipologia
             </h5>
           </div>
 
           <!-- FORMULARIO -->
-          <form action="../Controller/ControleAssunto.php" method="post">
+          <form action="../Controller/ControleTipologiaPid.php" method="post">
 
             <div class="modal-body">
 
@@ -99,17 +99,34 @@
                 <div class="form-row">
                  
 
-                 
-                  <div class="form-group col-md-12">
-                    <label for="recipient-descricao" class="col-form-label">Descrição:</label>
-                    <input 
-                      name="descricao"
-                      placeholder=""
-                      type="text" 
-                      class="form-control"
-                      maxlength="45"
-                      id="recipient-descricao">
+                <div class="form-group col-md-12">
+                    <label for="recipient-cod_pid" class="col-form-label">Pid:</label>
+                    <select name="cod_pid" class="form-control" id="recipient-cod_pid">
+                      <option value="">Selecionar Pid</option>
+                      <?php 
+                        foreach($array_selectPid as $chave => $valor){
+                        ?>
+                        <option value="<?= $valor['cod_pid'] ?>"><?= $valor['nome'] ?></option>
+                        <?php 
+                        }
+                      ?>
+                    </select>
                   </div>
+
+                  <div class="form-group col-md-12">
+                    <label for="recipient-cod_tipologia" class="col-form-label">Tipologia:</label>
+                    <select name="cod_tipologia" class="form-control" id="recipient-cod_tipologia">
+                      <option value="">Selecionar Tipologia</option>
+                      <?php 
+                        foreach($array_selectTipologia as $chave => $valor){
+                        ?>
+                        <option value="<?= $valor['cod_tipologia'] ?>"><?= $valor['descricao'] ?></option>
+                        <?php 
+                        }
+                      ?>
+                    </select>
+                  </div>
+
                 </div>
             </div>
             <div class="modal-footer">
