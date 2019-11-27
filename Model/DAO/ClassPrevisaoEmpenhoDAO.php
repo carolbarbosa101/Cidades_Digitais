@@ -6,7 +6,7 @@ class ClassPrevisaoEmpenhoDAO {
     public function cadastrar(ClassPrevisaoEmpenho $cadastrarPrevisaoEmpenho) {
         try {
             $pdo = Conexao::getInstance();
-            $sql = "INSERT INTO previsao_empenho (cod_previsao_empenho, cod_lote, cod_natureza_despesa, data, tipo, ano_referencia) values (?,?, ?, ?,?,?)";
+            $sql = "INSERT INTO previsao_empenho (cod_previsao_empenho, cod_lote, cod_natureza_despesa, data, tipo, ano_referencia) values (?,?,?,?,?,?)";
             $stmt = $pdo->prepare($sql);
             $stmt->bindValue(1, $cadastrarPrevisaoEmpenho->getCod_previsao_empenho());
             $stmt->bindValue(2, $cadastrarPrevisaoEmpenho->getCod_lote());
