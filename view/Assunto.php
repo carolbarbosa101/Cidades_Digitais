@@ -45,7 +45,6 @@
                     <tr>
                       <th scope="col">Codigo Assunto</th>
                       <th scope="col">Descrição</th>
-                      <th scope="col">Ações</th>
                     </tr>
                   </thead>
                   <tbody>

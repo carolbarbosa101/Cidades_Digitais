@@ -4,8 +4,6 @@
 
     // Buscar todos os cadastros no banco
     require_once("../Controller/ControleListarPrevisaoEmpenho.php");
-
-    require_once("../Controller/ControleLoteSelect.php");
     // $array_dados
     ?>
     
@@ -21,10 +19,10 @@
             </span>
             </div>
             <div class="col-md-6 text-right">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".cadastrar-PrevisaoEmpenho-modal-lg">
-              <i class="far fa-plus-square"></i>
-              Cadastrar
-            </button>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".cadastrar-previsaoempenho-modal-lg">
+            <i class="far fa-plus-square"></i>
+            Cadastrar
+          </button>
         </div>
         </div>
 
@@ -69,8 +67,6 @@
                           <td><?php echo $value['tipo'] ?></td>
                           <td><?php echo $value['ano_referencia'] ?></td>
                         </tr>
-                        
-
                         <?php
                     }
                   ?>
@@ -83,7 +79,7 @@
     </main>
 
     <!-- Modal de Cadastro -->
-    <div class="modal fade cadastrar-PrevisaoEmpenho-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myPrevisaoEmprenhoModalLabel" aria-hidden="true">
+    <div class="modal fade cadastrar-previsaoempenho-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myPrevisaoEmprenhoModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           
@@ -95,7 +91,7 @@
           </div>
 
           <!-- FORMULARIO -->
-          <form action="../Controller/ControlePrevisaoEmpenho.php" method="post">
+          <form action="../Controller/ControlePrevisaoEmprenho.php" method="post">
 
             <div class="modal-body">
 
