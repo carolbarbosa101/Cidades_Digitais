@@ -17,7 +17,7 @@
       }
     </script>
     <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
-    <script src="<?php echo URL ?>View/js/jquery-3.4.1.min"></script>
+    <script src="<?php echo URL ?>View/js/jquery-3.4.1.min.js"></script>
     <script src="<?php echo URL ?>View/js/popper.min.js"></script>
     <script src="<?php echo URL ?>View/js/bootstrap.js"></script>
   </body>
