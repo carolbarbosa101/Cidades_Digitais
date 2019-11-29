@@ -41,7 +41,11 @@ class ClassEmpenhoDAO {
             $pdo = Conexao::getInstance();
             
 
-            $sql = "SELECT cod_previsao_empenho, data, contador FROM empenho ORDER BY cod_empenho ASC";
+            $sql = "SELECT CONCAT(natureza_despesa.descricao,  ' - ' , cod_natureza_despesa) AS previsao,
+            empenho.cod_empenho,empenho.data,empenho.contador
+            FROM empenho 
+            INNER JOIN natureza_despesa ON empenho.cod_previsao_empenho = natureza_despesa.cod_natureza_despesa
+            ORDER BY Previsao ASC";
             $stmt = $pdo->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll(); // fetchAll() retorna um array contendo varios dados. 
@@ -54,10 +58,10 @@ class ClassEmpenhoDAO {
         try {
             $pdo = Conexao::getInstance();
 
-            $sql = "SELECT cod_previsao_empenho, data, contador 
-            FROM empenho 
-            WHERE cod_empenho = ? 
-            LIMIT 1";
+            $sql = "SELECT CONCAT(previsao_empenho.cod_previsao_empenho,  ' - ' , previsao_empenho.cod_lote, ' - ' , previsao_empenho.cod_natureza_despesa) AS previsao,
+            previsao_empenho.cod_previsao_empenho
+            FROM previsao_empenho 
+            ORDER BY previsao_empenho.cod_previsao_empenho ASC";
 
             $stmt = $pdo->prepare($sql);
 
