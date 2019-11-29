@@ -4,6 +4,9 @@
 
     // Buscar todos os cadastros no banco
     require_once("../Controller/ControleListarPrevisaoEmpenho.php");
+    require_once("../Controller/ControleLoteSelect.php");
+    require_once("../Controller/ControleNaturezaDespesaSelect.php");
+
     // $array_dados
     ?>
     
@@ -19,7 +22,7 @@
             </span>
             </div>
             <div class="col-md-6 text-right">
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".cadastrar-previsaoempenho-modal-lg">
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".cadastrar-previsao_empenho-modal-lg">
             <i class="far fa-plus-square"></i>
             Cadastrar
           </button>
@@ -44,7 +47,7 @@
                     <tr>
                       <th scope="col">Cód. Previsão Empenho</th>
                       <th scope="col">Cód. Lote</th>
-                      <th scope="col">Natureza de Despesa</th>
+                      <th scope="col">Cód. Natureza de Despesa</th>
                       <th scope="col">Data</th>
                       <th scope="col">Tipo</th>
                       <th scope="col">Ano de Referência</th>
@@ -79,7 +82,7 @@
     </main>
 
     <!-- Modal de Cadastro -->
-    <div class="modal fade cadastrar-previsaoempenho-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myPrevisaoEmprenhoModalLabel" aria-hidden="true">
+    <div class="modal fade cadastrar-previsao_empenho-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myPrevisaoEmprenhoModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           
@@ -97,6 +100,7 @@
 
                 <!-- Input cod_previsao_empenho -->
                 <div class="form-row">
+
                   <div class="form-group col-md-12">
                     <label for="recipient-cod_lote" class="col-form-label">Código Lote:</label>
                     <select name="cod_lote" class="form-control" id="recipient-cod_lote">
@@ -112,14 +116,17 @@
                   </div>
 
                   <div class="form-group col-md-12">
-                    <label for="recipient-cod_natureza_despesa" class="col-form-label">Descrição Natureza de Despesa:</label>
-                    <input 
-                      name="cod_natureza_despesa"
-                      placeholder=""
-                      type="text" 
-                      class="form-control"
-                      maxlength="" 
-                      id="recipient-cod_natureza_despesa">
+                    <label for="recipient-cod_natureza_despesa" class="col-form-label">Descrição da Natureza:</label>
+                    <select name="cod_natureza_despesa" class="form-control" id="recipient-cod_natureza_despesa">
+                      <option value="">Selecionar Natureza</option>
+                      <?php 
+                        foreach($array_selectNaturezaDespesa as $chave => $valor){
+                        ?>
+                        <option value="<?= $valor['cod_natureza_despesa'] ?>"><?= $valor['cod_natureza_despesa'] ?></option>
+                        <?php 
+                        }
+                      ?>
+                    </select>
                   </div>
 
                   <div class="form-group col-md-12">

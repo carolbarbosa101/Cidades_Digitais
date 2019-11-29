@@ -39,6 +39,8 @@ class ClassEmpenhoDAO {
     public function listarEmpenho(){
         try {
             $pdo = Conexao::getInstance();
+            
+
             $sql = "SELECT cod_previsao_empenho, data, contador FROM empenho ORDER BY cod_empenho ASC";
             $stmt = $pdo->prepare($sql);
             $stmt->execute();
