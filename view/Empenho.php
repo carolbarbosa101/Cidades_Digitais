@@ -4,7 +4,8 @@
 
     // Buscar todos os cadastros no banco
     require_once("../Controller/ControleListarEmpenho.php");
-    // $array_dados
+    require_once("../Controller/ControlePrevisaoEmpenhoSelect.php");
+    //$array_dados
     ?>
     
     <!-- Conteudo -->
@@ -45,10 +46,10 @@
                 <table class="table">
                   <thead>
                     <tr>
-                        <th scope="col">Código Empenho</th>
+                        <th scope="col">Empenho</th>
                         <th scope="col">Previsão de Empenho</th>
                         <th scope="col">Data</th>
-                        <th scope="col">Contador</th>
+                        
                     </tr>
                   </thead>
                   <tbody>
@@ -58,20 +59,12 @@
                     foreach ($array_dados as $key => $value) {
                         ?>
                         <tr>
-
+                        
                           <td><?php echo $value['cod_empenho'] ?></td>
                           <td><?php echo $value['cod_previsao_empenho'] ?></td>
                           <td><?php echo $value['data'] ?></td>
-                          <td><?php echo $value['contador'] ?></td>
-                          <td> 
-                            <span class="d-flex">
-                              <a href="<?php echo URL ?>View/EmpenhoEditar.php?cod_empenho=<?php echo $value['cod_empenho'] ?>" class="btn btn-warning mr-1">
-                              Editar
-                            </a> 
-                            <button onclick="apagarDados('<?php echo URL ?>Controller/ControleApagarEmpenho.php?cod_empenho=<?php echo $value['cod_empenho'] ?>')" class="btn btn-danger">
-                              Excluir
-                            </button> 
-                            </span>
+                          
+                          
                           </td>
 
                         </tr>
@@ -119,11 +112,11 @@
                   <div class="form-group col-md-12">
                     <label for="recipient-cod_previsao_empenho" class="col-form-label">Código Previsão de Empenho:</label>
                     <select name="cod_previsao_empenho" class="form-control" id="recipient-cod_previsao_empenho">
-                      <option value="">Selecionar Data de Empenho</option>
+                      <option value="">Selecionar Empenho</option>
                       <?php 
                         foreach($array_selectCd as $chave => $valor){
                         ?>
-                        <option value="<?= $valor['cod_previsao_empenho'] ?>"><?= $valor['data'] ?></option>
+                        <option value="<?= $valor['cod_previsao_empenho'] ?>"><?= $valor['cod_previsao_empenho'] ?></option>
                         <?php 
                         }
                       ?>
@@ -142,7 +135,7 @@
                       id="recipient-data">
                   </div>
 
-                  <div class="form-group col-md-12">
+                  <!--<div class="form-group col-md-12">
                     <label for="recipient-contador" class="col-form-label">Contador:</label>
                     <input 
                       name="contador"
@@ -151,7 +144,7 @@
                       class="form-control"
                       maxlength="" 
                       id="recipient-contador">
-                  </div>
+                  </div>-->
 
             </div>
 

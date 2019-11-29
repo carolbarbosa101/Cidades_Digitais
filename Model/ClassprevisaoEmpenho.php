@@ -1,8 +1,7 @@
 <?php
 
 class ClassPrevisaoEmpenho {
-    private $cod_previsao_empenho, $cod_lote, $cod_natureza_despesa,;
-    private  $data, $tipo, $ano_referencia;
+    private $cod_previsao_empenho, $cod_lote, $cod_natureza_despesa, $data, $tipo, $ano_referencia;
                   
 	function getCod_previsao_empenho() {
         return $this->cod_previsao_empenho;

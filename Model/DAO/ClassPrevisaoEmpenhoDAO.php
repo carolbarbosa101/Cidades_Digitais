@@ -26,9 +26,11 @@ class ClassPrevisaoEmpenhoDAO {
     public function listarPrevisaoEmpenho(){
         try {
             $pdo = Conexao::getInstance();
-            $sql = "SELECT cod_previsao_empenho, cod_lote, cod_natureza_despesa, data, tipo, ano_referencia
-             FROM previsao_empenho
-             ORDER BY cod_previsao_empenho ASC";
+            $sql = "SELECT      previsao_empenho.*,
+            CONCAT(natureza_despesa.cod_natureza_despesa, ' - ', natureza_despesa.descricao) AS descricao
+            FROM previsao_empenho 
+            JOIN natureza_despesa ON previsao_empenho.cod_natureza_despesa = natureza_despesa.cod_natureza_despesa
+			ORDER BY previsao_empenho.cod_previsao_empenho ASC";
             $stmt = $pdo->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll(); // fetchAll() retorna um array contendo varios dados. 
