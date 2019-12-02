@@ -78,7 +78,7 @@ class ClassNaturezaDespesaDAO {
     public function todosNaturezaDespesa(){
         try {
             $pdo = Conexao::getInstance();
-            $sql = "SELECT cod_ibge, nome_municipio FROM municipio ORDER BY nome_municipio ASC";
+            $sql = "SELECT cod_natureza_despesa, descricao FROM natureza_despesa ORDER BY cod_natureza_despesa ASC";
             $stmt = $pdo->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll(); // fetchAll() retorna um array contendo varios dados. 

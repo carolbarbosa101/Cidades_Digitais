@@ -4,7 +4,7 @@
 
     // Buscar todos os cadastros no banco
     require_once("../Controller/ControleListarPrevisaoEmpenho.php");
-    require_once("../Controller/ControleLoteSelect.php");
+    require_once("../Controller/ControleNaturezaDespesaSelect.php");
     // $array_dados
     ?>
     
@@ -118,7 +118,7 @@
                     <select name="cod_natureza_despesa" class="form-control" id="recipient-cod_natureza_despesa">
                       <option value="">Selecionar Natureza</option>
                       <?php 
-                        foreach($array_selectLote as $chave => $valor){
+                        foreach($array_selectNaturezaDespesa as $chave => $valor){
                         ?>
                         <option value="<?= $valor['cod_natureza_despesa'] ?>"><?= $valor['cod_natureza_despesa'] ?></option>
                         <?php 
