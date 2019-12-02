@@ -3,7 +3,7 @@ require_once 'Conexao.php';
 class ClassEmpenhoDAO {
     
     public function cadastrar(ClassEmpenho $cadastrarEmpenho) {
-        try {
+        try 
             $pdo = Conexao::getInstance();
             $sql = "INSERT INTO empenho (cod_empenho, cod_previsao_empenho, data, contador) values (?,?,?,?)";
             $stmt = $pdo->prepare($sql);
@@ -39,6 +39,8 @@ class ClassEmpenhoDAO {
     public function listarEmpenho(){
         try {
             $pdo = Conexao::getInstance();
+   $sql = "SELECT cod_previsao_empenho, data, contador FROM empenho ORDER BY cod_empenho ASC";
+
             
 
             $sql = "SELECT CONCAT(natureza_despesa.descricao,  ' - ' , cod_natureza_despesa) AS previsao,
