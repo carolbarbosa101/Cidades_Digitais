@@ -43,9 +43,9 @@
                 <table class="table">
                   <thead>
                     <tr>
-                      <th scope="col">Cód. Previsão Empenho</th>
-                      <th scope="col">Cód. Lote</th>
-                      <th scope="col">Cód. Natureza de Despesa</th>
+                      <th scope="col">Previsão Empenho</th>
+                      <th scope="col">Lote</th>
+                      <th scope="col">Natureza de Despesa</th>
                       <th scope="col">Data</th>
                       <th scope="col">Tipo</th>
                       <th scope="col">Ano de Referência</th>
@@ -63,7 +63,7 @@
                         <tr>
                           <td><?php echo $value['cod_previsao_empenho'] ?></td>
                           <td><?php echo $value['cod_lote'] ?></td>
-                          <td><?php echo $value['cod_natureza_despesa'] ?></td>
+                          <td><?php echo $value['descricao'] ?></td>
                           <td><?php echo $value['data'] ?></td>
                           <td><?php echo $value['tipo'] ?></td>
                           <td><?php echo $value['ano_referencia'] ?></td>
@@ -92,7 +92,7 @@
           </div>
 
           <!-- FORMULARIO -->
-          <form action="../Controller/ControlePrevisaoEmprenho.php" method="post">
+          <form action="../Controller/ControlePrevisaoEmpenho.php" method="post">
 
             <div class="modal-body">
 
@@ -120,7 +120,7 @@
                       <?php 
                         foreach($array_selectLote as $chave => $valor){
                         ?>
-                        <option value="<?= $valor['cod_natureza_despesa'] ?>"><?= $valor['cod_natureza_despesa'] ?></option>
+                        <option value="<?= $valor['cod_natureza_despesa'] ?>"><?= $valor['descricao'] ?></option>
                         <?php 
                         }
                       ?>

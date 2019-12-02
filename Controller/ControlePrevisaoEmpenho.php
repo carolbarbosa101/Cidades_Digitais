@@ -21,12 +21,14 @@ $novoPrevisaoEmpenho->setData($data);
 $novoPrevisaoEmpenho->setTipo($tipo);
 $novoPrevisaoEmpenho->setAno_referencia($ano_referencia);
 
+//var_dump($novoPrevisaoEmpenho);
+//die();
+
 
 $classPrevisaoEmpenhoDAO = new ClassPrevisaoEmpenhoDAO();
 $previsao_empenho = $classPrevisaoEmpenhoDAO->cadastrar($novoPrevisaoEmpenho);
 
-//var_dump($previsao_empenho);
-//die();
+
 if($previsao_empenho == TRUE){
     $_SESSION['msg'] = '
         <div class="alert alert-success" role="alert">
