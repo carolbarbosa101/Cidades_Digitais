@@ -78,7 +78,12 @@ class ClassNaturezaDespesaDAO {
     public function todosNaturezaDespesa(){
         try {
             $pdo = Conexao::getInstance();
-            $sql = "SELECT cod_natureza_despesa, descricao FROM natureza_despesa ORDER BY cod_natureza_despesa ASC";
+            $sql = "SELECT cod_ibge, nome_municipio FROM municipio ORDER BY nome_municipio ASC";
+            $sql = "SELECT      previsao_empenho.cod_previsao_empenho,
+            CONCAT(natureza_despesa.cod_natureza_despesa, ' - ', natureza_despesa.descricao) AS descricao
+            FROM previsao_empenho 
+            JOIN natureza_despesa ON previsao_empenho.cod_natureza_despesa = natureza_despesa.cod_natureza_despesa
+			ORDER BY previsao_empenho.cod_previsao_empenho ASC";
             $stmt = $pdo->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll(); // fetchAll() retorna um array contendo varios dados. 
