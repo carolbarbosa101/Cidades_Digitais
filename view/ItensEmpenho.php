@@ -49,8 +49,8 @@
                 <table class="table">
                   <thead>
                     <tr>
-                        <th scope="col">Código de Empenho</th>
-                        <th scope="col">Código de Item</th>
+                        <th scope="col">Cód. de Empenho</th>
+                        <th scope="col">Cód. Item</th>
                         <th scope="col">Código Tipo de Item</th>
                         <th scope="col">Código Previsão de Empenho</th>
                         <th scope="col">Valor</th>
@@ -65,7 +65,7 @@
                         ?>
                         <tr>
 
-                          <td><?php echo $value['empenhoLista'] ?></td>
+                          <td><?php echo $value['cod_empenho'] ?></td>
                           <td><?php echo $value['itemLista'] ?></td>
                           <td><?php echo $value['tipo_itemLista'] ?></td>
                           <td><?php echo $value['previsaoLista'] ?></td>
@@ -113,18 +113,18 @@
 
             <div class="modal-body">
             <div class="form-group col-md-12">
-                    <label for="recipient-cod_empenho" class="col-form-label">Código Empenho:</label>
+            <label for="recipient-cod_empenho" class="col-form-label">Cód. Empenho:</label>
                     <select name="cod_empenho" class="form-control" id="recipient-cod_empenho">
-                      <option value="">Selecionar Item</option>
+                      <option value="">Cód. Empenho</option>
                       <?php 
                         foreach($array_selectEmpenho as $chave => $valor){
                         ?>
-                        <option value="<?= $valor['cod_empenho'] ?>"><?= $valor['empenho'] ?></option>
+                        <option value="<?= $valor['cod_empenho'] ?>"><?= $valor['cod_empenho'] ?></option>
                         <?php 
                         }
                       ?>
                     </select>
-                  </div>
+
                   
                   <div class="form-group col-md-12">
                     <label for="recipient-cod_item" class="col-form-label">Código Item:</label>
@@ -176,7 +176,7 @@
                     <input 
                       name="valor"
                       placeholder=""
-                      type="float" 
+                      type="number" 
                       class="form-control"
                       maxlength="12" 
                       id="recipient-valor">

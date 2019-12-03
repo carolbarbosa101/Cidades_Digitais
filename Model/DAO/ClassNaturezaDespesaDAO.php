@@ -26,11 +26,10 @@ class ClassNaturezaDespesaDAO {
             SET  descricao = ?
             WHERE cod_natureza_despesa = ? ";
             $stmt = $pdo->prepare($sql);
-            $stmt->bindValue(1, $editarNaturezaDespesa->getNome_municipio());
-            $stmt->bindValue(2, $editarNaturezaDespesa->getPopulacao());
+            $stmt->bindValue(1, $editarNaturezaDespesa->getDescricao());
 
 
-            $stmt->bindValue(14, $editarNaturezaDespesa->getCod_ibge());
+            $stmt->bindValue(2, $editarNaturezaDespesa->getCod_natureza_despesa());
            
             $stmt->execute();
             return TRUE;
@@ -42,7 +41,8 @@ class ClassNaturezaDespesaDAO {
     public function listarNaturezaDespesa(){
         try {
             $pdo = Conexao::getInstance();
-            $sql = "SELECT cod_ibge, nome_municipio, populacao, uf, regiao, cnpj, dist_capital, endereco, numero, complemento, bairro, idhm, latitude, longitude FROM municipio ORDER BY nome_municipio ASC";
+            $sql = "SELECT cod_natureza_despesa, descricao
+             FROM natureza_despesa ORDER BY cod_natureza_despesa ASC";
             $stmt = $pdo->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll(); // fetchAll() retorna um array contendo varios dados. 
@@ -55,14 +55,14 @@ class ClassNaturezaDespesaDAO {
         try {
             $pdo = Conexao::getInstance();
 
-            $sql = "SELECT cod_ibge, nome_municipio, populacao, uf, regiao, cnpj, dist_capital, endereco, numero, complemento, bairro, idhm, latitude, longitude 
-            FROM municipio 
-            WHERE cod_ibge = ? 
+            $sql = "SELECT cod_natureza_despesa, descricao 
+            FROM natureza_despesa 
+            WHERE cod_natureza_despesa = ? 
             LIMIT 1";
 
             $stmt = $pdo->prepare($sql);
 
-            $stmt->bindValue(1, $visualizarNaturezaDespesa->getCod_ibge());
+            $stmt->bindValue(1, $visualizarNaturezaDespesa->getCod_natureza_despesa());
 
             $stmt->execute();
             return $stmt->fetchAll(); // fetchAll() retorna um array contendo varios dados. 
@@ -71,18 +71,12 @@ class ClassNaturezaDespesaDAO {
         }
     }
 
-    /**
-     * Buscar todos os municipios para exibir em tabelas que precisa
-     * do codigo ibge, ou seja tabela de relacionamento com municipio
-     */
     public function todosNaturezaDespesa(){
         try {
             $pdo = Conexao::getInstance();
-            $sql = "SELECT      previsao_empenho.cod_previsao_empenho,
-            CONCAT(natureza_despesa.cod_natureza_despesa, ' - ', natureza_despesa.descricao) AS descricao
-            FROM previsao_empenho 
-            JOIN natureza_despesa ON previsao_empenho.cod_natureza_despesa = natureza_despesa.cod_natureza_despesa
-			ORDER BY previsao_empenho.cod_previsao_empenho ASC";
+            $sql = "SELECT cod_natureza_despesa, descricao
+            FROM natureza_despesa
+            ORDER BY cod_natureza_despesa ASC";
             $stmt = $pdo->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll(); // fetchAll() retorna um array contendo varios dados. 
@@ -95,9 +89,9 @@ class ClassNaturezaDespesaDAO {
     public function apagarNaturezaDespesa(ClassNaturezaDespesa $apagarNaturezaDespesa) {
         try {
             $pdo = Conexao::getInstance();
-            $sql = "DELETE FROM municipio WHERE cod_ibge = ?";
+            $sql = "DELETE FROM natureza_despesa WHERE cod_natureza_despesa = ?";
             $stmt = $pdo->prepare($sql);
-            $stmt->bindValue(1, $apagarNaturezaDespesa->getCod_ibge());
+            $stmt->bindValue(1, $apagarNaturezaDespesa->getCod_natureza_despesa());
            
             $stmt->execute();
             return TRUE;

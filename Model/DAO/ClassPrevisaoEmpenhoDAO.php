@@ -42,10 +42,9 @@ class ClassPrevisaoEmpenhoDAO {
     public function todosPrevisaoEmpenho(){
         try {
             $pdo = Conexao::getInstance();
-            $sql = "SELECT CONCAT(previsao_empenho.cod_previsao_empenho, ' - ', previsao_empenho.ano_referencia, ' - ', previsao_empenho.data) AS previsao, 
-            previsao_empenho.cod_previsao_empenho
+            $sql = "SELECT cod_previsao_empenho
             FROM previsao_empenho 
-			ORDER BY previsao_empenho.cod_previsao_empenho ASC";
+			ORDER BY cod_previsao_empenho ASC";
             $stmt = $pdo->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll(); // fetchAll() retorna um array contendo varios dados. 
