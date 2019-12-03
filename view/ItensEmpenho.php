@@ -4,6 +4,10 @@
 
     // Buscar todos os cadastros no banco
     require_once("../Controller/ControleListarItensEmpenho.php");
+    require_once("../Controller/ControleEmpenhoSelect.php");
+    require_once("../Controller/ControleItensSelect.php");
+    require_once("../Controller/ControleTipoItemSelect.php");
+    require_once("../Controller/ControlePrevisaoEmpenhoSelect.php");
     // $array_dados
     ?>
     
@@ -61,15 +65,15 @@
                         ?>
                         <tr>
 
-                          <td><?php echo $value['cod_empenho'] ?></td>
-                          <td><?php echo $value['cod_item'] ?></td>
-                          <td><?php echo $value['cod_tipo_item'] ?></td>
-                          <td><?php echo $value['cod_previsao_empenho'] ?></td>
+                          <td><?php echo $value['empenhoLista'] ?></td>
+                          <td><?php echo $value['itemLista'] ?></td>
+                          <td><?php echo $value['tipo_itemLista'] ?></td>
+                          <td><?php echo $value['previsaoLista'] ?></td>
                           <td><?php echo $value['valor'] ?></td>
                           <td><?php echo $value['quantidade'] ?></td>
                           <td> 
                             <span class="d-flex">
-                              <a href="<?php echo URL ?>View/ItensEmpenhoEditar.php?cod_empenho=<?php echo $value['cod_empenho'] ?>" class="btn btn-warning mr-1">
+                              <a href="<?php echo URL ?>View/ItensEmpenhoEditar.php?cod_empenho=<?php echo $value['cod_empenho'] ?>&cod_item=<?php echo $value['cod_item'] ?>&cod_tipo_item=<?php echo $value['cod_tipo_item'] ?>&cod_previsao_empenho=<?php echo $value['cod_previsao_empenho'] ?>&valor=<?php echo $value['valor'] ?>&quantidade=<?php echo $value['quantidade'] ?>" class="btn btn-warning mr-1">
                               Editar
                             </a> 
                             <button onclick="apagarDados('<?php echo URL ?>Controller/ControleApagarItensEmpenho.php?cod_empenho=<?php echo $value['cod_empenho'] ?>')" class="btn btn-danger">
@@ -108,50 +112,61 @@
           <form action="../Controller/ControleItensEmpenho.php" method="post">
 
             <div class="modal-body">
-
             <div class="form-group col-md-12">
-                    <label for="recipient-cod_empenho" class="col-form-label">Código de Empenho:</label>
-                    <input 
-                      name="cod_empenho"
-                      placeholder=""
-                      type="text" 
-                      class="form-control"
-                      maxlength="13" 
-                      id="recipient-cod_empenho">
+                    <label for="recipient-cod_empenho" class="col-form-label">Código Empenho:</label>
+                    <select name="cod_empenho" class="form-control" id="recipient-cod_empenho">
+                      <option value="">Selecionar Item</option>
+                      <?php 
+                        foreach($array_selectEmpenho as $chave => $valor){
+                        ?>
+                        <option value="<?= $valor['cod_empenho'] ?>"><?= $valor['empenho'] ?></option>
+                        <?php 
+                        }
+                      ?>
+                    </select>
                   </div>
                   
                   <div class="form-group col-md-12">
-                    <label for="recipient-cod_item" class="col-form-label">Código de Item:</label>
-                    <input 
-                      name="cod_item"
-                      placeholder=""
-                      type="int" 
-                      class="form-control"
-                      maxlength="" 
-                      id="recipient-cod_item">
+                    <label for="recipient-cod_item" class="col-form-label">Código Item:</label>
+                    <select name="cod_item" class="form-control" id="recipient-cod_item">
+                      <option value="">Selecionar Item</option>
+                      <?php 
+                        foreach($array_selectItens as $chave => $valor){
+                        ?>
+                        <option value="<?= $valor['cod_item'] ?>"><?= $valor['item'] ?></option>
+                        <?php 
+                        }
+                      ?>
+                    </select>
                   </div>
                     
 
                   <div class="form-group col-md-12">
-                    <label for="recipient-cod_tipo_item" class="col-form-label">Código Tipo de Item:</label>
-                    <input 
-                      name="cod_tipo_item"
-                      placeholder=""
-                      type="int" 
-                      class="form-control"
-                      maxlength="" 
-                      id="recipient-cod_tipo_item">
+                    <label for="recipient-cod_tipo_item" class="col-form-label">Código Tipo Item:</label>
+                    <select name="cod_tipo_item" class="form-control" id="recipient-cod_tipo_item">
+                      <option value="">Selecionar Tipo Item</option>
+                      <?php 
+                        foreach($array_selectTipoItem as $chave => $valor){
+                        ?>
+                        <option value="<?= $valor['cod_tipo_item'] ?>"><?= $valor['tipo'] ?></option>
+                        <?php 
+                        }
+                      ?>
+                    </select>
                   </div>
 
                   <div class="form-group col-md-12">
-                    <label for="recipient-cod_previsao_empenho" class="col-form-label">Código da Previsão de Empenho:</label>
-                    <input 
-                      name="cod_previsao_empenho"
-                      placeholder=""
-                      type="int" 
-                      class="form-control"
-                      maxlength="" 
-                      id="recipient-cod_previsao_empenho">
+                    <label for="recipient-cod_previsao_empenho" class="col-form-label">Código Previsão Empenho:</label>
+                    <select name="cod_previsao_empenho" class="form-control" id="recipient-cod_previsao_empenho">
+                      <option value="">Selecionar Previsão de Empenho</option>
+                      <?php 
+                        foreach($array_selectPrevisaoEmpenho as $chave => $valor){
+                        ?>
+                        <option value="<?= $valor['cod_previsao_empenho'] ?>"><?= $valor['previsao'] ?></option>
+                        <?php 
+                        }
+                      ?>
+                    </select>
                   </div>
 
 

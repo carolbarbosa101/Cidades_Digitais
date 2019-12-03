@@ -4,19 +4,12 @@ session_start();
 
 // como não tem uma chave primária e só estrangeira, eu fiz um if com todas as estrangeiras
 $cod_empenho = @$_GET["cod_empenho"]; 
-$cod_empenho = @$_GET['cod_empenho'];
 $cod_item = @$_GET['cod_item'];
 $cod_tipo_item = @$_GET['cod_tipo_item'];
 $cod_previsao_empenho = @$_GET['cod_previsao_empenho'];
 
 if (empty($cod_empenho)) {
-    if (empty($cod_empenho)) {
-        if (empty($cod_empenho)) {
-            if (empty($cod_empenho)) {
-                header('Location:../View/ItensEmpenho.php');
-            }
-        }
-    }
+    header('Location:../View/ItensEmpenho.php');
 }
 
 require_once '../Model/ClassItensEmpenho.php';

@@ -4,8 +4,9 @@
 
     // Buscar todos os cadastros no banco
     require_once("../Controller/ControleListarPrevisaoEmpenho.php");
-    require_once("../Controller/ControleNaturezaDespesaSelect.php");
     require_once("../Controller/ControleLoteSelect.php");
+    require_once("../Controller/ControleNaturezaDespesaSelect.php");
+
     // $array_dados
     ?>
     
@@ -65,7 +66,7 @@
                           <td><?php echo $value['cod_previsao_empenho'] ?></td>
                           <td><?php echo $value['cod_lote'] ?></td>
                           <td><?php echo $value['descricao'] ?></td>
-                          <td><?php echo $value['data'] ?></td>
+                          <td><?php echo date('d/m/Y', strtotime($value['data']))?> </td>
                           <td><?php echo $value['tipo'] ?></td>
                           <td><?php echo $value['ano_referencia'] ?></td>
                         </tr>
