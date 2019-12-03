@@ -5,6 +5,7 @@
     // Buscar todos os cadastros no banco
     require_once("../Controller/ControleListarPrevisaoEmpenho.php");
     require_once("../Controller/ControleNaturezaDespesaSelect.php");
+    require_once("../Controller/ControleLoteSelect.php");
     // $array_dados
     ?>
     
