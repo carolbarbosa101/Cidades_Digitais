@@ -125,13 +125,13 @@
                     </select>
                   </div>
                     
-
+                
                   <div class="form-group col-md-12">
-                    <label for="recipient-data" class="col-form-label">Data:</label>
+                    <label for="recipient-data" class="col-form-label"></label>
                     <input 
                       name="data"
-                      placeholder=""
-                      type="datetime-local" 
+                      value="<?php echo date('Y-m-d H:i:s') ?>"
+                      type="hidden" 
                       class="form-control"
                       maxlength="" 
                       id="recipient-data">
