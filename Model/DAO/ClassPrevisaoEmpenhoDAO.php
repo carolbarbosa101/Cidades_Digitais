@@ -43,8 +43,8 @@ class ClassPrevisaoEmpenhoDAO {
         try {
             $pdo = Conexao::getInstance();
             $sql = "SELECT cod_previsao_empenho
-            FROM previsao_empenho
-            ORDER BY cod_previsao_empenho ASC";
+            FROM previsao_empenho 
+			ORDER BY cod_previsao_empenho ASC";
             $stmt = $pdo->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll(); // fetchAll() retorna um array contendo varios dados. 

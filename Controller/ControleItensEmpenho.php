@@ -21,7 +21,7 @@ $novoItensEmpenho->setValor($valor);
 $novoItensEmpenho->setQuantidade($quantidade);
 
 $classItensEmpenhoDAO = new ClassItensEmpenhoDAO();
-$itens_empenho = $classItensEmpenhoDAO->cadastrar($novaItensEmpenho);
+$itens_empenho = $classItensEmpenhoDAO->cadastrar($novoItensEmpenho);
 
 //var_dump($itens_empenho);
 //die();

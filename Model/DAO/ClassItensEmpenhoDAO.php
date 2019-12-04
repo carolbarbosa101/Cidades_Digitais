@@ -6,6 +6,11 @@ class ClassItensEmpenhoDAO {
 
     
     public function cadastrar(ClassItensEmpenho $cadastrarItensEmpenho) {
+        //var_dump($cadastrarItensEmpenho);
+        //die;
+
+
+        //Não cadastra diretamente, é cadastrado por meio de uma trigger
         try {
             $pdo = Conexao::getInstance();
             $sql = "INSERT INTO itens_empenho (cod_empenho,cod_item,cod_tipo_item,cod_previsao_empenho,valor,quantidade) values (?,?,?,?,?,?)";
@@ -24,21 +29,45 @@ class ClassItensEmpenhoDAO {
         }
     }
 
+    // apagar registro pelo id
+    public function apagarItensEmpenho(ClassItensEmpenho $apagarItensEmpenho) {
+        try {
+            //var_dump($apagarItensEmpenho);
+            //die;
 
-    public function update(ClassCdItens $editarCdItens) {
+            $pdo = Conexao::getInstance();
+            $sql = "DELETE FROM itens_empenho 
+            WHERE cod_empenho = ? AND cod_item = ? AND cod_tipo_item = ? AND cod_previsao_empenho = ?";
+            $stmt = $pdo->prepare($sql);
+            
+            $stmt->bindValue(1, $apagarItensEmpenho->getCod_empenho());
+            $stmt->bindValue(2, $apagarItensEmpenho->getCod_item());
+            $stmt->bindValue(3, $apagarItensEmpenho->getCod_tipo_item());
+            $stmt->bindValue(4, $apagarItensEmpenho->getCod_previsao_empenho());
+
+            
+           
+            $stmt->execute();
+            return TRUE;
+        } catch (PDOException $exc) {
+            echo $exc->getMessage();
+        }
+    }
+
+    public function update(ClassItensEmpenho $editarItensEmpenho) {
         try {
             $pdo = Conexao::getInstance();
             $sql = "UPDATE itens_empenho SET valor = ?, quantidade = ? 
             WHERE cod_empenho = ? AND cod_item = ? AND cod_tipo_item = ? AND cod_previsao_empenho = ?";
             $stmt = $pdo->prepare($sql);
           
-            $stmt->bindValue(1, $editarCdItens->getValor());
-            $stmt->bindValue(2, $editarCdItens->getQuantidade());
+            $stmt->bindValue(1, $editarItensEmpenho->getValor());
+            $stmt->bindValue(2, $editarItensEmpenho->getQuantidade());
 
-            $stmt->bindValue(3, $editarCdItens->getCod_empenho());
-            $stmt->bindValue(4, $editarCdItens->getCod_item());
-            $stmt->bindValue(5, $editarCdItens->getCod_tipo_item());
-            $stmt->bindValue(6, $editarCdItens->getCod_previsao_empenho());
+            $stmt->bindValue(3, $editarItensEmpenho->getCod_empenho());
+            $stmt->bindValue(4, $editarItensEmpenho->getCod_item());
+            $stmt->bindValue(5, $editarItensEmpenho->getCod_tipo_item());
+            $stmt->bindValue(6, $editarItensEmpenho->getCod_previsao_empenho());
            
             $stmt->execute();
             return TRUE;
@@ -48,19 +77,23 @@ class ClassItensEmpenhoDAO {
     }
 
 
-    ???????????????????????????????????????????????????????????????????????????????????????
+    
     //Não sei como deveria ser a listagem da função listar e visualizar
     public function listarItensEmpenho(){
         try {
             $pdo = Conexao::getInstance();
-            $sql = "SELECT 
-            municipio.nome_municipio, 
-            CONCAT (itens.cod_tipo_item, '.', itens.cod_item, ' - ', itens.descricao) AS descricao, 
-            cd_itens.*
-            FROM cd_itens 
-            INNER JOIN municipio ON cd_itens.cod_ibge = municipio.cod_ibge
-            INNER JOIN itens ON cd_itens.cod_item = itens.cod_item AND cd_itens.cod_tipo_item = itens.cod_tipo_item
-            ORDER BY municipio.nome_municipio, itens.cod_tipo_item, itens.cod_item ASC";
+            $sql = "SELECT CONCAT(empenho.cod_empenho, ' - ', empenho.data) AS empenhoLista, 
+            CONCAT(itens.cod_item, ' - ', itens.descricao, ' - ', itens.unidade) AS itemLista,
+            CONCAT(tipo_item.cod_tipo_item, ' - ', tipo_item.descricao) AS tipo_itemLista,
+            CONCAT(previsao_empenho.cod_previsao_empenho, ' - ', previsao_empenho.data) AS previsaoLista,
+            empenho.cod_empenho, itens.cod_item, tipo_item.cod_tipo_item, previsao_empenho.cod_previsao_empenho, itens_empenho.valor, itens_empenho.quantidade
+            FROM itens_empenho
+            INNER JOIN empenho ON itens_empenho.cod_empenho = empenho.cod_empenho
+            INNER JOIN itens ON itens_empenho.cod_item = itens.cod_item
+            INNER JOIN tipo_item ON itens_empenho.cod_tipo_item = tipo_item.cod_tipo_item
+            INNER JOIN previsao_empenho ON itens_empenho.cod_previsao_empenho = previsao_empenho.cod_previsao_empenho
+            ORDER BY itens_empenho.cod_empenho ASC";
+
             $stmt = $pdo->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll();
@@ -69,23 +102,41 @@ class ClassItensEmpenhoDAO {
         }
     }
 
+    /**SELECT valor, quantidade,
+            CONCAT(empenho.cod_empenho, ' - ', empenho.data) AS empenhoLista
+            FROM itens_empenho
+            INNER JOIN empenho ON itens_empenho.cod_empenho = empenho.cod_empenho
+            ORDER BY itens_empenho.cod_empenho ASC;
+            
+            SELECT CONCAT(itens.cod_item, ' - ', itens.descricao, ' - ', itens.unidade) AS itemLista
+            FROM itens_empenho
+            INNER JOIN itens ON itens_empenho.cod_item = itens.cod_item
+            ORDER BY itens_empenho.cod_empenho ASC;
+            
+            SELECT CONCAT(tipo_item.cod_tipo_item, ' - ', tipo_item.descricao) AS tipo_itemLista
+            FROM itens_empenho
+            INNER JOIN tipo_item ON itens_empenho.cod_tipo_item = tipo_item.cod_tipo_item
+            ORDER BY itens_empenho.cod_empenho ASC;
+            
+            SELECT CONCAT(previsao_empenho.cod_previsao_empenho, ' - ', previsao_empenho.data) AS previsaoLista
+            FROM itens_empenho
+            INNER JOIN previsao_empenho ON itens_empenho.cod_previsao_empenho = previsao_empenho.cod_previsao_empenho
+            ORDER BY itens_empenho.cod_empenho ASC */
+
     public function visualizarItensEmpenho(ClassItensEmpenho $visualizarItensEmpenho){
-        //var_dump($visualizarCdItens);
+        //var_dump($visualizarItensEmpenho);
+        //die;
         try {
             $pdo = Conexao::getInstance();
-            $sql = "SELECT 
-            municipio.nome_municipio, 
-            CONCAT (itens.cod_tipo_item, '.', itens.cod_item, ' - ', itens.descricao) AS descricao, 
-            cd_itens.*
-            FROM cd_itens 
-            INNER JOIN municipio ON cd_itens.cod_ibge = municipio.cod_ibge
-            INNER JOIN itens ON cd_itens.cod_item = itens.cod_item AND cd_itens.cod_tipo_item = itens.cod_tipo_item
-            WHERE municipio.cod_ibge = ? AND cd_itens.cod_item = ? AND cd_itens.cod_tipo_item = ?";
+            $sql = "SELECT *
+            FROM itens_empenho 
+            WHERE cod_empenho = ? AND cod_item = ? AND cod_tipo_item = ? AND cod_previsao_empenho = ?";
             $stmt = $pdo->prepare($sql);
 
-            $stmt->bindValue(1, $visualizarCdItens->getCod_ibge());
-            $stmt->bindValue(2, $visualizarCdItens->getCod_item());
-            $stmt->bindValue(3, $visualizarCdItens->getCod_tipo_item());
+            $stmt->bindValue(1, $visualizarItensEmpenho->getCod_empenho());
+            $stmt->bindValue(2, $visualizarItensEmpenho->getCod_item());
+            $stmt->bindValue(3, $visualizarItensEmpenho->getCod_tipo_item());
+            $stmt->bindValue(3, $visualizarItensEmpenho->getCod_previsao_empenho());
 
             $stmt->execute();
             $resultado = $stmt->fetchAll();

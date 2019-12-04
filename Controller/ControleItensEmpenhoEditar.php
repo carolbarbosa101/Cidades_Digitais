@@ -21,7 +21,7 @@ $novoItensEmpenho->setValor($valor);
 $novoItensEmpenho->setQuantidade($quantidade);
 
 $classItensEmpenhoDAO = new ClassItensEmpenhoDAO();
-$itens_empenho = $classItensEmpenhoDAO->update($novaItensEmpenho);
+$itens_empenho = $classItensEmpenhoDAO->update($novoItensEmpenho);
 
 
 //var_dump($itens_empenho);

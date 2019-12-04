@@ -3,8 +3,15 @@
     include_once("_cabecalho.php");
 
     // Buscar todos os cadastros no banco
-    require_once("../Controller/ControleEmpenhoVisualizar.php");
-    // $array_dados
+    require_once("../Controller/ControleItensEmpenhoVisualizar.php");
+    //require_once("../Controller/ControleEmpenhoSelect.php");
+
+
+    
+     
+     //var_dump($array_dados);
+     //die();
+     //$array_dados
     ?>
     
     <!-- Conteudo -->
@@ -16,7 +23,7 @@
             <i class="fas fa-globe-asia"></i>
             </span>
             <span>
-              <h3 class="mb-0">Editar Empenho</h3>
+              <h3 class="mb-0">Editar Itens Empenho</h3>
             </span>
           </div>
  
@@ -31,56 +38,79 @@
                     unset($_SESSION['msg']); // após exibir a informação do alerta, destruir a variavel, para que ao recarregar a página o alerta não permanessa na pagina.
                 }
             ?>
-
+          
           <?php 
-            if(!empty($array_dados)){
+            //if(!empty($array_dados)){
 
-              extract($array_dados);
+            //  extract($array_dados);
           ?>
 
           <!-- FORMULARIO -->
-          <form action="../Controller/ControleEmpenhoEditar.php" method="post">
+          <form action="../Controller/ControleItensEmpenhoEditar.php" method="post">
 
-            <div class="modal-body">
+            <div class="form_row">
 
                   <!-- Chave primaria para saber qual registro editar do banco | input hidden para que o usuario não visualize -->
                   <input name="cod_empenho" type="hidden" value="<?php echo $cod_empenho ?>"/>
-
-                  <div class="form-group col-md-12">
-                    <label for="recipient-cod_empenho" class="col-form-label">Código Empenho:</label>
-                    <input 
+                 
+                  <div class="form-group col-md-4">
+                    <label for="recipient-cod_empenho" class="col-form-label">Cód. Empenho:</label>
+                    <input disabled 
                       value="<?php echo $cod_empenho ?>"
-                      name="cod_empenho"
+                      type="text" 
+                      class="form-control"
+                      id="recipient-cod_empenho">
+                  </div>
+
+                  <div class="form-group col-md-4">
+                    <label for="recipient-cod_item" class="col-form-label">Cód. Item:</label>
+                    <input disabled 
+                      value="<?php echo $cod_item ?>"
+                      type="text" 
+                      class="form-control"
+                      id="recipient-cod_item">
+                  </div>
+
+                  <div class="form-group col-md-4">
+                    <label for="recipient-cod_tipo_item" class="col-form-label">Cód. Tipo Item:</label>
+                    <input disabled 
+                      value="<?php echo $cod_tipo_item ?>"
+                      type="text" 
+                      class="form-control"
+                      id="recipient-cod_tipo_item">
+                  </div>
+
+                  <div class="form-group col-md-4">
+                    <label for="recipient-cod_previsao_empenho" class="col-form-label">Cód. Previsão Empenho:</label>
+                    <input disabled 
+                      value="<?php echo $cod_previsao_empenho ?>"
+                      type="text" 
+                      class="form-control"
+                      id="recipient-cod_previsao_empenho">
+                  </div>
+                    
+                  <div class="form-group col-md-12">
+                    <label for="recipient-valor" class="col-form-label">Valor:</label>
+                    <input 
+                      value="<?php echo $valor ?>"
+                      name="valor"
                       placeholder=""
                       type="int" 
                       class="form-control"
-                      maxlength="13"
-                      id="recipient-cod_empenho">
+                      maxlength="12"
+                      id="recipient-valor">
                   </div>
                   
                   <div class="form-group col-md-12">
-                    <label for="recipient-cod_previsao_empenho" class="col-form-label">Código Previsão de Empenho:</label>
+                    <label for="recipient-quantidade" class="col-form-label">Quantidade:</label>
                     <input 
-                      value="<?php echo $cod_previsao_empenho ?>"
-                      name="cod_previsao_empenho"
+                      value="<?php echo $quantidade ?>"
+                      name="quantidade"
                       placeholder=""
                       type="int" 
                       class="form-control"
                       maxlength=""
-                      id="recipient-cod_previsao_empenho">
-                  </div>
-                    
-
-                  <div class="form-group col-md-12">
-                    <label for="recipient-data" class="col-form-label">Data da Nota Fiscal:</label>
-                    <input 
-                      value="<?php echo $data ?>"
-                      name="data"
-                      placeholder=""
-                      type="date" 
-                      class="form-control"
-                      maxlength="100"
-                      id="recipient-data">
+                      id="recipient-quantidade">
                   </div>
 
 
@@ -89,7 +119,7 @@
             </div>
 
             <div class="modal-footer">
-              <a href="<?php echo URL ?>View/Empenho.php" class="btn btn-secondary">Cancelar</a>
+              <a href="<?php echo URL ?>View/ItensEmpenho.php" class="btn btn-secondary">Cancelar</a>
               <button type="submit" class="btn btn-primary">
                 Salvar
               </button>
@@ -98,7 +128,7 @@
           </form>
 
           <?php 
-            } // fim do if para verificar se existe dados para editar
+            //} // fim do if para verificar se existe dados para editar
           ?>
 
         </div>
@@ -110,19 +140,19 @@
 
 
     <!-- Modal de Cadastro -->
-    <div class="modal fade cadastrar-empenho-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myEmpenhoModalLabel" aria-hidden="true">
+    <div class="modal fade cadastrar-empenho-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myItensEmpenhoModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           
           <div class="modal-header">
-            <h5 class="modal-title" id="myEmpenhoModalLabel">
+            <h5 class="modal-title" id="myItensEmpenhoModalLabel">
               <i class="far fa-plus-square"></i>
-              Cadastrar Empenho
+              Cadastrar ItensEmpenho
             </h5>
           </div>
 
           <!-- FORMULARIO -->
-          <form action="../Controller/ControleEmpenhoEditar.php" method="post">
+          <form action="../Controller/ControleItensEmpenhoEditar.php" method="post">
 
             <div class="modal-body">
                 <div class="form-group col-md-12">

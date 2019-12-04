@@ -3,7 +3,7 @@ require_once 'Conexao.php';
 class ClassEmpenhoDAO {
     
     public function cadastrar(ClassEmpenho $cadastrarEmpenho) {
-        try 
+        try {
             $pdo = Conexao::getInstance();
             $sql = "INSERT INTO empenho (cod_empenho, cod_previsao_empenho, data, contador) values (?,?,?,?)";
             $stmt = $pdo->prepare($sql);
@@ -39,15 +39,13 @@ class ClassEmpenhoDAO {
     public function listarEmpenho(){
         try {
             $pdo = Conexao::getInstance();
-   $sql = "SELECT cod_previsao_empenho, data, contador FROM empenho ORDER BY cod_empenho ASC";
-
             
 
-            $sql = "SELECT CONCAT(natureza_despesa.descricao,  ' - ' , cod_natureza_despesa) AS previsao,
-            empenho.cod_empenho,empenho.data,empenho.contador
+            $sql = "SELECT		empenho.cod_empenho, CONCAT(previsao_empenho.cod_previsao_empenho, ' - ', natureza_despesa.descricao, ' - ', previsao_empenho.data) as previsao, empenho.data
             FROM empenho 
-            INNER JOIN natureza_despesa ON empenho.cod_previsao_empenho = natureza_despesa.cod_natureza_despesa
-            ORDER BY Previsao ASC";
+            INNER JOIN previsao_empenho ON empenho.cod_previsao_empenho = previsao_empenho.cod_previsao_empenho
+            INNER JOIN natureza_despesa ON previsao_empenho.cod_natureza_despesa = natureza_despesa.cod_natureza_despesa
+            ORDER BY empenho.cod_empenho ASC";
             $stmt = $pdo->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll(); // fetchAll() retorna um array contendo varios dados. 
@@ -94,7 +92,7 @@ class ClassEmpenhoDAO {
     public function todosEmpenho(){
         try {
             $pdo = Conexao::getInstance();
-            $sql = "SELECT cod_empenho, cod_previsao_empenho, data, contador FROM empenho ORDER BY cod_empenho ASC";
+            $sql = "SELECT cod_empenho, data, contador  FROM empenho";
             $stmt = $pdo->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll(); // fetchAll() retorna um array contendo varios dados. 
@@ -102,5 +100,10 @@ class ClassEmpenhoDAO {
             return $ex->getMessage();
         }
     }
-
+    /**SELECT CONCAT(empenho.cod_empenho,  ' - ' , empenho.data,  ' - ' , previsao_empenho.data) AS empenho,
+            empenho.cod_empenho,empenho.data
+            FROM empenho 
+            INNER JOIN previsao_empenho ON empenho.cod_previsao_empenho = previsao_empenho.cod_previsao_empenho
+            ORDER BY empenho ASC
+            */
 }

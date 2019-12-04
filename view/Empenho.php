@@ -5,6 +5,7 @@
     // Buscar todos os cadastros no banco
     require_once("../Controller/ControleListarEmpenho.php");
     require_once("../Controller/ControlePrevisaoEmpenhoSelect.php");
+
     //$array_dados
     ?>
     
@@ -46,9 +47,10 @@
                 <table class="table">
                   <thead>
                     <tr>
-                        <th scope="col">Empenho</th>
+                        <th scope="col">Cód. Empenho</th>
                         <th scope="col">Previsão de Empenho</th>
                         <th scope="col">Data</th>
+                        <th scope="col">Ações</th>
                         
                     </tr>
                   </thead>
@@ -61,8 +63,9 @@
                         <tr>
                         
                           <td><?php echo $value['cod_empenho'] ?></td>
-                          <td><?php echo $value['cod_previsao_empenho'] ?></td>
-                          <td><?php echo $value['data'] ?></td>
+                          <td><?php echo $value['previsao'] ?></td>
+                          <td><?php echo date('d/m/Y H:i', strtotime($value['data']))?> </td>
+
                           
                           
                           </td>
@@ -97,9 +100,8 @@
           <form action="../Controller/ControleEmpenho.php" method="post">
 
             <div class="modal-body">
-
             <div class="form-group col-md-12">
-                    <label for="recipient-cod_empenho" class="col-form-label">Código de Empenho:</label>
+                    <label for="recipient-cod_empenho" class="col-form-label">Cód. Empenho:</label>
                     <input 
                       name="cod_empenho"
                       placeholder=""
@@ -110,11 +112,11 @@
                   </div>
                   
                   <div class="form-group col-md-12">
-                    <label for="recipient-cod_previsao_empenho" class="col-form-label">Código Previsão de Empenho:</label>
+                    <label for="recipient-cod_previsao_empenho" class="col-form-label">Cód. Previsão de Empenho:</label>
                     <select name="cod_previsao_empenho" class="form-control" id="recipient-cod_previsao_empenho">
                       <option value="">Selecionar Empenho</option>
                       <?php 
-                        foreach($array_selectCd as $chave => $valor){
+                        foreach($array_selectPrevisaoEmpenho as $chave => $valor){
                         ?>
                         <option value="<?= $valor['cod_previsao_empenho'] ?>"><?= $valor['cod_previsao_empenho'] ?></option>
                         <?php 
@@ -129,7 +131,7 @@
                     <input 
                       name="data"
                       placeholder=""
-                      type="date" 
+                      type="datetime-local" 
                       class="form-control"
                       maxlength="" 
                       id="recipient-data">
