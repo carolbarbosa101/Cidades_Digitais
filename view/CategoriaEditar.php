@@ -3,9 +3,7 @@
     require_once("../Controller/ControleCategoriaVisualizar.php");
 
     ?>
-    
     <main id="main_conteudo">
-
         <div class="row mb-5">
           <div id="mainHeader" class="col-md-6 d-flex align-items-center">
             <span>
