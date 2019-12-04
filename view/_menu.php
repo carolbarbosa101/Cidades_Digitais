@@ -11,6 +11,7 @@
     "Empenho" => '<i class="fas fa-align-justify"></i>',
     "Fatura"=> '<i class="fas fa-file-alt"></i>',
     "ItensEmpenho"=> '<i class="fas fa-file-alt"></i>',
+    "ItensFatura"=> '<i class="fas fa-file-alt"></i>',
     "Lote" =>'<i class="fas fa-clone"></i>',
     "LoteItens" =>'<i class="fas fa-clone"></i>',
     "Municipios" => '<i class="fas fa-globe-asia"></i>',

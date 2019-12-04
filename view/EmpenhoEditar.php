@@ -51,7 +51,7 @@
                     <input disable
                       value="<?php echo $cod_empenho ?>"
                       placeholder=""
-                      type="int" 
+                      type="number" 
                       class="form-control"
                       maxlength="13"
                       id="recipient-cod_empenho">
@@ -63,7 +63,7 @@
                       value="<?php echo $cod_previsao_empenho ?>"
                       name="cod_previsao_empenho"
                       placeholder=""
-                      type="int" 
+                      type="number" 
                       class="form-control"
                       maxlength=""
                       id="recipient-cod_previsao_empenho">
