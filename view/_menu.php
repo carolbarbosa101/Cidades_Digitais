@@ -8,6 +8,13 @@
     "Contato" => '<i class="far fa-address-book"></i>',
     "Entidade" => '<i class="fas fa-boxes"></i>',
     "Etapa" => '<i class="fas fa-align-justify"></i>',
+<<<<<<< HEAD
+=======
+    "Empenho" => '<i class="fas fa-align-justify"></i>',
+    "Fatura"=> '<i class="fas fa-file-alt"></i>',
+    "ItensEmpenho"=> '<i class="fas fa-file-alt"></i>',
+    "ItensFatura"=> '<i class="fas fa-file-alt"></i>',
+>>>>>>> f7961ace1fc56860d5daf4bd18f196451c9ad1f5
     "Lote" =>'<i class="fas fa-clone"></i>',
     "LoteItens" =>'<i class="fas fa-clone"></i>',
     "Municipios" => '<i class="fas fa-globe-asia"></i>',

@@ -20,7 +20,7 @@
             <i class="fas fa-globe-asia"></i>
             </span>
             <span>
-              <h3 class="mb-0">ItensEmpenho</h3>
+              <h3 class="mb-0">Itens Empenho</h3>
               <small>Descrição</small>
             </span>
           </div>
@@ -107,8 +107,13 @@
           <form action="../Controller/ControleItensEmpenho.php" method="post">
 
             <div class="modal-body">
+<<<<<<< HEAD
             <div class="form-group col-md-12">
                     <label for="recipient-cod_empenho" class="col-form-label">Código Empenho:</label>
+=======
+            
+            <label for="recipient-cod_empenho" class="col-form-label">Cód. Empenho:</label>
+>>>>>>> f7961ace1fc56860d5daf4bd18f196451c9ad1f5
                     <select name="cod_empenho" class="form-control" id="recipient-cod_empenho">
                       <option value="">Selecionar Item</option>
                       <?php 
