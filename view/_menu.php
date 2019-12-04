@@ -10,6 +10,7 @@
     "Etapa" => '<i class="fas fa-align-justify"></i>',
     "Empenho" => '<i class="fas fa-align-justify"></i>',
     "Fatura"=> '<i class="fas fa-file-alt"></i>',
+    "Itens" =>'<i class="fas fa-wifi"></i>',
     "ItensEmpenho"=> '<i class="fas fa-file-alt"></i>',
     "ItensFatura"=> '<i class="fas fa-file-alt"></i>',
     "Lote" =>'<i class="fas fa-clone"></i>',
