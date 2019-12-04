@@ -61,8 +61,8 @@
                       ?>
                       <tr>
 
-                        <td><?php echo $value['cod_ibge'] ?></td>						
-                        <td><?php echo $value['data'] ?></td>
+                        <td><?php echo $value['cod_ibge'] ?></td>
+                        <td><?php echo date('d/m/Y H:i:s', strtotime($value['data']))?> </td>
                         <td><?php echo $value['titulo'] ?></td>
                         <td><?php echo $value['relato'] ?></td>
                         <td> 

@@ -61,7 +61,7 @@
 
                           <td><?php echo $value['num_nf'] ?></td>
                           <td><?php echo $value['cod_ibge'] ?></td>
-                          <td><?php echo $value['dt_nf'] ?></td>
+                          <td><?php echo date('d/m/Y', strtotime($value['dt_nf']))?> </td>
                           <td> 
                             <span class="d-flex">
                              

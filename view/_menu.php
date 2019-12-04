@@ -8,13 +8,9 @@
     "Contato" => '<i class="far fa-address-book"></i>',
     "Entidade" => '<i class="fas fa-boxes"></i>',
     "Etapa" => '<i class="fas fa-align-justify"></i>',
-    "Empenho" => '<i class="fas fa-align-justify"></i>',
-    "Fatura"=> '<i class="fas fa-file-alt"></i>',
-    "ItensEmpenho"=> '<i class="fas fa-file-alt"></i>',
     "Lote" =>'<i class="fas fa-clone"></i>',
     "LoteItens" =>'<i class="fas fa-clone"></i>',
     "Municipios" => '<i class="fas fa-globe-asia"></i>',
-    "NaturezaDespesa" => '<i class="fas fa-globe-asia"></i>',
     "Pid"=> '<i class="fas fa-sliders-h"></i>',
     "Prefeitos"=> '<i class="fas fa-sliders-h"></i>',
     "PrevisaoEmpenho"=> '<i class="fas fa-sliders-h"></i>',
@@ -25,9 +21,10 @@
     "TipologiaPid"=> '<i class="fas fa-sliders-h"></i>',
     "Tipologia"=> '<i class="fas fa-sliders-h"></i>',
     "Uacom"=> '<i class="fas fa-sliders-h"></i>',
-    
+    "Fatura"=> '<i class="fas fa-file-alt"></i>',
     "Empenho"=> '<i class="fas fa-sliders-h"></i>',
-    "Usuario"=> '<i class="fas fa-sliders-h"></i>'
+    "Usuario"=> '<i class="fas fa-sliders-h"></i>',
+    "ItensEmpenho"=> '<i class="fas fa-sliders-h"></i>'
 
   ];
 

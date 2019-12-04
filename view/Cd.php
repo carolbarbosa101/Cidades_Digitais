@@ -64,9 +64,9 @@
                           <td><?php echo $value['ibge'] ?></td>
                           <td><?php echo $value['cod_lote'] ?></td>
                           <td><?php echo $value['os_pe'] ?></td>
-                          <td><?php echo $value['data_pe'] ?></td>
+                          <td><?php echo date('d/m/Y', strtotime($value['data_pe']))?> </td>
                           <td><?php echo $value['os_imp'] ?></td>
-                          <td><?php echo $value['data_imp'] ?></td>
+                          <td><?php echo date('d/m/Y', strtotime($value['data_imp']))?> </td>
                           <td> 
                             <span class="d-flex">
                             <a href="<?php echo URL ?>View/CdEditar.php?cod_ibge=<?php echo $value['cod_ibge'] ?>" 

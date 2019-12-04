@@ -142,7 +142,7 @@
                       placeholder=""
                       type="text" 
                       class="form-control"
-                      ]maxlength=""
+                      maxlength="45"
                       id="recipient-nome">
                   </div>
 
@@ -153,8 +153,8 @@
                       placeholder=""
                       type="text" 
                       class="form-control"
-                      maxlength="" 
-                      id="recipient-uf">
+                      maxlength="11" 
+                      id="recipient-cpf">
                   </div>
 
                   <div class="form-group col-md-12">
@@ -164,7 +164,7 @@
                       placeholder=""
                       type="text" 
                       class="form-control"
-                      maxlength="" 
+                      maxlength="20" 
                       id="recipient-rg">
                   </div>
 
@@ -175,7 +175,7 @@
                       placeholder=""
                       type="text" 
                       class="form-control"
-                      maxlength="" 
+                      maxlength="45" 
                       id="recipient-partido">
                   </div>
 
@@ -186,7 +186,7 @@
                       placeholder=""
                       type="text" 
                       class="form-control"
-                      maxlength="" 
+                      maxlength="45" 
                       id="recipient-exercicio">
                   </div>
 

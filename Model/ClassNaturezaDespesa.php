@@ -1,6 +1,6 @@
 <?php
 
-class ClassNaturezaDespesa {
+class ClassFatura {
     private $cod_natureza_despesa, $descricao;
 
 

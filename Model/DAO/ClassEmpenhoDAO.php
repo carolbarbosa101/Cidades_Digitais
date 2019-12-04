@@ -92,7 +92,10 @@ class ClassEmpenhoDAO {
     public function todosEmpenho(){
         try {
             $pdo = Conexao::getInstance();
-            $sql = "SELECT cod_empenho, data, contador  FROM empenho";
+            $sql = "SELECT CONCAT(empenho.cod_empenho,  ' - ' , empenho.data) AS empenho,
+            empenho.cod_empenho,empenho.data
+            FROM empenho 
+            ORDER BY empenho ASC";
             $stmt = $pdo->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll(); // fetchAll() retorna um array contendo varios dados. 

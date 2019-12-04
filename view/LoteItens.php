@@ -62,7 +62,7 @@
                           <td><?php echo $value['preco'] ?></td>
                           <td> 
                         <span class="d-flex">
-                            <a href="<?php echo URL ?>View/LoteItensEditar.php?cod_lote=<?php echo $value['cod_lote'] ?>&cod_item=<?php echo $value['cod_item'] ?>&cod_tipo_item=<?php echo $value['cod_tipo_item'] ?>" class="btn btn-warning mr-1">
+                            <a href="<?php echo URL ?>View/LoteItensEditar.php?cod_lote=<?php echo $value['cod_lote'] ?>&cod_item=<?php echo $value['cod_item'] ?>&cod_tipo_item=<?php echo $value['cod_tipo_item'] ?>&preco=<?php echo $value['preco'] ?>" class="btn btn-warning mr-1">
                                 Editar
                             </a>
                               <button onclick="apagarDados('<?php echo URL ?>Controller/ControleApagarLoteItens.php?cod_lote=<?php echo $value['cod_lote'] ?>&cod_item=<?php echo $value['cod_item'] ?>&cod_tipo_item=<?php echo $value['cod_tipo_item'] ?>')" class="btn btn-danger">Excluir</button> 

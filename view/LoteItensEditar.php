@@ -30,9 +30,9 @@
             ?>
 
           <?php 
-            if(!empty($array_dados)){
+            //if(!empty($array_dados)){
 
-              extract($array_dados);
+             // extract($array_dados);
           ?>
 
           <!-- FORMULARIO -->
@@ -106,7 +106,7 @@
           </form>
 
           <?php 
-            } // fim do if para verificar se existe dados para editar
+            //} // fim do if para verificar se existe dados para editar
           ?>
 
         </div>

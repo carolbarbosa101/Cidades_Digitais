@@ -27,12 +27,14 @@ $novaEntidade->setUf($uf);
 $novaEntidade->setObservacao($observacao);
 
 
+//var_dump($novaEntidade);
+//die();
+
 $classEntidadeDAO = new ClassEntidadeDAO();
 $entidade = $classEntidadeDAO->update($novaEntidade);
 
 
-//var_dump($entidade);
-//die();
+
 
 if($entidade == TRUE){
     $_SESSION['msg'] = '

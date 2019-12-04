@@ -68,7 +68,11 @@
                           <td><?php echo $value['senha'] ?></td>
                           <td> 
                             <span class="d-flex">
-                              <button type="button" class="btn btn-warning mr-1">Editar</button> 
+                            <a href="<?php echo URL ?>View/UsuarioEditar.php?cod_usuario=<?php echo $value['cod_usuario'] ?>" 
+                                class="btn btn-warning mr-1">
+                                Editar
+                              </a> 
+                              
                               <a href="<?php echo URL ?>Controller/ControleApagarUsuario.php?cod_usuario=<?php echo $value['cod_usuario'] ?>" class="btn btn-danger">Excluir</a> 
                             </span>
                           </td>

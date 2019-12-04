@@ -1,5 +1,5 @@
 <?php
-//define("URL", "http://localhost:83/Cidades_Digitais/");
+//define("URL", "http://localhost:88/Cidades_Digitais/");
 define("URL", "http://172.25.116.2:83/Cidades_Digitais/");
 //define("URL", "http://localhost:3308/Cidades_Digitais/");
   session_start();
@@ -35,5 +35,9 @@ define("URL", "http://172.25.116.2:83/Cidades_Digitais/");
     <!-- Cabeçalho -->
     <header id="header">
       <!-- Menu de navegação -->
-      <?php include_once("_menu.php"); ?>
+      <?php 
+      
+      //header("Content-Type: text/html; charset=ISO-8859-1",true);
+      include_once("_menu.php");
+      ?>
     </header>

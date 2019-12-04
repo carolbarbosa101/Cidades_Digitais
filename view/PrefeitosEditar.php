@@ -106,15 +106,15 @@
                   </div>
 
                   <div class="form-group col-md-12">
-                    <label for="recipient-exericio" class="col-form-label">Exercício:</label>
+                    <label for="recipient-exercicio" class="col-form-label">Exercício:</label>
                     <input 
-                      value="<?php echo $exericio ?>"
-                      name="exericio"
+                      value="<?php echo $exercicio ?>"
+                      name="exercicio"
                       placeholder=""
                       type="text" 
                       class="form-control"
                       maxlength="45"
-                      id="recipient-exericio">
+                      id="recipient-exercicio">
                   </div>
 
             </div>

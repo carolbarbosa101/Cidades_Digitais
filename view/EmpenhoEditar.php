@@ -48,8 +48,9 @@
 
                   <div class="form-group col-md-12">
                     <label for="recipient-cod_empenho" class="col-form-label">Código Empenho:</label>
-                    <input disable
+                    <input 
                       value="<?php echo $cod_empenho ?>"
+                      name="cod_empenho"
                       placeholder=""
                       type="int" 
                       class="form-control"

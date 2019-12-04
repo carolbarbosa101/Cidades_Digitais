@@ -1,8 +1,4 @@
 <?php
-/**
- * Description of ClassUsuario
- * @author Carol
- */
 
 class ClassUsuario {
     private $cod_usuario, $nome, $email, $status, $login, $senha;
