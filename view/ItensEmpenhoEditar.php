@@ -48,44 +48,56 @@
           <!-- FORMULARIO -->
           <form action="../Controller/ControleItensEmpenhoEditar.php" method="post">
 
-            <div class="form_row">
+            <div class="modal-body">
 
                   <!-- Chave primaria para saber qual registro editar do banco | input hidden para que o usuario não visualize -->
                   <input name="cod_empenho" type="hidden" value="<?php echo $cod_empenho ?>"/>
-                 
-                  <div class="form-group col-md-4">
-                    <label for="recipient-cod_empenho" class="col-form-label">Cód. Empenho:</label>
-                    <input disabled 
+
+                  <div class="form-group col-md-12">
+                    <label for="recipient-cod_empenho" class="col-form-label">Código Empenho:</label>
+                    <input 
                       value="<?php echo $cod_empenho ?>"
+                      name="cod_empenho"
+                      placeholder=""
                       type="text" 
                       class="form-control"
+                      maxlength="13"
                       id="recipient-cod_empenho">
                   </div>
-
-                  <div class="form-group col-md-4">
-                    <label for="recipient-cod_item" class="col-form-label">Cód. Item:</label>
-                    <input disabled 
+                  
+                  <div class="form-group col-md-12">
+                    <label for="recipient-cod_item" class="col-form-label">Código Item:</label>
+                    <input 
                       value="<?php echo $cod_item ?>"
-                      type="text" 
+                      name="cod_item"
+                      placeholder=""
+                      type="int" 
                       class="form-control"
+                      maxlength=""
                       id="recipient-cod_item">
                   </div>
 
-                  <div class="form-group col-md-4">
-                    <label for="recipient-cod_tipo_item" class="col-form-label">Cód. Tipo Item:</label>
-                    <input disabled 
+                  <div class="form-group col-md-12">
+                    <label for="recipient-cod_tipo_item" class="col-form-label">Código Tipo Item:</label>
+                    <input 
                       value="<?php echo $cod_tipo_item ?>"
-                      type="text" 
+                      name="cod_tipo_item"
+                      placeholder=""
+                      type="int" 
                       class="form-control"
+                      maxlength=""
                       id="recipient-cod_tipo_item">
                   </div>
-
-                  <div class="form-group col-md-4">
-                    <label for="recipient-cod_previsao_empenho" class="col-form-label">Cód. Previsão Empenho:</label>
-                    <input disabled 
+                  
+                  <div class="form-group col-md-12">
+                    <label for="recipient-cod_previsao_empenho" class="col-form-label">Código Previsão Empenho:</label>
+                    <input 
                       value="<?php echo $cod_previsao_empenho ?>"
-                      type="text" 
+                      name="cod_previsao_empenho"
+                      placeholder=""
+                      type="int" 
                       class="form-control"
+                      maxlength=""
                       id="recipient-cod_previsao_empenho">
                   </div>
                     

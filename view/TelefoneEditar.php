@@ -4,7 +4,7 @@
 
     // Buscar todos os cadastros no banco
     require_once("../Controller/ControleTelefoneVisualizar.php");
-
+    //require_once("../Controller/ControleListarTelefone.php");
     require_once("../Controller/ControleContatoSelect.php");
     // $array_dados
     ?>
@@ -36,9 +36,9 @@
             ?>
 
           <?php 
-            if(!empty($array_dados)){
+            //if(!empty($array_dados)){
 
-              extract($array_dados);
+              //extract($array_dados);
           ?>
 
           <!-- FORMULARIO -->
@@ -47,17 +47,38 @@
             <div class="modal-body">
 
                   <!-- Chave primaria para saber qual registro editar do banco | input hidden para que o usuario não visualize -->
-                  <input name="cod_telefone" type="hidden" value="<?php echo $cod_telefone ?>"/>
+                  
+                  <input type="hidden" name="cod_telefone" value="<?php echo $cod_telefone ?>" />
+                  <input type="hidden" name="cod_contato" value="<?php echo $cod_contato ?>" />
                  
-                  <div class="form-group col-md-12">
-                    <label for="recipient-nome" class="col-form-label">Contato:</label>
+                  
+                  <div class="form-row">
+                  <div class="form-group col-md-4">
+                    <label for="recipient-cod_telefone" class="col-form-label">Codigo Telefone:</label>
                     <input disabled 
-                      value="<?php echo $nome ?>"
-                      placeholder=""
+                      value="<?php echo $cod_telefone ?>"
+                      type="int" 
+                      class="form-control"
+                      id="recipient-cod_telefone">
+                  </div>
+
+                  <div class="form-group col-md-4">
+                    <label for="recipient-cod_contato" class="col-form-label">Codigo Contato:</label>
+                    <input disabled 
+                      value="<?php echo $cod_contato ?>"
                       type="text" 
                       class="form-control"
-                      maxlength="255" 
-                      id="recipient-nome">
+                      id="recipient-cod_contato">
+                  </div>
+
+                  <div class="form-group col-md-12">
+                  <label for="recipient-contato" class="col-form-label">Contato:</label>
+                    <input disabled 
+                      name="contato"
+                      value="<?php echo $contato ?>"
+                      type="text" 
+                      class="form-control"
+                      id="recipient-contato">
                   </div>
 
                   <div class="form-group col-md-12">
@@ -99,7 +120,7 @@
           </form>
 
           <?php 
-            } // fim do if para verificar se existe dados para editar
+           // } // fim do if para verificar se existe dados para editar
           ?>
 
         </div>

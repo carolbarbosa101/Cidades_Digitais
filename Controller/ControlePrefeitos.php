@@ -15,7 +15,7 @@ $exercicio = @$_POST['exercicio'];
 
 
 $novoPrefeitos = new ClassPrefeitos();
-$novoPrefeitos ->setCod_prefeito($cod_prefeito);
+$novoPrefeitos->setCod_prefeito($cod_prefeito);
 $novoPrefeitos->setCod_ibge($cod_ibge);
 $novoPrefeitos->setNome($nome);
 $novoPrefeitos->setCpf($cpf);

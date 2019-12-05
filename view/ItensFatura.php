@@ -3,8 +3,11 @@
   include_once("_cabecalho.php");
 
   // Buscar todos os cadastros no banco
-  require_once("../Controller/ControleListarLote.php");
-  require_once("../Controller/ControleEntidadeSelect.php");
+  require_once("../Controller/ControleListarItensFatura.php");
+  require_once("../Controller/ControleFaturaSelect.php");
+  require_once("../Controller/ControleEmpenhoSelect.php");
+  require_once("../Controller/ControleItensSelect.php");
+  require_once("../Controller/ControleTipoItemSelect.php");
   // $array_dados
   ?>
   
@@ -111,26 +114,28 @@
 
             <!-- Input cod_lote -->
             <div class="form-row">
-              <div class="form-group col-md-12">
+
+            <div class="form-group col-md-12">
                 <label for="recipient-num_nf" class="col-form-label">Nota Fiscal:</label>
-                <input
-                name="num_nf"
-                placeholder=""
-                type="number"
-                class="form-control"
-                maxlength=""
-                id="recipient-num_nf">
+                      <select name="num_nf" class="form-control" id="recipient-num_nf">
+                      <option value="">Selecionar Nota Fiscal</option>
+                      <?php 
+                        foreach($array_selectFatura as $chave => $valor){
+                        ?>
+                        <option value="<?= $valor['num_nf'] ?>"><?= $valor['num_nf'] ?></option>
+                        <?php 
+                        }
+                      ?>
+                    </select>
               </div>
 
 
-
-            <div class="form-row">
               <div class="form-group col-md-12">
-                <label for="recipient-cod_ibge" class="col-form-label">Municipio:</label>
+                <label for="recipient-cod_ibge" class="col-form-label">IBGE:</label>
                       <select name="cod_ibge" class="form-control" id="recipient-cod_ibge">
-                      <option value="">Selecionar Municipio</option>
+                      <option value="">Selecionar Código IBGE</option>
                       <?php 
-                        foreach($array_selectCd as $chave => $valor){
+                        foreach($array_selectFatura as $chave => $valor){
                         ?>
                         <option value="<?= $valor['cod_ibge'] ?>"><?= $valor['cod_ibge'] ?></option>
                         <?php 
@@ -139,11 +144,11 @@
                     </select>
               </div>
 
-              <div class="form-row">
+           
               <div class="form-group col-md-12">
                 <label for="recipient-cod_empenho" class="col-form-label">Cód. Empenho:</label>
                       <select name="cod_empenho" class="form-control" id="recipient-cod_empenho">
-                      <option value="">Selecionar Cód Empenho</option>
+                      <option value="">Selecionar Código do Empenho</option>
                       <?php 
                         foreach($array_selectEmpenho as $chave => $valor){
                         ?>
@@ -154,38 +159,58 @@
                     </select>
               </div>
 
+             
               <div class="form-group col-md-12">
-                <label for="recipient-dt_inicio_vig" class="col-form-label">Data inicio da Vigência:</label>
-                <input
-                name="dt_inicio_vig"
-                placeholder=""
-                type="date"
-                class="form-control"
-                maxlength="2"
-                id="recipient-dt_inicio_vig">
+                <label for="recipient-item" class="col-form-label">Cód. Item:</label>
+                      <select name="item" class="form-control" id="recipient-item">
+                      <option value="">Selecionar Item</option>
+                      <?php 
+                        foreach($array_selectItens as $chave => $valor){
+                        ?>
+                        <option value="<?= $valor['item'] ?>"><?= $valor['item'] ?></option>
+                        <?php 
+                        }
+                      ?>
+                    </select>
               </div>
 
+            
               <div class="form-group col-md-12">
-                <label for="recipient-dt_final_vig" class="col-form-label">Data final da Vigência:</label>
-                <input
-                name="dt_final_vig"
-                placeholder=""
-                type="date"
-                class="form-control"
-                maxlength="15"
-                id="recipient-dt_final_vig">
+                <label for="recipient-tipo" class="col-form-label">Cód. Tipo Item:</label>
+                      <select name="tipo" class="form-control" id="recipient-tipo">
+                      <option value="">Selecionar Tipo do Item</option>
+                      <?php 
+                        foreach($selectTipoItem as $chave => $valor){
+                        ?>
+                        <option value="<?= $valor['tipo'] ?>"><?= $valor['tipo'] ?></option>
+                        <?php 
+                        }
+                      ?>
+                    </select>
               </div>
            
               <div class="form-group col-md-12">
-                <label for="recipient-dt_reajuste" class="col-form-label">Data Reajuste:</label>
+                <label for="recipient-valor" class="col-form-label">Valor:</label>
                 <input
-                name="dt_reajuste"
-                placeholder="dd-mm"
-                type="text"
+                name="valor"
+                placeholder=""
+                type="number"
                 class="form-control"
-                maxlength="8"
-                id="recipient-dt_reajuste">
+                maxlength="12"
+                id="recipient-valor">
               </div>
+
+              <div class="form-group col-md-12">
+                <label for="recipient-quantidade" class="col-form-label">Quantidade:</label>
+                <input
+                name="quantidade"
+                placeholder=""
+                type="number"
+                class="form-control"
+                maxlength=""
+                id="recipient-quantidade">
+              </div>
+
             </div>
 
             <div class="modal-footer">

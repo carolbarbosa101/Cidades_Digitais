@@ -65,9 +65,9 @@
                         <td><?php echo $value['cod_lote'] ?></td>
                         <td><?php echo $value['nome'] ?></td>
                         <td><?php echo $value['contrato'] ?></td>
-                        <td><?php echo $value['dt_inicio_vig'] ?></td>
-                        <td><?php echo $value['dt_final_vig'] ?></td>
-                        <td><?php echo date('d-m', strtotime($value['dt_reajuste']))?> </td>
+                        <td><?php echo date('d/m/Y', strtotime($value['dt_inicio_vig']))?> </td>
+                        <td><?php echo date('d/m/Y', strtotime($value['dt_final_vig']))?> </td>
+                        <td><?php echo date('d/m', strtotime($value['dt_reajuste']))?> </td>
                       
                         <td> 
                           <span class="d-flex">

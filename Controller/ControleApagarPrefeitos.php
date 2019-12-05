@@ -2,6 +2,7 @@
 session_start();
 
 $cod_prefeito = @$_GET["cod_prefeito"]; // id unico da tabela, chave primaria
+$cod_ibge = @$_GET["cod_ibge"];
 
 if (empty($cod_prefeito)) {
 	header('Location:../View/Prefeitos.php');
@@ -12,8 +13,13 @@ require_once '../Model/DAO/ClassPrefeitosDAO.php';
 $apagarPrefeito = new ClassPrefeitosDAO(); // instanciando um objeto
 $prefeito = new ClassPrefeitos();
 $prefeito->setCod_prefeito($cod_prefeito);
+$prefeito->setCod_ibge($cod_ibge);
 
 $resultado = $apagarPrefeito->apagarPrefeitos($prefeito); // chamando metodo para listar todos os usuários do banco
+
+
+//var_dump($prefeito);
+//die();
 
 if($resultado) { // se existir algum municipio no banco então passar o array de dados para a variavel $array_dados
     $_SESSION['msg'] = '

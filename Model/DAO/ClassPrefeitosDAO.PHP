@@ -5,7 +5,7 @@ class ClassPrefeitosDAO {
     public function cadastrar(ClassPrefeitos $cadastrarPrefeitos) {
         try {
             $pdo = Conexao::getInstance();
-            $sql = "INSERT INTO prefeitos (cod_prefeito, cod_ibge, nome, cpf, rg, artido, exercicio) values (?,?, ?, ?,?,?,?)";
+            $sql = "INSERT INTO prefeitos (cod_prefeito, cod_ibge, nome, cpf, rg, partido, exercicio) values (?,?, ?, ?,?,?,?)";
 			$stmt = $pdo->prepare($sql);
 			$stmt->bindValue(1, $cadastrarPrefeitos->getCod_prefeito());
             $stmt->bindValue(2, $cadastrarPrefeitos->getCod_ibge());
@@ -36,7 +36,7 @@ class ClassPrefeitosDAO {
         }
     }
 
-    public function update(ClassPrefeito $editarPrefeito) {
+    public function update(ClassPrefeitos $editarPrefeito) {
         try {
             $pdo = Conexao::getInstance();
             $sql = "UPDATE prefeitos SET nome = ?, cpf = ?, rg = ?, partido = ?, exercicio = ?
@@ -71,6 +71,29 @@ class ClassPrefeitosDAO {
             return TRUE;
         } catch (PDOException $exc) {
             echo $exc->getMessage();
+        }
+    }
+
+    public function visualizarPrefeitos(ClassPrefeitos $visualizarPrefeitos){
+        //var_dump($visualizarPrefeitos);
+        //die;
+        try {
+            $pdo = Conexao::getInstance();
+            $sql = "SELECT *
+            FROM prefeitos 
+            WHERE cod_prefeito = ? AND cod_ibge = ?";
+            $stmt = $pdo->prepare($sql);
+
+            $stmt->bindValue(1, $visualizarPrefeitos->getCod_prefeito());
+            $stmt->bindValue(2, $visualizarPrefeitos->getCod_ibge());
+
+            $stmt->execute();
+            $resultado = $stmt->fetchAll();
+            //var_dump($resultado);
+            //die;
+            return $resultado;
+        } catch (PDOException $ex) {
+            return $ex->getMessage();
         }
     }
 

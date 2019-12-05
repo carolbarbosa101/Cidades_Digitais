@@ -4,6 +4,8 @@ class ClassCdDAO {
 
     public function cadastrar(ClassCd $cadastrarCd) {
         try {
+            //var_dump($cadastrarCd);
+            //die;
             $pdo = Conexao::getInstance();
             $sql = "INSERT INTO cd (cod_ibge,cod_lote,os_pe,data_pe,os_imp,data_imp) values (?,?,?,?,?,?)";
             $stmt = $pdo->prepare($sql);

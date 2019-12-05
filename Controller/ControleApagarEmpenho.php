@@ -15,6 +15,10 @@ $empenho->getCod_empenho($cod_empenho);
 
 $resultado = $apagarEmpenho->apagarEmpenho($empenho); // chamando metodo para listar todos os usuários do banco
 
+
+var_dump($empenho);
+die();
+
 if($resultado) { // se existir alguma empenho no banco então passar o array de dados para a variavel $array_dados
     $_SESSION['msg'] = '
         <div class="alert alert-success" role="alert">

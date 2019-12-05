@@ -61,12 +61,12 @@
                         ?>
                         <tr>
                           <td><?php echo $value['cod_telefone'] ?></td>
-                          <td><?php echo $value['nome'] ?></td>
+                          <td><?php echo $value['contato'] ?></td>
                           <td><?php echo $value['telefone'] ?></td>
                           <td><?php echo $value['tipo'] ?></td>
                           <td> 
                             <span class="d-flex">
-                            <a href="<?php echo URL ?>View/TelefoneEditar.php?cod_telefone=<?php echo $value['cod_telefone'] ?>" 
+                            <a href="<?php echo URL ?>View/TelefoneEditar.php?cod_telefone=<?php echo $value['cod_telefone'] ?>&cod_contato=<?php echo $value['cod_contato'] ?>&contato=<?php echo $value['contato'] ?>&telefone=<?php echo $value['telefone'] ?>&tipo=<?php echo $value['tipo'] ?>" 
                                 class="btn btn-warning mr-1">
                                 Editar
                               </a> 

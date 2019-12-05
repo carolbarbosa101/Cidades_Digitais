@@ -1,15 +1,19 @@
 <?php
 
-require_once '../Model/ClassAssunto.php';
-require_once '../Model/DAO/ClassAssuntoDAO.php';
+require_once '../Model/ClassLoteItens.php';
+require_once '../Model/DAO/ClassLoteItensDAO.php';
 
-$cod_assunto = @$_GET['cod_assunto'];
+$cod_lote = @$_GET['cod_lote'];
+$cod_item = @$_GET['cod_item'];
+$cod_tipo_item = @$_GET['cod_tipo_item'];
 
-$visualizarAssunto = new ClassAssunto();
-$visualizarAssunto->setCod_assunto($cod_assunto);
+$visualizarLoteItens = new ClassLoteItens();
+$visualizarLoteItens->setCod_lote($cod_lote);
+$visualizarLoteItens->setCod_item($cod_item);
+$visualizarLoteItens->setCod_tipo_item($cod_tipo_item);
 
-$ver = new ClassAssuntoDAO();
-$dados = $ver->visualizarAssunto($visualizarAssunto);
+$ver = new ClassLoteItensDAO();
+$dados = $ver->visualizarLoteItens($visualizarLoteItens);
 
 if($dados) { 
     $array_dados = $dados[0];
@@ -21,5 +25,5 @@ if($dados) {
             Erro! Não foi possível visualizar os dados.
         </div>
     ';
-    header('Location:../View/Assunto.php');
+    header('Location:../View/LoteItens.php');
 }

@@ -21,7 +21,7 @@ $novoTelefone->setTipo($tipo);
 $classTelefoneDAO = new ClassTelefoneDAO();
 $telefone = $classTelefoneDAO->update($novoTelefone);
 
-//var_dump($telefone);
+//var_dump($novoTelefone);
 //die();
 
 if($telefone == TRUE){
