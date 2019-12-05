@@ -84,4 +84,16 @@ class ClassAssuntoDAO {
         }
     }
 
+    public function todosAssunto(){
+        try {
+            $pdo = Conexao::getInstance();
+            $sql = "SELECT cod_assunto, descricao FROM assunto ORDER BY cod_assunto ASC";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(); // fetchAll() retorna um array contendo varios dados. 
+        } catch (PDOException $ex) {
+            return $ex->getMessage();
+        }
+    }
+
 }

@@ -1,29 +1,32 @@
 <?php
 
 require_once 'Conexao.php';
-class ClassUacomDAO {
+class ClassUacomAssuntoDAO {
         
-    public function cadastrar(ClassUacom $cadastrarUacom) {
+    public function cadastrar(ClassUacomAssunto $cadastrarUacomAssunto) {
         try {
             $pdo = Conexao::getInstance();
-            $sql = "INSERT INTO uacom (cod_ibge, data, titulo, relato) values (?,?,?,?)";
+            $sql = "INSERT INTO uacom_assunto (cod_ibge, data, cod_assunto) values (?,?,?)";
             $stmt = $pdo->prepare($sql);
             
-			$stmt->bindValue(1, $cadastrarUacom->getCod_ibge());
-			$stmt->bindValue(2, $cadastrarUacom->getData());
-            $stmt->bindValue(3, $cadastrarUacom->getTitulo());
-            $stmt->bindValue(4, $cadastrarUacom->getRelato());
+			$stmt->bindValue(1, $cadastrarUacomAssunto->getCod_ibge());
+			$stmt->bindValue(2, $cadastrarUacomAssunto->getData());
+            $stmt->bindValue(3, $cadastrarUacomAssunto->getCod_assunto());
             $stmt->execute();
             return TRUE;
         } catch (PDOException $exc) {
             echo $exc->getMessage();
         }
     }
-    
-    public function listarUacom(){
+
+
+
+    public function listarUacomAssunto(){
         try {
             $pdo = Conexao::getInstance();
-            $sql = "SELECT cod_ibge, data, titulo, relato FROM uacom ORDER BY cod_ibge ASC";
+            $sql = "SELECT cod_ibge, data, cod_assunto
+            FROM uacom_assunto
+            ORDER BY cod_ibge ASC";
             $stmt = $pdo->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll(); // fetchAll() retorna um array contendo varios dados. 
@@ -66,10 +69,10 @@ class ClassUacomDAO {
         }
     }
 
-    public function todosUacom(){
+    public function todosCd(){
         try {
             $pdo = Conexao::getInstance();
-            $sql = "SELECT cod_ibge, data, titulo, relato FROM uacom ORDER BY cod_ibge ASC";
+            $sql = "SELECT cod_ibge, nome_municipio FROM municipio ORDER BY nome_municipio ASC";
             $stmt = $pdo->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll(); // fetchAll() retorna um array contendo varios dados. 
