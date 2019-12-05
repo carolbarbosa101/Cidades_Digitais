@@ -27,6 +27,7 @@
     "TipologiaPid"=> '<i class="fas fa-sliders-h"></i>',
     "Tipologia"=> '<i class="fas fa-sliders-h"></i>',
     "Uacom"=> '<i class="fas fa-sliders-h"></i>',
+    "UacomAssunto"=> '<i class="fas fa-sliders-h"></i>',
     "Empenho"=> '<i class="fas fa-sliders-h"></i>',
     "Usuario"=> '<i class="fas fa-sliders-h"></i>',
     "ItensEmpenho"=> '<i class="fas fa-sliders-h"></i>'
