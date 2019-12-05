@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: 20-Nov-2019 às 04:35
--- Versão do servidor: 5.7.26
--- versão do PHP: 7.2.18
+-- Host: 127.0.0.1
+-- Tempo de geração: 05-Dez-2019 às 21:20
+-- Versão do servidor: 10.4.8-MariaDB
+-- versão do PHP: 7.3.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `cidades_digitais_db`
+-- Banco de dados: `cidades_digitais_db`
 --
 
 -- --------------------------------------------------------
@@ -28,20 +28,16 @@ SET time_zone = "+00:00";
 -- Estrutura da tabela `assunto`
 --
 
-DROP TABLE IF EXISTS `assunto`;
-CREATE TABLE IF NOT EXISTS `assunto` (
-  `cod_assunto` int(11) NOT NULL AUTO_INCREMENT,
-  `descricao` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`cod_assunto`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+CREATE TABLE `assunto` (
+  `cod_assunto` int(11) NOT NULL,
+  `descricao` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `assunto`
 --
 
 INSERT INTO `assunto` (`cod_assunto`, `descricao`) VALUES
-(1, 'No dia mais claro'),
-(2, 'Na noite mais densa'),
 (3, 'O mal sucumbira ante a minha presenca'),
 (4, 'Todo aquele que venera o mal ha de penar'),
 (5, 'Quando o poder do Lanterna Verde enfrentar!'),
@@ -52,8 +48,7 @@ INSERT INTO `assunto` (`cod_assunto`, `descricao`) VALUES
 (10, 'Vou te amar por toda minha vida'),
 (11, 'Vem comigo por este caminho'),
 (12, 'Me de a mao pra fugir'),
-(13, 'Desta terrivel'),
-(14, 'Escuridao');
+(18, 'Malz, apaguei o errado...\'XD');
 
 -- --------------------------------------------------------
 
@@ -61,12 +56,10 @@ INSERT INTO `assunto` (`cod_assunto`, `descricao`) VALUES
 -- Estrutura da tabela `categoria`
 --
 
-DROP TABLE IF EXISTS `categoria`;
-CREATE TABLE IF NOT EXISTS `categoria` (
-  `cod_categoria` int(11) NOT NULL AUTO_INCREMENT,
-  `descricao` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`cod_categoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+CREATE TABLE `categoria` (
+  `cod_categoria` int(11) NOT NULL,
+  `descricao` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `categoria`
@@ -87,16 +80,13 @@ INSERT INTO `categoria` (`cod_categoria`, `descricao`) VALUES
 -- Estrutura da tabela `cd`
 --
 
-DROP TABLE IF EXISTS `cd`;
-CREATE TABLE IF NOT EXISTS `cd` (
+CREATE TABLE `cd` (
   `cod_ibge` int(7) NOT NULL,
   `cod_lote` int(11) NOT NULL,
   `os_pe` varchar(10) DEFAULT NULL,
   `data_pe` date DEFAULT NULL,
   `os_imp` varchar(10) DEFAULT NULL,
-  `data_imp` date DEFAULT NULL,
-  PRIMARY KEY (`cod_ibge`),
-  KEY `fk_cd_lote1_idx` (`cod_lote`)
+  `data_imp` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -105,13 +95,14 @@ CREATE TABLE IF NOT EXISTS `cd` (
 
 INSERT INTO `cd` (`cod_ibge`, `cod_lote`, `os_pe`, `data_pe`, `os_imp`, `data_imp`) VALUES
 (1100015, 5, 'Ordem1', '2019-11-27', 'Ordem1', '2019-11-13'),
+(2100600, 3, 'ORDEM1', '2019-12-19', 'ORDEM2', '2019-12-26'),
+(3129509, 4, 'asdasdssd', '0000-00-00', 'sdfghsfd', '0000-00-00'),
 (5458566, 3, 'ORDEM2', '2019-11-12', 'ORDEM2', '2019-11-14'),
 (8474555, 1, 'ORDEM3', '2019-11-13', 'ORDEM4', '2020-11-13');
 
 --
 -- Acionadores `cd`
 --
-DROP TRIGGER IF EXISTS `insere_cd_itens`;
 DELIMITER $$
 CREATE TRIGGER `insere_cd_itens` AFTER INSERT ON `cd` FOR EACH ROW BEGIN
 insert into cd_itens (cod_ibge, cod_item, cod_tipo_item) (select cd.cod_ibge, itens.cod_item, itens.cod_tipo_item from cd, itens
@@ -126,17 +117,13 @@ DELIMITER ;
 -- Estrutura da tabela `cd_itens`
 --
 
-DROP TABLE IF EXISTS `cd_itens`;
-CREATE TABLE IF NOT EXISTS `cd_itens` (
+CREATE TABLE `cd_itens` (
   `cod_ibge` int(7) NOT NULL,
   `cod_item` int(11) NOT NULL,
   `cod_tipo_item` int(11) NOT NULL,
   `quantidade_previsto` int(11) DEFAULT NULL,
   `quantidade_projeto_executivo` int(11) DEFAULT NULL,
-  `quantidade_termo_instalacao` int(11) DEFAULT NULL,
-  PRIMARY KEY (`cod_ibge`,`cod_item`,`cod_tipo_item`),
-  KEY `fk_itens_has_cd_cd1_idx` (`cod_ibge`),
-  KEY `fk_cd_itens_itens2_idx` (`cod_item`,`cod_tipo_item`)
+  `quantidade_termo_instalacao` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -144,7 +131,7 @@ CREATE TABLE IF NOT EXISTS `cd_itens` (
 --
 
 INSERT INTO `cd_itens` (`cod_ibge`, `cod_item`, `cod_tipo_item`, `quantidade_previsto`, `quantidade_projeto_executivo`, `quantidade_termo_instalacao`) VALUES
-(1100015, 1, 1, 12, 22, 38),
+(1100015, 1, 1, 2147483647, 2147483647, 2147483647),
 (1100015, 1, 2, NULL, NULL, NULL),
 (1100015, 1, 3, NULL, NULL, NULL),
 (1100015, 1, 4, NULL, NULL, NULL),
@@ -218,6 +205,154 @@ INSERT INTO `cd_itens` (`cod_ibge`, `cod_item`, `cod_tipo_item`, `quantidade_pre
 (1100015, 15, 1, NULL, NULL, NULL),
 (1100015, 16, 1, NULL, NULL, NULL),
 (1100015, 17, 1, NULL, NULL, NULL),
+(2100600, 1, 1, NULL, NULL, NULL),
+(2100600, 1, 2, NULL, NULL, NULL),
+(2100600, 1, 3, NULL, NULL, NULL),
+(2100600, 1, 4, NULL, NULL, NULL),
+(2100600, 1, 5, NULL, NULL, NULL),
+(2100600, 1, 6, NULL, NULL, NULL),
+(2100600, 1, 7, NULL, NULL, NULL),
+(2100600, 1, 8, NULL, NULL, NULL),
+(2100600, 1, 9, NULL, NULL, NULL),
+(2100600, 1, 10, NULL, NULL, NULL),
+(2100600, 1, 11, NULL, NULL, NULL),
+(2100600, 1, 12, NULL, NULL, NULL),
+(2100600, 1, 13, NULL, NULL, NULL),
+(2100600, 2, 1, NULL, NULL, NULL),
+(2100600, 2, 2, NULL, NULL, NULL),
+(2100600, 2, 3, NULL, NULL, NULL),
+(2100600, 2, 4, NULL, NULL, NULL),
+(2100600, 2, 5, NULL, NULL, NULL),
+(2100600, 2, 6, NULL, NULL, NULL),
+(2100600, 2, 7, NULL, NULL, NULL),
+(2100600, 2, 8, NULL, NULL, NULL),
+(2100600, 2, 9, NULL, NULL, NULL),
+(2100600, 2, 10, NULL, NULL, NULL),
+(2100600, 2, 11, NULL, NULL, NULL),
+(2100600, 3, 1, NULL, NULL, NULL),
+(2100600, 3, 2, NULL, NULL, NULL),
+(2100600, 3, 3, NULL, NULL, NULL),
+(2100600, 3, 4, NULL, NULL, NULL),
+(2100600, 3, 5, NULL, NULL, NULL),
+(2100600, 3, 8, NULL, NULL, NULL),
+(2100600, 3, 9, NULL, NULL, NULL),
+(2100600, 3, 10, NULL, NULL, NULL),
+(2100600, 4, 1, NULL, NULL, NULL),
+(2100600, 4, 2, NULL, NULL, NULL),
+(2100600, 4, 3, NULL, NULL, NULL),
+(2100600, 4, 4, NULL, NULL, NULL),
+(2100600, 4, 5, NULL, NULL, NULL),
+(2100600, 4, 8, NULL, NULL, NULL),
+(2100600, 4, 9, NULL, NULL, NULL),
+(2100600, 4, 10, NULL, NULL, NULL),
+(2100600, 5, 1, NULL, NULL, NULL),
+(2100600, 5, 2, NULL, NULL, NULL),
+(2100600, 5, 3, NULL, NULL, NULL),
+(2100600, 5, 4, NULL, NULL, NULL),
+(2100600, 5, 5, NULL, NULL, NULL),
+(2100600, 5, 8, NULL, NULL, NULL),
+(2100600, 5, 9, NULL, NULL, NULL),
+(2100600, 5, 10, NULL, NULL, NULL),
+(2100600, 6, 1, NULL, NULL, NULL),
+(2100600, 6, 2, NULL, NULL, NULL),
+(2100600, 6, 3, NULL, NULL, NULL),
+(2100600, 6, 4, NULL, NULL, NULL),
+(2100600, 6, 5, NULL, NULL, NULL),
+(2100600, 7, 1, NULL, NULL, NULL),
+(2100600, 7, 2, NULL, NULL, NULL),
+(2100600, 7, 3, NULL, NULL, NULL),
+(2100600, 7, 4, NULL, NULL, NULL),
+(2100600, 7, 5, NULL, NULL, NULL),
+(2100600, 8, 1, NULL, NULL, NULL),
+(2100600, 8, 3, NULL, NULL, NULL),
+(2100600, 9, 1, NULL, NULL, NULL),
+(2100600, 9, 3, NULL, NULL, NULL),
+(2100600, 10, 1, NULL, NULL, NULL),
+(2100600, 10, 3, NULL, NULL, NULL),
+(2100600, 11, 1, NULL, NULL, NULL),
+(2100600, 11, 3, NULL, NULL, NULL),
+(2100600, 12, 1, NULL, NULL, NULL),
+(2100600, 12, 3, NULL, NULL, NULL),
+(2100600, 13, 1, NULL, NULL, NULL),
+(2100600, 13, 3, NULL, NULL, NULL),
+(2100600, 14, 1, NULL, NULL, NULL),
+(2100600, 15, 1, NULL, NULL, NULL),
+(2100600, 16, 1, NULL, NULL, NULL),
+(2100600, 17, 1, NULL, NULL, NULL),
+(3129509, 1, 1, NULL, NULL, NULL),
+(3129509, 1, 2, NULL, NULL, NULL),
+(3129509, 1, 3, NULL, NULL, NULL),
+(3129509, 1, 4, NULL, NULL, NULL),
+(3129509, 1, 5, NULL, NULL, NULL),
+(3129509, 1, 6, NULL, NULL, NULL),
+(3129509, 1, 7, NULL, NULL, NULL),
+(3129509, 1, 8, NULL, NULL, NULL),
+(3129509, 1, 9, NULL, NULL, NULL),
+(3129509, 1, 10, NULL, NULL, NULL),
+(3129509, 1, 11, NULL, NULL, NULL),
+(3129509, 1, 12, NULL, NULL, NULL),
+(3129509, 1, 13, NULL, NULL, NULL),
+(3129509, 2, 1, NULL, NULL, NULL),
+(3129509, 2, 2, NULL, NULL, NULL),
+(3129509, 2, 3, NULL, NULL, NULL),
+(3129509, 2, 4, NULL, NULL, NULL),
+(3129509, 2, 5, NULL, NULL, NULL),
+(3129509, 2, 6, NULL, NULL, NULL),
+(3129509, 2, 7, NULL, NULL, NULL),
+(3129509, 2, 8, NULL, NULL, NULL),
+(3129509, 2, 9, NULL, NULL, NULL),
+(3129509, 2, 10, NULL, NULL, NULL),
+(3129509, 2, 11, NULL, NULL, NULL),
+(3129509, 3, 1, NULL, NULL, NULL),
+(3129509, 3, 2, NULL, NULL, NULL),
+(3129509, 3, 3, NULL, NULL, NULL),
+(3129509, 3, 4, NULL, NULL, NULL),
+(3129509, 3, 5, NULL, NULL, NULL),
+(3129509, 3, 8, NULL, NULL, NULL),
+(3129509, 3, 9, NULL, NULL, NULL),
+(3129509, 3, 10, NULL, NULL, NULL),
+(3129509, 4, 1, NULL, NULL, NULL),
+(3129509, 4, 2, NULL, NULL, NULL),
+(3129509, 4, 3, NULL, NULL, NULL),
+(3129509, 4, 4, NULL, NULL, NULL),
+(3129509, 4, 5, NULL, NULL, NULL),
+(3129509, 4, 8, NULL, NULL, NULL),
+(3129509, 4, 9, NULL, NULL, NULL),
+(3129509, 4, 10, NULL, NULL, NULL),
+(3129509, 5, 1, NULL, NULL, NULL),
+(3129509, 5, 2, NULL, NULL, NULL),
+(3129509, 5, 3, NULL, NULL, NULL),
+(3129509, 5, 4, NULL, NULL, NULL),
+(3129509, 5, 5, NULL, NULL, NULL),
+(3129509, 5, 8, NULL, NULL, NULL),
+(3129509, 5, 9, NULL, NULL, NULL),
+(3129509, 5, 10, NULL, NULL, NULL),
+(3129509, 6, 1, NULL, NULL, NULL),
+(3129509, 6, 2, NULL, NULL, NULL),
+(3129509, 6, 3, NULL, NULL, NULL),
+(3129509, 6, 4, NULL, NULL, NULL),
+(3129509, 6, 5, NULL, NULL, NULL),
+(3129509, 7, 1, NULL, NULL, NULL),
+(3129509, 7, 2, NULL, NULL, NULL),
+(3129509, 7, 3, NULL, NULL, NULL),
+(3129509, 7, 4, NULL, NULL, NULL),
+(3129509, 7, 5, NULL, NULL, NULL),
+(3129509, 8, 1, NULL, NULL, NULL),
+(3129509, 8, 3, NULL, NULL, NULL),
+(3129509, 9, 1, NULL, NULL, NULL),
+(3129509, 9, 3, NULL, NULL, NULL),
+(3129509, 10, 1, NULL, NULL, NULL),
+(3129509, 10, 3, NULL, NULL, NULL),
+(3129509, 11, 1, NULL, NULL, NULL),
+(3129509, 11, 3, NULL, NULL, NULL),
+(3129509, 12, 1, NULL, NULL, NULL),
+(3129509, 12, 3, NULL, NULL, NULL),
+(3129509, 13, 1, NULL, NULL, NULL),
+(3129509, 13, 3, NULL, NULL, NULL),
+(3129509, 14, 1, NULL, NULL, NULL),
+(3129509, 15, 1, NULL, NULL, NULL),
+(3129509, 16, 1, NULL, NULL, NULL),
+(3129509, 17, 1, NULL, NULL, NULL),
 (5458566, 1, 1, NULL, NULL, NULL),
 (5458566, 1, 2, NULL, NULL, NULL),
 (5458566, 1, 3, NULL, NULL, NULL),
@@ -373,11 +508,9 @@ INSERT INTO `cd_itens` (`cod_ibge`, `cod_item`, `cod_tipo_item`, `quantidade_pre
 -- Estrutura da tabela `classe_empenho`
 --
 
-DROP TABLE IF EXISTS `classe_empenho`;
-CREATE TABLE IF NOT EXISTS `classe_empenho` (
+CREATE TABLE `classe_empenho` (
   `cod_classe_empenho` int(11) NOT NULL,
-  `descricao` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`cod_classe_empenho`)
+  `descricao` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -407,18 +540,14 @@ INSERT INTO `classe_empenho` (`cod_classe_empenho`, `descricao`) VALUES
 -- Estrutura da tabela `contato`
 --
 
-DROP TABLE IF EXISTS `contato`;
-CREATE TABLE IF NOT EXISTS `contato` (
-  `cod_contato` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `contato` (
+  `cod_contato` int(11) NOT NULL,
   `cnpj` varchar(14) DEFAULT NULL,
   `cod_ibge` int(7) DEFAULT NULL,
   `nome` varchar(50) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
-  `funcao` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`cod_contato`),
-  KEY `fk_contato_entidade1_idx` (`cnpj`),
-  KEY `fk_contato_cd1_idx` (`cod_ibge`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+  `funcao` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `contato`
@@ -430,7 +559,8 @@ INSERT INTO `contato` (`cod_contato`, `cnpj`, `cod_ibge`, `nome`, `email`, `func
 (3, NULL, 5458566, 'MARIAZINHA', 'MARIA@GMAIL.COM', 'ESTAGIARIO'),
 (4, '44488493000139', 8474555, 'DONALD TRUMP', 'DONALD@GMAIL.COM', 'PRESIDENTE EUA'),
 (5, '99979314000100', 1100015, 'BOLSONARO', 'BOLSONARO@GMAIL.COM', 'PRESIDENTE BR'),
-(7, '64479314000100', 5458566, 'LULA MOLUSCO', 'LULA@GMAIL.COM', 'LADRAO');
+(7, '64479314000100', 5458566, 'LULA MOLUSCO', 'LULA@GMAIL.COM', 'LADRAO'),
+(8, '12379314000100', 5458566, 'Gerisvaldinho', 'gerisvaldoprapresidente@hil.com', 'Imperador');
 
 -- --------------------------------------------------------
 
@@ -438,20 +568,24 @@ INSERT INTO `contato` (`cod_contato`, `cnpj`, `cod_ibge`, `nome`, `email`, `func
 -- Estrutura da tabela `empenho`
 --
 
-DROP TABLE IF EXISTS `empenho`;
-CREATE TABLE IF NOT EXISTS `empenho` (
+CREATE TABLE `empenho` (
   `cod_empenho` varchar(13) NOT NULL,
   `cod_previsao_empenho` int(11) NOT NULL,
   `data` datetime DEFAULT NULL,
-  `contador` int(11) DEFAULT NULL,
-  PRIMARY KEY (`cod_empenho`),
-  KEY `fk_empenho_previsao_empenho1_idx` (`cod_previsao_empenho`)
+  `contador` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `empenho`
+--
+
+INSERT INTO `empenho` (`cod_empenho`, `cod_previsao_empenho`, `data`, `contador`) VALUES
+('14752', 2, '2019-12-12 08:08:00', NULL),
+('TESTE', 2, '2019-12-05 19:17:40', NULL);
 
 --
 -- Acionadores `empenho`
 --
-DROP TRIGGER IF EXISTS `insere_itens_empenho`;
 DELIMITER $$
 CREATE TRIGGER `insere_itens_empenho` AFTER INSERT ON `empenho` FOR EACH ROW BEGIN
 insert into itens_empenho (cod_empenho, cod_item, cod_tipo_item, cod_previsao_empenho, valor) 
@@ -470,8 +604,7 @@ DELIMITER ;
 -- Estrutura da tabela `entidade`
 --
 
-DROP TABLE IF EXISTS `entidade`;
-CREATE TABLE IF NOT EXISTS `entidade` (
+CREATE TABLE `entidade` (
   `cnpj` char(14) NOT NULL,
   `nome` varchar(50) DEFAULT NULL,
   `endereco` varchar(100) DEFAULT NULL,
@@ -480,8 +613,7 @@ CREATE TABLE IF NOT EXISTS `entidade` (
   `cep` varchar(8) DEFAULT NULL,
   `nome_municipio` varchar(50) DEFAULT NULL,
   `uf` varchar(2) DEFAULT NULL,
-  `observacao` varchar(1000) DEFAULT NULL,
-  PRIMARY KEY (`cnpj`)
+  `observacao` varchar(1000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -491,7 +623,7 @@ CREATE TABLE IF NOT EXISTS `entidade` (
 INSERT INTO `entidade` (`cnpj`, `nome`, `endereco`, `numero`, `bairro`, `cep`, `nome_municipio`, `uf`, `observacao`) VALUES
 ('12379314000100', 'Entidade5', 'qne 12, lote 11', NULL, '', '', '', 'SC', 'NENHUMA'),
 ('44488493000139', 'Entidade 7', NULL, NULL, NULL, NULL, NULL, 'SP', 'NENHUMA'),
-('60288493000139', 'Entidade 3', 'QNE', '12', NULL, NULL, NULL, 'TO', 'NENHUMA'),
+('60288493000139', 'Entidade 3', 'QNE', NULL, '', '', '', 'TO', 'NENHUMA'),
 ('64479314000100', 'Entidade 1', 'RUA', '14', NULL, NULL, NULL, 'DF', 'NENHUMA'),
 ('74144867000157', 'Entidade 2', NULL, NULL, NULL, NULL, NULL, 'MG', 'NENHUMA'),
 ('88879314000100', 'Entidade 6', NULL, NULL, NULL, NULL, NULL, 'RJ', 'NENHUMA'),
@@ -503,15 +635,13 @@ INSERT INTO `entidade` (`cnpj`, `nome`, `endereco`, `numero`, `bairro`, `cep`, `
 -- Estrutura da tabela `etapa`
 --
 
-DROP TABLE IF EXISTS `etapa`;
-CREATE TABLE IF NOT EXISTS `etapa` (
-  `cod_etapa` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `etapa` (
+  `cod_etapa` int(11) NOT NULL,
   `descricao` varchar(45) DEFAULT NULL,
   `duracao` int(11) DEFAULT NULL,
   `depende` int(11) DEFAULT NULL,
   `delay` int(11) DEFAULT NULL,
-  `setor_resp` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`cod_etapa`)
+  `setor_resp` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -520,15 +650,12 @@ CREATE TABLE IF NOT EXISTS `etapa` (
 -- Estrutura da tabela `etapas_cd`
 --
 
-DROP TABLE IF EXISTS `etapas_cd`;
-CREATE TABLE IF NOT EXISTS `etapas_cd` (
+CREATE TABLE `etapas_cd` (
   `cod_ibge` int(7) NOT NULL,
   `cod_etapa` int(11) NOT NULL,
   `dt_inicio` datetime DEFAULT NULL,
   `dt_fim` datetime DEFAULT NULL,
-  `responsavel` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`cod_ibge`,`cod_etapa`),
-  KEY `fk_etapas_cd_etapa1_idx` (`cod_etapa`)
+  `responsavel` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -537,14 +664,18 @@ CREATE TABLE IF NOT EXISTS `etapas_cd` (
 -- Estrutura da tabela `fatura`
 --
 
-DROP TABLE IF EXISTS `fatura`;
-CREATE TABLE IF NOT EXISTS `fatura` (
+CREATE TABLE `fatura` (
   `num_nf` int(11) NOT NULL,
   `cod_ibge` int(7) NOT NULL,
-  `dt_nf` date DEFAULT NULL,
-  PRIMARY KEY (`num_nf`,`cod_ibge`),
-  KEY `fk_Fatura_cd1_idx` (`cod_ibge`)
+  `dt_nf` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `fatura`
+--
+
+INSERT INTO `fatura` (`num_nf`, `cod_ibge`, `dt_nf`) VALUES
+(147852, 1100015, '2019-11-12');
 
 -- --------------------------------------------------------
 
@@ -552,20 +683,15 @@ CREATE TABLE IF NOT EXISTS `fatura` (
 -- Estrutura da tabela `fatura_otb`
 --
 
-DROP TABLE IF EXISTS `fatura_otb`;
-CREATE TABLE IF NOT EXISTS `fatura_otb` (
+CREATE TABLE `fatura_otb` (
   `cod_otb` int(11) NOT NULL,
   `num_nf` int(11) NOT NULL,
-  `cod_ibge` int(7) NOT NULL,
-  PRIMARY KEY (`cod_otb`,`num_nf`,`cod_ibge`),
-  KEY `fk_Fatura_has_otb_otb1_idx` (`cod_otb`),
-  KEY `fk_fatura_otb_fatura1_idx` (`num_nf`,`cod_ibge`)
+  `cod_ibge` int(7) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Acionadores `fatura_otb`
 --
-DROP TRIGGER IF EXISTS `insere_itens_otb`;
 DELIMITER $$
 CREATE TRIGGER `insere_itens_otb` AFTER INSERT ON `fatura_otb` FOR EACH ROW BEGIN
 	insert into itens_otb (cod_otb, num_nf, cod_empenho, cod_item, cod_tipo_item,  valor, quantidade) 
@@ -583,18 +709,13 @@ DELIMITER ;
 -- Estrutura da tabela `itens`
 --
 
-DROP TABLE IF EXISTS `itens`;
-CREATE TABLE IF NOT EXISTS `itens` (
+CREATE TABLE `itens` (
   `cod_item` int(11) NOT NULL,
   `cod_tipo_item` int(11) NOT NULL,
   `cod_natureza_despesa` int(11) NOT NULL,
   `cod_classe_empenho` int(11) NOT NULL,
   `descricao` varchar(100) DEFAULT NULL,
-  `unidade` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`cod_item`,`cod_tipo_item`),
-  KEY `fk_itens_classificacao_itens1_idx` (`cod_natureza_despesa`),
-  KEY `fk_itens_subitem1_idx` (`cod_classe_empenho`),
-  KEY `fk_itens_tipo_item1_idx` (`cod_tipo_item`)
+  `unidade` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -683,18 +804,34 @@ INSERT INTO `itens` (`cod_item`, `cod_tipo_item`, `cod_natureza_despesa`, `cod_c
 -- Estrutura da tabela `itens_empenho`
 --
 
-DROP TABLE IF EXISTS `itens_empenho`;
-CREATE TABLE IF NOT EXISTS `itens_empenho` (
+CREATE TABLE `itens_empenho` (
   `cod_empenho` varchar(13) NOT NULL,
   `cod_item` int(11) NOT NULL,
   `cod_tipo_item` int(11) NOT NULL,
   `cod_previsao_empenho` int(11) NOT NULL,
   `valor` decimal(12,0) DEFAULT NULL,
-  `quantidade` int(11) DEFAULT NULL,
-  PRIMARY KEY (`cod_empenho`,`cod_item`,`cod_tipo_item`),
-  KEY `fk_itens_empenho_empenho1_idx` (`cod_empenho`),
-  KEY `fk_itens_empenho_itens_previsao_empenho1_idx` (`cod_previsao_empenho`,`cod_item`,`cod_tipo_item`)
+  `quantidade` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `itens_empenho`
+--
+
+INSERT INTO `itens_empenho` (`cod_empenho`, `cod_item`, `cod_tipo_item`, `cod_previsao_empenho`, `valor`, `quantidade`) VALUES
+('14752', 2, 6, 2, NULL, NULL),
+('14752', 2, 7, 2, NULL, NULL),
+('14752', 2, 11, 2, NULL, NULL),
+('14752', 3, 2, 2, '545', 1),
+('14752', 5, 8, 2, NULL, NULL),
+('14752', 5, 9, 2, NULL, NULL),
+('14752', 5, 10, 2, NULL, NULL),
+('TESTE', 2, 6, 2, NULL, NULL),
+('TESTE', 2, 7, 2, NULL, NULL),
+('TESTE', 2, 11, 2, NULL, NULL),
+('TESTE', 3, 2, 2, NULL, NULL),
+('TESTE', 5, 8, 2, NULL, NULL),
+('TESTE', 5, 9, 2, NULL, NULL),
+('TESTE', 5, 10, 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -702,18 +839,14 @@ CREATE TABLE IF NOT EXISTS `itens_empenho` (
 -- Estrutura da tabela `itens_fatura`
 --
 
-DROP TABLE IF EXISTS `itens_fatura`;
-CREATE TABLE IF NOT EXISTS `itens_fatura` (
+CREATE TABLE `itens_fatura` (
   `num_nf` int(11) NOT NULL,
   `cod_ibge` int(7) NOT NULL,
   `cod_empenho` varchar(13) NOT NULL,
   `cod_item` int(11) NOT NULL,
   `cod_tipo_item` int(11) NOT NULL,
   `valor` decimal(12,0) DEFAULT NULL,
-  `quantidade` int(11) DEFAULT NULL,
-  PRIMARY KEY (`num_nf`,`cod_ibge`,`cod_empenho`,`cod_item`,`cod_tipo_item`),
-  KEY `fk_itens_fatura_itens_empenho1_idx` (`cod_empenho`,`cod_item`,`cod_tipo_item`),
-  KEY `fk_itens_fatura_fatura1_idx` (`num_nf`,`cod_ibge`)
+  `quantidade` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -722,8 +855,7 @@ CREATE TABLE IF NOT EXISTS `itens_fatura` (
 -- Estrutura da tabela `itens_otb`
 --
 
-DROP TABLE IF EXISTS `itens_otb`;
-CREATE TABLE IF NOT EXISTS `itens_otb` (
+CREATE TABLE `itens_otb` (
   `cod_otb` int(11) NOT NULL,
   `num_nf` int(11) NOT NULL,
   `cod_ibge` int(7) NOT NULL,
@@ -731,10 +863,7 @@ CREATE TABLE IF NOT EXISTS `itens_otb` (
   `cod_item` int(11) NOT NULL,
   `cod_tipo_item` int(11) NOT NULL,
   `valor` decimal(12,0) DEFAULT NULL,
-  `quantidade` int(11) DEFAULT NULL,
-  PRIMARY KEY (`cod_otb`,`num_nf`,`cod_ibge`,`cod_empenho`,`cod_item`,`cod_tipo_item`),
-  KEY `fk_itens_fatura_has_otb_otb1_idx` (`cod_otb`),
-  KEY `fk_itens_otb_itens_fatura1_idx` (`num_nf`,`cod_ibge`,`cod_empenho`,`cod_item`,`cod_tipo_item`)
+  `quantidade` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -743,18 +872,27 @@ CREATE TABLE IF NOT EXISTS `itens_otb` (
 -- Estrutura da tabela `itens_previsao_empenho`
 --
 
-DROP TABLE IF EXISTS `itens_previsao_empenho`;
-CREATE TABLE IF NOT EXISTS `itens_previsao_empenho` (
+CREATE TABLE `itens_previsao_empenho` (
   `cod_previsao_empenho` int(11) NOT NULL,
   `cod_item` int(11) NOT NULL,
   `cod_tipo_item` int(11) NOT NULL,
   `cod_lote` int(11) NOT NULL,
   `valor` decimal(12,0) DEFAULT NULL,
-  `quantidade` int(11) DEFAULT NULL,
-  PRIMARY KEY (`cod_previsao_empenho`,`cod_item`,`cod_tipo_item`),
-  KEY `fk_itens_previsao_empenho_previsao_empenho1_idx` (`cod_previsao_empenho`),
-  KEY `fk_itens_previsao_empenho_lote_itens1_idx` (`cod_lote`,`cod_item`,`cod_tipo_item`)
+  `quantidade` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `itens_previsao_empenho`
+--
+
+INSERT INTO `itens_previsao_empenho` (`cod_previsao_empenho`, `cod_item`, `cod_tipo_item`, `cod_lote`, `valor`, `quantidade`) VALUES
+(2, 2, 6, 2, NULL, NULL),
+(2, 2, 7, 2, NULL, NULL),
+(2, 2, 11, 2, NULL, NULL),
+(2, 3, 2, 2, NULL, NULL),
+(2, 5, 8, 2, NULL, NULL),
+(2, 5, 9, 2, NULL, NULL),
+(2, 5, 10, 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -762,14 +900,13 @@ CREATE TABLE IF NOT EXISTS `itens_previsao_empenho` (
 -- Estrutura da tabela `log`
 --
 
-DROP TABLE IF EXISTS `log`;
-CREATE TABLE IF NOT EXISTS `log` (
-  `cod_log` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `log` (
+  `cod_log` int(11) NOT NULL,
   `cod_usuario` int(11) NOT NULL,
-  `data` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `data` datetime NOT NULL DEFAULT current_timestamp(),
   `nome_tabela` varchar(45) NOT NULL,
   `operacao` char(1) NOT NULL,
-  `espelho` longtext,
+  `espelho` longtext DEFAULT NULL,
   `cod_int_1` int(11) DEFAULT NULL,
   `cod_int_2` int(11) DEFAULT NULL,
   `cod_int_3` int(11) DEFAULT NULL,
@@ -778,9 +915,7 @@ CREATE TABLE IF NOT EXISTS `log` (
   `cod_data` datetime DEFAULT NULL,
   `cod_processo` char(17) DEFAULT NULL,
   `cod_cnpj` char(14) DEFAULT NULL,
-  `cod_empenho` varchar(13) DEFAULT NULL,
-  PRIMARY KEY (`cod_log`,`cod_usuario`),
-  KEY `fk_log_usuario1_idx` (`cod_usuario`)
+  `cod_empenho` varchar(13) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -789,16 +924,13 @@ CREATE TABLE IF NOT EXISTS `log` (
 -- Estrutura da tabela `lote`
 --
 
-DROP TABLE IF EXISTS `lote`;
-CREATE TABLE IF NOT EXISTS `lote` (
+CREATE TABLE `lote` (
   `cod_lote` int(11) NOT NULL,
   `cnpj` varchar(14) NOT NULL,
   `contrato` varchar(10) DEFAULT NULL,
   `dt_inicio_vig` date DEFAULT NULL,
   `dt_final_vig` date DEFAULT NULL,
-  `dt_reajuste` date DEFAULT NULL,
-  PRIMARY KEY (`cod_lote`),
-  KEY `fk_lote_entidade1_idx` (`cnpj`)
+  `dt_reajuste` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -812,12 +944,13 @@ INSERT INTO `lote` (`cod_lote`, `cnpj`, `contrato`, `dt_inicio_vig`, `dt_final_v
 (4, '74144867000157', 'D', '2016-02-02', '2021-02-02', NULL),
 (5, '64479314000100', 'EF', '2018-02-02', '2025-02-02', '0000-01-01'),
 (6, '44488493000139', 'contrato88', '2019-11-01', '2049-11-09', '0000-11-17'),
-(7, '99979314000100', 'teste', '2019-11-01', '2019-11-21', '0000-10-09');
+(7, '99979314000100', 'teste', '2019-11-01', '2019-11-21', '0000-10-09'),
+(8, '60288493000139', '363454', '2019-11-13', '2019-11-28', '0000-09-08'),
+(99, '44488493000139', 'kjabhklsdf', '0099-09-09', '0088-09-09', '1970-01-01');
 
 --
 -- Acionadores `lote`
 --
-DROP TRIGGER IF EXISTS `insere_lote_itens`;
 DELIMITER $$
 CREATE TRIGGER `insere_lote_itens` AFTER INSERT ON `lote` FOR EACH ROW BEGIN
 insert into lote_itens(cod_lote, cod_item, cod_tipo_item) (select lote.cod_lote, itens.cod_item, itens.cod_tipo_item from lote, itens 
@@ -832,15 +965,11 @@ DELIMITER ;
 -- Estrutura da tabela `lote_itens`
 --
 
-DROP TABLE IF EXISTS `lote_itens`;
-CREATE TABLE IF NOT EXISTS `lote_itens` (
+CREATE TABLE `lote_itens` (
   `cod_lote` int(11) NOT NULL,
   `cod_item` int(11) NOT NULL,
   `cod_tipo_item` int(11) NOT NULL,
-  `preco` decimal(12,0) DEFAULT NULL,
-  PRIMARY KEY (`cod_lote`,`cod_item`,`cod_tipo_item`),
-  KEY `fk_lote_has_itens_lote1_idx` (`cod_lote`),
-  KEY `fk_lote_itens_itens1_idx` (`cod_item`,`cod_tipo_item`)
+  `preco` decimal(12,0) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1365,7 +1494,154 @@ INSERT INTO `lote_itens` (`cod_lote`, `cod_item`, `cod_tipo_item`, `preco`) VALU
 (7, 14, 1, NULL),
 (7, 15, 1, NULL),
 (7, 16, 1, NULL),
-(7, 17, 1, NULL);
+(7, 17, 1, NULL),
+(8, 1, 1, NULL),
+(8, 1, 2, NULL),
+(8, 1, 3, NULL),
+(8, 1, 4, NULL),
+(8, 1, 5, NULL),
+(8, 1, 6, NULL),
+(8, 1, 7, NULL),
+(8, 1, 8, NULL),
+(8, 1, 9, NULL),
+(8, 1, 10, NULL),
+(8, 1, 11, NULL),
+(8, 1, 12, NULL),
+(8, 1, 13, NULL),
+(8, 2, 1, NULL),
+(8, 2, 2, NULL),
+(8, 2, 3, NULL),
+(8, 2, 4, NULL),
+(8, 2, 5, NULL),
+(8, 2, 6, NULL),
+(8, 2, 7, NULL),
+(8, 2, 8, NULL),
+(8, 2, 9, NULL),
+(8, 2, 10, NULL),
+(8, 2, 11, NULL),
+(8, 3, 1, NULL),
+(8, 3, 2, NULL),
+(8, 3, 3, NULL),
+(8, 3, 4, NULL),
+(8, 3, 5, NULL),
+(8, 3, 8, NULL),
+(8, 3, 9, NULL),
+(8, 3, 10, NULL),
+(8, 4, 1, NULL),
+(8, 4, 2, NULL),
+(8, 4, 3, NULL),
+(8, 4, 4, NULL),
+(8, 4, 5, NULL),
+(8, 4, 8, NULL),
+(8, 4, 9, NULL),
+(8, 4, 10, NULL),
+(8, 5, 1, NULL),
+(8, 5, 2, NULL),
+(8, 5, 3, NULL),
+(8, 5, 4, NULL),
+(8, 5, 5, NULL),
+(8, 5, 8, NULL),
+(8, 5, 9, NULL),
+(8, 5, 10, NULL),
+(8, 6, 1, NULL),
+(8, 6, 2, NULL),
+(8, 6, 3, NULL),
+(8, 6, 4, NULL),
+(8, 6, 5, NULL),
+(8, 7, 1, NULL),
+(8, 7, 2, NULL),
+(8, 7, 3, NULL),
+(8, 7, 4, NULL),
+(8, 7, 5, NULL),
+(8, 8, 1, NULL),
+(8, 8, 3, NULL),
+(8, 9, 1, NULL),
+(8, 9, 3, NULL),
+(8, 10, 1, NULL),
+(8, 10, 3, NULL),
+(8, 11, 1, NULL),
+(8, 11, 3, NULL),
+(8, 12, 1, NULL),
+(8, 12, 3, NULL),
+(8, 13, 1, NULL),
+(8, 13, 3, NULL),
+(8, 14, 1, NULL),
+(8, 15, 1, NULL),
+(8, 16, 1, NULL),
+(8, 17, 1, NULL),
+(99, 1, 1, NULL),
+(99, 1, 2, NULL),
+(99, 1, 3, NULL),
+(99, 1, 4, NULL),
+(99, 1, 5, NULL),
+(99, 1, 6, NULL),
+(99, 1, 7, NULL),
+(99, 1, 8, NULL),
+(99, 1, 9, NULL),
+(99, 1, 10, NULL),
+(99, 1, 11, NULL),
+(99, 1, 12, NULL),
+(99, 1, 13, NULL),
+(99, 2, 1, NULL),
+(99, 2, 2, NULL),
+(99, 2, 3, NULL),
+(99, 2, 4, NULL),
+(99, 2, 5, NULL),
+(99, 2, 6, NULL),
+(99, 2, 7, NULL),
+(99, 2, 8, NULL),
+(99, 2, 9, NULL),
+(99, 2, 10, NULL),
+(99, 2, 11, NULL),
+(99, 3, 1, NULL),
+(99, 3, 2, NULL),
+(99, 3, 3, NULL),
+(99, 3, 4, NULL),
+(99, 3, 5, NULL),
+(99, 3, 8, NULL),
+(99, 3, 9, NULL),
+(99, 3, 10, NULL),
+(99, 4, 1, NULL),
+(99, 4, 2, NULL),
+(99, 4, 3, NULL),
+(99, 4, 4, NULL),
+(99, 4, 5, NULL),
+(99, 4, 8, NULL),
+(99, 4, 9, NULL),
+(99, 4, 10, NULL),
+(99, 5, 1, NULL),
+(99, 5, 2, NULL),
+(99, 5, 3, NULL),
+(99, 5, 4, NULL),
+(99, 5, 5, NULL),
+(99, 5, 8, NULL),
+(99, 5, 9, NULL),
+(99, 5, 10, NULL),
+(99, 6, 1, NULL),
+(99, 6, 2, NULL),
+(99, 6, 3, NULL),
+(99, 6, 4, NULL),
+(99, 6, 5, NULL),
+(99, 7, 1, NULL),
+(99, 7, 2, NULL),
+(99, 7, 3, NULL),
+(99, 7, 4, NULL),
+(99, 7, 5, NULL),
+(99, 8, 1, NULL),
+(99, 8, 3, NULL),
+(99, 9, 1, NULL),
+(99, 9, 3, NULL),
+(99, 10, 1, NULL),
+(99, 10, 3, NULL),
+(99, 11, 1, NULL),
+(99, 11, 3, NULL),
+(99, 12, 1, NULL),
+(99, 12, 3, NULL),
+(99, 13, 1, NULL),
+(99, 13, 3, NULL),
+(99, 14, 1, NULL),
+(99, 15, 1, NULL),
+(99, 16, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -1373,14 +1649,12 @@ INSERT INTO `lote_itens` (`cod_lote`, `cod_item`, `cod_tipo_item`, `preco`) VALU
 -- Estrutura da tabela `modulo`
 --
 
-DROP TABLE IF EXISTS `modulo`;
-CREATE TABLE IF NOT EXISTS `modulo` (
+CREATE TABLE `modulo` (
   `cod_modulo` int(11) NOT NULL,
   `categoria_1` varchar(45) DEFAULT NULL,
   `categoria_2` varchar(45) DEFAULT NULL,
   `categoria_3` varchar(45) DEFAULT NULL,
-  `descricao` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`cod_modulo`)
+  `descricao` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1389,8 +1663,7 @@ CREATE TABLE IF NOT EXISTS `modulo` (
 -- Estrutura da tabela `municipio`
 --
 
-DROP TABLE IF EXISTS `municipio`;
-CREATE TABLE IF NOT EXISTS `municipio` (
+CREATE TABLE `municipio` (
   `cod_ibge` int(7) NOT NULL,
   `nome_municipio` varchar(50) DEFAULT NULL,
   `populacao` int(11) DEFAULT NULL,
@@ -1404,8 +1677,7 @@ CREATE TABLE IF NOT EXISTS `municipio` (
   `bairro` varchar(45) DEFAULT NULL,
   `idhm` float DEFAULT NULL,
   `latitude` decimal(10,8) DEFAULT NULL,
-  `longitude` decimal(10,8) DEFAULT NULL,
-  PRIMARY KEY (`cod_ibge`)
+  `longitude` decimal(10,8) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1413,12 +1685,14 @@ CREATE TABLE IF NOT EXISTS `municipio` (
 --
 
 INSERT INTO `municipio` (`cod_ibge`, `nome_municipio`, `populacao`, `uf`, `regiao`, `cnpj`, `dist_capital`, `endereco`, `numero`, `complemento`, `bairro`, `idhm`, `latitude`, `longitude`) VALUES
+(7767, 'ty87ju', NULL, 'hy', 'tgrfd4d3', '23462568yyhu', 6420, '6h8htftd', '5677765444', '5rt6yhg67jgth6hg', '4rfv4tr4fdf', 3445, '99.99999999', '56.90000000'),
 (1100015, 'Alta Floresta dOeste', 25578, 'RO', 'NORTE', '15834732000154', 17, NULL, NULL, '', NULL, 0.641, '-11.92830000', '-61.99530000'),
 (1702208, 'Araguatins', 34392, 'TO', 'CENTRO-OESTE', '01237403000111', 687, NULL, NULL, NULL, NULL, 0.631, '-5.64659000', '-48.12320000'),
 (2100600, 'Amarante do Maranhao', 40378, 'MA', 'NORDESTE', '06157846000116', 66, NULL, NULL, NULL, NULL, 0.555, '-5.56913000', '-46.74730000'),
 (3129509, 'Ibia', 24784, 'MG', 'SUDESTE', '18584961000156', 47, NULL, NULL, NULL, NULL, 0.718, '-19.47490000', '-46.54740000'),
 (5458566, 'Palmas', 217056, 'TO', 'NORTE', '06157846000116', 45, NULL, NULL, NULL, NULL, 0.547, '-8.64659000', '-99.92830000'),
-(8474555, 'Urucuia', 54897, 'MG', 'SUDESTE', '99834732000154', 74, NULL, NULL, NULL, NULL, 0.888, '-19.47490000', '-61.99530000');
+(8474555, 'Urucuia', 54897, 'MG', 'SUDESTE', '99834732000154', 74, NULL, NULL, NULL, NULL, 0.888, '-19.47490000', '-61.99530000'),
+(2147483647, '', NULL, '', '', '', 0, '', '', '', '', 0, '10.98820000', '0.00000000');
 
 -- --------------------------------------------------------
 
@@ -1426,11 +1700,9 @@ INSERT INTO `municipio` (`cod_ibge`, `nome_municipio`, `populacao`, `uf`, `regia
 -- Estrutura da tabela `natureza_despesa`
 --
 
-DROP TABLE IF EXISTS `natureza_despesa`;
-CREATE TABLE IF NOT EXISTS `natureza_despesa` (
+CREATE TABLE `natureza_despesa` (
   `cod_natureza_despesa` int(11) NOT NULL,
-  `descricao` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`cod_natureza_despesa`)
+  `descricao` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1441,7 +1713,8 @@ INSERT INTO `natureza_despesa` (`cod_natureza_despesa`, `descricao`) VALUES
 (339039, 'Serviços e Operação assistida e Capacitação'),
 (449039, 'Software'),
 (449051, 'Obras e Instalação'),
-(449052, 'valor equip. sem instalação');
+(449052, 'valor equip. sem instalação'),
+(449852, 'VALOR OBRA');
 
 -- --------------------------------------------------------
 
@@ -1449,11 +1722,9 @@ INSERT INTO `natureza_despesa` (`cod_natureza_despesa`, `descricao`) VALUES
 -- Estrutura da tabela `otb`
 --
 
-DROP TABLE IF EXISTS `otb`;
-CREATE TABLE IF NOT EXISTS `otb` (
+CREATE TABLE `otb` (
   `cod_otb` int(11) NOT NULL,
-  `dt_pgto` date DEFAULT NULL,
-  PRIMARY KEY (`cod_otb`)
+  `dt_pgto` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1462,23 +1733,21 @@ CREATE TABLE IF NOT EXISTS `otb` (
 -- Estrutura da tabela `pid`
 --
 
-DROP TABLE IF EXISTS `pid`;
-CREATE TABLE IF NOT EXISTS `pid` (
-  `cod_pid` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `pid` (
+  `cod_pid` int(11) NOT NULL,
   `cod_ibge` int(7) NOT NULL,
   `nome` varchar(255) NOT NULL,
-  `inep` varchar(15) DEFAULT NULL,
-  PRIMARY KEY (`cod_pid`),
-  KEY `fk_pid_municipio1_idx` (`cod_ibge`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  `inep` varchar(15) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `pid`
 --
 
 INSERT INTO `pid` (`cod_pid`, `cod_ibge`, `nome`, `inep`) VALUES
-(1, 1100015, 'Alta Floresta1', 'ALTER1'),
-(2, 5458566, 'PIDPALMAS1', 'INEPPALMAS1');
+(1, 1100015, 'algo', 'ALTERei'),
+(2, 5458566, 'PIDPALMAS1', 'INEPPALMAS1'),
+(4, 5458566, 'ç.llçmj', 'gf');
 
 -- --------------------------------------------------------
 
@@ -1486,13 +1755,9 @@ INSERT INTO `pid` (`cod_pid`, `cod_ibge`, `nome`, `inep`) VALUES
 -- Estrutura da tabela `pid_tipologia`
 --
 
-DROP TABLE IF EXISTS `pid_tipologia`;
-CREATE TABLE IF NOT EXISTS `pid_tipologia` (
+CREATE TABLE `pid_tipologia` (
   `cod_pid` int(11) NOT NULL,
-  `cod_tipologia` int(11) NOT NULL,
-  PRIMARY KEY (`cod_pid`,`cod_tipologia`),
-  KEY `fk_ponto_has_tipologia_tipologia1_idx` (`cod_tipologia`),
-  KEY `fk_ponto_tipologia_pid1_idx` (`cod_pid`)
+  `cod_tipologia` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1501,8 +1766,7 @@ CREATE TABLE IF NOT EXISTS `pid_tipologia` (
 -- Estrutura da tabela `ponto`
 --
 
-DROP TABLE IF EXISTS `ponto`;
-CREATE TABLE IF NOT EXISTS `ponto` (
+CREATE TABLE `ponto` (
   `cod_ponto` int(11) NOT NULL,
   `cod_categoria` int(11) NOT NULL,
   `cod_ibge` int(7) NOT NULL,
@@ -1513,11 +1777,7 @@ CREATE TABLE IF NOT EXISTS `ponto` (
   `bairro` varchar(100) DEFAULT NULL,
   `cep` char(8) DEFAULT NULL,
   `latitude` decimal(10,8) DEFAULT NULL,
-  `longitude` decimal(10,8) DEFAULT NULL,
-  PRIMARY KEY (`cod_ponto`,`cod_categoria`,`cod_ibge`),
-  KEY `fk_ponto_categoria1_idx` (`cod_categoria`),
-  KEY `fk_ponto_cd1_idx` (`cod_ibge`),
-  KEY `fk_ponto_pid1_idx` (`cod_pid`)
+  `longitude` decimal(10,8) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1525,7 +1785,7 @@ CREATE TABLE IF NOT EXISTS `ponto` (
 --
 
 INSERT INTO `ponto` (`cod_ponto`, `cod_categoria`, `cod_ibge`, `cod_pid`, `endereco`, `numero`, `complemento`, `bairro`, `cep`, `latitude`, `longitude`) VALUES
-(1, 1, 1100015, 1, 'QNE 12', '12', 'RUA BRASILIA', 'TAGUATINGue', '72125177', NULL, NULL);
+(1, 1, 1100015, 1, 'QNE 12rtrt', '128787878', 'RUA BRASILIAgtrgrg', 'TAGUATINGuey', '72125177', '5.00000000', '5.00000000');
 
 -- --------------------------------------------------------
 
@@ -1533,14 +1793,11 @@ INSERT INTO `ponto` (`cod_ponto`, `cod_categoria`, `cod_ibge`, `cod_pid`, `ender
 -- Estrutura da tabela `ponto_has_usuario`
 --
 
-DROP TABLE IF EXISTS `ponto_has_usuario`;
-CREATE TABLE IF NOT EXISTS `ponto_has_usuario` (
+CREATE TABLE `ponto_has_usuario` (
   `ponto_cod_ponto` int(11) NOT NULL,
   `ponto_categoria_cod_categoria` int(11) NOT NULL,
   `usuario_cod_usuario` int(11) NOT NULL,
-  `usuario_perfil_cod_perfil` int(11) NOT NULL,
-  PRIMARY KEY (`ponto_cod_ponto`,`ponto_categoria_cod_categoria`,`usuario_cod_usuario`,`usuario_perfil_cod_perfil`),
-  KEY `fk_ponto_has_usuario_usuario1_idx` (`usuario_cod_usuario`,`usuario_perfil_cod_perfil`)
+  `usuario_perfil_cod_perfil` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1549,17 +1806,14 @@ CREATE TABLE IF NOT EXISTS `ponto_has_usuario` (
 -- Estrutura da tabela `prefeitos`
 --
 
-DROP TABLE IF EXISTS `prefeitos`;
-CREATE TABLE IF NOT EXISTS `prefeitos` (
-  `cod_prefeito` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `prefeitos` (
+  `cod_prefeito` int(11) NOT NULL,
   `cod_ibge` int(7) NOT NULL,
   `nome` varchar(45) DEFAULT NULL,
   `cpf` varchar(11) DEFAULT NULL,
   `rg` varchar(20) DEFAULT NULL,
   `partido` varchar(45) DEFAULT NULL,
-  `exercicio` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`cod_prefeito`),
-  KEY `fk_prefeitos_municipio1_idx` (`cod_ibge`)
+  `exercicio` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1568,23 +1822,25 @@ CREATE TABLE IF NOT EXISTS `prefeitos` (
 -- Estrutura da tabela `previsao_empenho`
 --
 
-DROP TABLE IF EXISTS `previsao_empenho`;
-CREATE TABLE IF NOT EXISTS `previsao_empenho` (
-  `cod_previsao_empenho` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `previsao_empenho` (
+  `cod_previsao_empenho` int(11) NOT NULL,
   `cod_lote` int(11) NOT NULL,
   `cod_natureza_despesa` int(11) NOT NULL,
   `data` date DEFAULT NULL,
   `tipo` char(1) DEFAULT NULL,
-  `ano_referencia` int(11) DEFAULT NULL,
-  PRIMARY KEY (`cod_previsao_empenho`),
-  KEY `fk_empenho_lote1_idx` (`cod_lote`),
-  KEY `fk_previsao_empenho_natureza_despesa1_idx` (`cod_natureza_despesa`)
+  `ano_referencia` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `previsao_empenho`
+--
+
+INSERT INTO `previsao_empenho` (`cod_previsao_empenho`, `cod_lote`, `cod_natureza_despesa`, `data`, `tipo`, `ano_referencia`) VALUES
+(2, 2, 449039, '2019-12-05', 'O', 2020);
 
 --
 -- Acionadores `previsao_empenho`
 --
-DROP TRIGGER IF EXISTS `insere_itens_previsao_empenho`;
 DELIMITER $$
 CREATE TRIGGER `insere_itens_previsao_empenho` AFTER INSERT ON `previsao_empenho` FOR EACH ROW BEGIN
 	insert into itens_previsao_empenho (cod_previsao_empenho, cod_item, cod_tipo_item, cod_lote)
@@ -1602,13 +1858,10 @@ DELIMITER ;
 -- Estrutura da tabela `processo`
 --
 
-DROP TABLE IF EXISTS `processo`;
-CREATE TABLE IF NOT EXISTS `processo` (
+CREATE TABLE `processo` (
   `cod_processo` char(17) NOT NULL,
   `cod_ibge` int(7) NOT NULL,
-  `descricao` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`cod_processo`,`cod_ibge`),
-  KEY `fk_processo_cd1_idx` (`cod_ibge`)
+  `descricao` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1626,13 +1879,10 @@ INSERT INTO `processo` (`cod_processo`, `cod_ibge`, `descricao`) VALUES
 -- Estrutura da tabela `reajuste`
 --
 
-DROP TABLE IF EXISTS `reajuste`;
-CREATE TABLE IF NOT EXISTS `reajuste` (
+CREATE TABLE `reajuste` (
   `ano_ref` int(11) NOT NULL,
   `cod_lote` int(11) NOT NULL,
-  `percentual` float DEFAULT NULL,
-  PRIMARY KEY (`ano_ref`,`cod_lote`),
-  KEY `fk_reajuste_lote1_idx` (`cod_lote`)
+  `percentual` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1649,15 +1899,12 @@ INSERT INTO `reajuste` (`ano_ref`, `cod_lote`, `percentual`) VALUES
 -- Estrutura da tabela `telefone`
 --
 
-DROP TABLE IF EXISTS `telefone`;
-CREATE TABLE IF NOT EXISTS `telefone` (
-  `cod_telefone` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `telefone` (
+  `cod_telefone` int(11) NOT NULL,
   `cod_contato` int(11) NOT NULL,
   `telefone` varchar(11) DEFAULT NULL,
-  `tipo` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`cod_telefone`),
-  KEY `fk_telefone_contato1_idx` (`cod_contato`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  `tipo` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `telefone`
@@ -1674,12 +1921,10 @@ INSERT INTO `telefone` (`cod_telefone`, `cod_contato`, `telefone`, `tipo`) VALUE
 -- Estrutura da tabela `tipologia`
 --
 
-DROP TABLE IF EXISTS `tipologia`;
-CREATE TABLE IF NOT EXISTS `tipologia` (
-  `cod_tipologia` int(11) NOT NULL AUTO_INCREMENT,
-  `descricao` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`cod_tipologia`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+CREATE TABLE `tipologia` (
+  `cod_tipologia` int(11) NOT NULL,
+  `descricao` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `tipologia`
@@ -1708,11 +1953,9 @@ INSERT INTO `tipologia` (`cod_tipologia`, `descricao`) VALUES
 -- Estrutura da tabela `tipo_item`
 --
 
-DROP TABLE IF EXISTS `tipo_item`;
-CREATE TABLE IF NOT EXISTS `tipo_item` (
+CREATE TABLE `tipo_item` (
   `cod_tipo_item` int(11) NOT NULL,
-  `descricao` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`cod_tipo_item`)
+  `descricao` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1740,14 +1983,11 @@ INSERT INTO `tipo_item` (`cod_tipo_item`, `descricao`) VALUES
 -- Estrutura da tabela `uacom`
 --
 
-DROP TABLE IF EXISTS `uacom`;
-CREATE TABLE IF NOT EXISTS `uacom` (
+CREATE TABLE `uacom` (
   `cod_ibge` int(7) NOT NULL,
   `data` datetime NOT NULL,
   `titulo` varchar(45) DEFAULT NULL,
-  `relato` text,
-  PRIMARY KEY (`cod_ibge`,`data`),
-  KEY `fk_uacom_cd1_idx` (`cod_ibge`)
+  `relato` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1756,14 +1996,10 @@ CREATE TABLE IF NOT EXISTS `uacom` (
 -- Estrutura da tabela `uacom_assunto`
 --
 
-DROP TABLE IF EXISTS `uacom_assunto`;
-CREATE TABLE IF NOT EXISTS `uacom_assunto` (
+CREATE TABLE `uacom_assunto` (
   `cod_ibge` int(7) NOT NULL,
   `data` datetime NOT NULL,
-  `cod_assunto` int(11) NOT NULL,
-  PRIMARY KEY (`cod_ibge`,`data`,`cod_assunto`),
-  KEY `fk_uacom_has_assunto_assunto1_idx` (`cod_assunto`),
-  KEY `fk_uacom_has_assunto_uacom1_idx` (`cod_ibge`,`data`)
+  `cod_assunto` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1772,15 +2008,13 @@ CREATE TABLE IF NOT EXISTS `uacom_assunto` (
 -- Estrutura da tabela `usuario`
 --
 
-DROP TABLE IF EXISTS `usuario`;
-CREATE TABLE IF NOT EXISTS `usuario` (
-  `cod_usuario` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `usuario` (
+  `cod_usuario` int(11) NOT NULL,
   `nome` varchar(100) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
   `status` char(1) DEFAULT NULL,
   `login` varchar(45) DEFAULT NULL,
-  `senha` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`cod_usuario`)
+  `senha` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1789,17 +2023,364 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 -- Estrutura da tabela `usuario_modulo`
 --
 
-DROP TABLE IF EXISTS `usuario_modulo`;
-CREATE TABLE IF NOT EXISTS `usuario_modulo` (
+CREATE TABLE `usuario_modulo` (
   `cod_usuario` int(11) NOT NULL,
-  `cod_modulo` int(11) NOT NULL,
-  PRIMARY KEY (`cod_usuario`,`cod_modulo`),
-  KEY `fk_usuario_has_modulo_modulo1_idx` (`cod_modulo`),
-  KEY `fk_usuario_has_modulo_usuario1_idx` (`cod_usuario`)
+  `cod_modulo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Constraints for dumped tables
+-- Índices para tabelas despejadas
+--
+
+--
+-- Índices para tabela `assunto`
+--
+ALTER TABLE `assunto`
+  ADD PRIMARY KEY (`cod_assunto`);
+
+--
+-- Índices para tabela `categoria`
+--
+ALTER TABLE `categoria`
+  ADD PRIMARY KEY (`cod_categoria`);
+
+--
+-- Índices para tabela `cd`
+--
+ALTER TABLE `cd`
+  ADD PRIMARY KEY (`cod_ibge`),
+  ADD KEY `fk_cd_lote1_idx` (`cod_lote`);
+
+--
+-- Índices para tabela `cd_itens`
+--
+ALTER TABLE `cd_itens`
+  ADD PRIMARY KEY (`cod_ibge`,`cod_item`,`cod_tipo_item`),
+  ADD KEY `fk_itens_has_cd_cd1_idx` (`cod_ibge`),
+  ADD KEY `fk_cd_itens_itens2_idx` (`cod_item`,`cod_tipo_item`);
+
+--
+-- Índices para tabela `classe_empenho`
+--
+ALTER TABLE `classe_empenho`
+  ADD PRIMARY KEY (`cod_classe_empenho`);
+
+--
+-- Índices para tabela `contato`
+--
+ALTER TABLE `contato`
+  ADD PRIMARY KEY (`cod_contato`),
+  ADD KEY `fk_contato_entidade1_idx` (`cnpj`),
+  ADD KEY `fk_contato_cd1_idx` (`cod_ibge`);
+
+--
+-- Índices para tabela `empenho`
+--
+ALTER TABLE `empenho`
+  ADD PRIMARY KEY (`cod_empenho`),
+  ADD KEY `fk_empenho_previsao_empenho1_idx` (`cod_previsao_empenho`);
+
+--
+-- Índices para tabela `entidade`
+--
+ALTER TABLE `entidade`
+  ADD PRIMARY KEY (`cnpj`);
+
+--
+-- Índices para tabela `etapa`
+--
+ALTER TABLE `etapa`
+  ADD PRIMARY KEY (`cod_etapa`);
+
+--
+-- Índices para tabela `etapas_cd`
+--
+ALTER TABLE `etapas_cd`
+  ADD PRIMARY KEY (`cod_ibge`,`cod_etapa`),
+  ADD KEY `fk_etapas_cd_etapa1_idx` (`cod_etapa`);
+
+--
+-- Índices para tabela `fatura`
+--
+ALTER TABLE `fatura`
+  ADD PRIMARY KEY (`num_nf`,`cod_ibge`),
+  ADD KEY `fk_Fatura_cd1_idx` (`cod_ibge`);
+
+--
+-- Índices para tabela `fatura_otb`
+--
+ALTER TABLE `fatura_otb`
+  ADD PRIMARY KEY (`cod_otb`,`num_nf`,`cod_ibge`),
+  ADD KEY `fk_Fatura_has_otb_otb1_idx` (`cod_otb`),
+  ADD KEY `fk_fatura_otb_fatura1_idx` (`num_nf`,`cod_ibge`);
+
+--
+-- Índices para tabela `itens`
+--
+ALTER TABLE `itens`
+  ADD PRIMARY KEY (`cod_item`,`cod_tipo_item`),
+  ADD KEY `fk_itens_classificacao_itens1_idx` (`cod_natureza_despesa`),
+  ADD KEY `fk_itens_subitem1_idx` (`cod_classe_empenho`),
+  ADD KEY `fk_itens_tipo_item1_idx` (`cod_tipo_item`);
+
+--
+-- Índices para tabela `itens_empenho`
+--
+ALTER TABLE `itens_empenho`
+  ADD PRIMARY KEY (`cod_empenho`,`cod_item`,`cod_tipo_item`),
+  ADD KEY `fk_itens_empenho_empenho1_idx` (`cod_empenho`),
+  ADD KEY `fk_itens_empenho_itens_previsao_empenho1_idx` (`cod_previsao_empenho`,`cod_item`,`cod_tipo_item`);
+
+--
+-- Índices para tabela `itens_fatura`
+--
+ALTER TABLE `itens_fatura`
+  ADD PRIMARY KEY (`num_nf`,`cod_ibge`,`cod_empenho`,`cod_item`,`cod_tipo_item`),
+  ADD KEY `fk_itens_fatura_itens_empenho1_idx` (`cod_empenho`,`cod_item`,`cod_tipo_item`),
+  ADD KEY `fk_itens_fatura_fatura1_idx` (`num_nf`,`cod_ibge`);
+
+--
+-- Índices para tabela `itens_otb`
+--
+ALTER TABLE `itens_otb`
+  ADD PRIMARY KEY (`cod_otb`,`num_nf`,`cod_ibge`,`cod_empenho`,`cod_item`,`cod_tipo_item`),
+  ADD KEY `fk_itens_fatura_has_otb_otb1_idx` (`cod_otb`),
+  ADD KEY `fk_itens_otb_itens_fatura1_idx` (`num_nf`,`cod_ibge`,`cod_empenho`,`cod_item`,`cod_tipo_item`);
+
+--
+-- Índices para tabela `itens_previsao_empenho`
+--
+ALTER TABLE `itens_previsao_empenho`
+  ADD PRIMARY KEY (`cod_previsao_empenho`,`cod_item`,`cod_tipo_item`),
+  ADD KEY `fk_itens_previsao_empenho_previsao_empenho1_idx` (`cod_previsao_empenho`),
+  ADD KEY `fk_itens_previsao_empenho_lote_itens1_idx` (`cod_lote`,`cod_item`,`cod_tipo_item`);
+
+--
+-- Índices para tabela `log`
+--
+ALTER TABLE `log`
+  ADD PRIMARY KEY (`cod_log`,`cod_usuario`),
+  ADD KEY `fk_log_usuario1_idx` (`cod_usuario`);
+
+--
+-- Índices para tabela `lote`
+--
+ALTER TABLE `lote`
+  ADD PRIMARY KEY (`cod_lote`),
+  ADD KEY `fk_lote_entidade1_idx` (`cnpj`);
+
+--
+-- Índices para tabela `lote_itens`
+--
+ALTER TABLE `lote_itens`
+  ADD PRIMARY KEY (`cod_lote`,`cod_item`,`cod_tipo_item`),
+  ADD KEY `fk_lote_has_itens_lote1_idx` (`cod_lote`),
+  ADD KEY `fk_lote_itens_itens1_idx` (`cod_item`,`cod_tipo_item`);
+
+--
+-- Índices para tabela `modulo`
+--
+ALTER TABLE `modulo`
+  ADD PRIMARY KEY (`cod_modulo`);
+
+--
+-- Índices para tabela `municipio`
+--
+ALTER TABLE `municipio`
+  ADD PRIMARY KEY (`cod_ibge`);
+
+--
+-- Índices para tabela `natureza_despesa`
+--
+ALTER TABLE `natureza_despesa`
+  ADD PRIMARY KEY (`cod_natureza_despesa`);
+
+--
+-- Índices para tabela `otb`
+--
+ALTER TABLE `otb`
+  ADD PRIMARY KEY (`cod_otb`);
+
+--
+-- Índices para tabela `pid`
+--
+ALTER TABLE `pid`
+  ADD PRIMARY KEY (`cod_pid`),
+  ADD KEY `fk_pid_municipio1_idx` (`cod_ibge`);
+
+--
+-- Índices para tabela `pid_tipologia`
+--
+ALTER TABLE `pid_tipologia`
+  ADD PRIMARY KEY (`cod_pid`,`cod_tipologia`),
+  ADD KEY `fk_ponto_has_tipologia_tipologia1_idx` (`cod_tipologia`),
+  ADD KEY `fk_ponto_tipologia_pid1_idx` (`cod_pid`);
+
+--
+-- Índices para tabela `ponto`
+--
+ALTER TABLE `ponto`
+  ADD PRIMARY KEY (`cod_ponto`,`cod_categoria`,`cod_ibge`),
+  ADD KEY `fk_ponto_categoria1_idx` (`cod_categoria`),
+  ADD KEY `fk_ponto_cd1_idx` (`cod_ibge`),
+  ADD KEY `fk_ponto_pid1_idx` (`cod_pid`);
+
+--
+-- Índices para tabela `ponto_has_usuario`
+--
+ALTER TABLE `ponto_has_usuario`
+  ADD PRIMARY KEY (`ponto_cod_ponto`,`ponto_categoria_cod_categoria`,`usuario_cod_usuario`,`usuario_perfil_cod_perfil`),
+  ADD KEY `fk_ponto_has_usuario_usuario1_idx` (`usuario_cod_usuario`,`usuario_perfil_cod_perfil`);
+
+--
+-- Índices para tabela `prefeitos`
+--
+ALTER TABLE `prefeitos`
+  ADD PRIMARY KEY (`cod_prefeito`),
+  ADD KEY `fk_prefeitos_municipio1_idx` (`cod_ibge`);
+
+--
+-- Índices para tabela `previsao_empenho`
+--
+ALTER TABLE `previsao_empenho`
+  ADD PRIMARY KEY (`cod_previsao_empenho`),
+  ADD KEY `fk_empenho_lote1_idx` (`cod_lote`),
+  ADD KEY `fk_previsao_empenho_natureza_despesa1_idx` (`cod_natureza_despesa`);
+
+--
+-- Índices para tabela `processo`
+--
+ALTER TABLE `processo`
+  ADD PRIMARY KEY (`cod_processo`,`cod_ibge`),
+  ADD KEY `fk_processo_cd1_idx` (`cod_ibge`);
+
+--
+-- Índices para tabela `reajuste`
+--
+ALTER TABLE `reajuste`
+  ADD PRIMARY KEY (`ano_ref`,`cod_lote`),
+  ADD KEY `fk_reajuste_lote1_idx` (`cod_lote`);
+
+--
+-- Índices para tabela `telefone`
+--
+ALTER TABLE `telefone`
+  ADD PRIMARY KEY (`cod_telefone`),
+  ADD KEY `fk_telefone_contato1_idx` (`cod_contato`);
+
+--
+-- Índices para tabela `tipologia`
+--
+ALTER TABLE `tipologia`
+  ADD PRIMARY KEY (`cod_tipologia`);
+
+--
+-- Índices para tabela `tipo_item`
+--
+ALTER TABLE `tipo_item`
+  ADD PRIMARY KEY (`cod_tipo_item`);
+
+--
+-- Índices para tabela `uacom`
+--
+ALTER TABLE `uacom`
+  ADD PRIMARY KEY (`cod_ibge`,`data`),
+  ADD KEY `fk_uacom_cd1_idx` (`cod_ibge`);
+
+--
+-- Índices para tabela `uacom_assunto`
+--
+ALTER TABLE `uacom_assunto`
+  ADD PRIMARY KEY (`cod_ibge`,`data`,`cod_assunto`),
+  ADD KEY `fk_uacom_has_assunto_assunto1_idx` (`cod_assunto`),
+  ADD KEY `fk_uacom_has_assunto_uacom1_idx` (`cod_ibge`,`data`);
+
+--
+-- Índices para tabela `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`cod_usuario`);
+
+--
+-- Índices para tabela `usuario_modulo`
+--
+ALTER TABLE `usuario_modulo`
+  ADD PRIMARY KEY (`cod_usuario`,`cod_modulo`),
+  ADD KEY `fk_usuario_has_modulo_modulo1_idx` (`cod_modulo`),
+  ADD KEY `fk_usuario_has_modulo_usuario1_idx` (`cod_usuario`);
+
+--
+-- AUTO_INCREMENT de tabelas despejadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `assunto`
+--
+ALTER TABLE `assunto`
+  MODIFY `cod_assunto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT de tabela `categoria`
+--
+ALTER TABLE `categoria`
+  MODIFY `cod_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT de tabela `contato`
+--
+ALTER TABLE `contato`
+  MODIFY `cod_contato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT de tabela `etapa`
+--
+ALTER TABLE `etapa`
+  MODIFY `cod_etapa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de tabela `log`
+--
+ALTER TABLE `log`
+  MODIFY `cod_log` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `pid`
+--
+ALTER TABLE `pid`
+  MODIFY `cod_pid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de tabela `prefeitos`
+--
+ALTER TABLE `prefeitos`
+  MODIFY `cod_prefeito` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `previsao_empenho`
+--
+ALTER TABLE `previsao_empenho`
+  MODIFY `cod_previsao_empenho` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de tabela `telefone`
+--
+ALTER TABLE `telefone`
+  MODIFY `cod_telefone` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de tabela `tipologia`
+--
+ALTER TABLE `tipologia`
+  MODIFY `cod_tipologia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT de tabela `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `cod_usuario` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Restrições para despejos de tabelas
 --
 
 --
