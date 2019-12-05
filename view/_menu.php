@@ -10,6 +10,7 @@
     "Etapa" => '<i class="fas fa-align-justify"></i>',
     "Empenho" => '<i class="fas fa-align-justify"></i>',
     "Fatura"=> '<i class="fas fa-file-alt"></i>',
+    "FaturaOtb"=> '<i class="fas fa-file-alt"></i>',
     "Itens" =>'<i class="fas fa-wifi"></i>',
     "ItensEmpenho"=> '<i class="fas fa-file-alt"></i>',
     "ItensFatura"=> '<i class="fas fa-file-alt"></i>',
@@ -26,7 +27,6 @@
     "TipologiaPid"=> '<i class="fas fa-sliders-h"></i>',
     "Tipologia"=> '<i class="fas fa-sliders-h"></i>',
     "Uacom"=> '<i class="fas fa-sliders-h"></i>',
-    "Fatura"=> '<i class="fas fa-file-alt"></i>',
     "Empenho"=> '<i class="fas fa-sliders-h"></i>',
     "Usuario"=> '<i class="fas fa-sliders-h"></i>',
     "ItensEmpenho"=> '<i class="fas fa-sliders-h"></i>'
