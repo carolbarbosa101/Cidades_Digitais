@@ -46,8 +46,8 @@
               <table class="table">
                 <thead>
                   <tr>
-                    <th scope="col">Código IBGE</th>
-				    <th scope="col">Data</th>
+                    <th scope="col">Município</th>
+				            <th scope="col">Data</th>
                     <th scope="col">Código Assunto</th>
                     <th scope="col">Ações</th>
                   </tr>
@@ -60,9 +60,9 @@
                       ?>
                       <tr>
 
-                        <td><?php echo $value['cod_ibge'] ?></td>
+                        <td><?php echo $value['munic'] ?></td>
                         <td><?php echo date('d/m/Y H:i:s', strtotime($value['data']))?> </td>
-                        <td><?php echo $value['cod_assunto'] ?></td>
+                        <td><?php echo $value['assun'] ?></td>
                         <td> 
                           <span class="d-flex">
                           <a href="<?php echo URL ?>View/UacomAssuntoEditar.php?cod_ibge=<?php echo $value['cod_ibge'] ?>&data=<?php echo $value['data'] ?>&cod_assunto=<?php echo $value['cod_assunto'] ?>" 

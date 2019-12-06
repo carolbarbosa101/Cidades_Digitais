@@ -24,9 +24,21 @@ class ClassUacomAssuntoDAO {
     public function listarUacomAssunto(){
         try {
             $pdo = Conexao::getInstance();
-            $sql = "SELECT cod_ibge, data, cod_assunto
+            $sql = "SELECT CONCAT (municipio.nome_municipio,  ' - ' , municipio.uf,': ',uacom.cod_ibge) AS munic,
+            CONCAT (uacom_assunto.cod_assunto,  ' - ' ,assunto.descricao) AS assun,
+            uacom_assunto.cod_ibge,
+            uacom_assunto.data,
+            uacom_assunto.cod_assunto,
+            municipio.cod_ibge,
+            uacom.cod_ibge,
+            cd.cod_ibge,
+            assunto.descricao
             FROM uacom_assunto
-            ORDER BY cod_ibge ASC";
+            INNER JOIN assunto ON uacom_assunto.cod_assunto = assunto.cod_assunto
+            INNER JOIN uacom ON uacom_assunto.cod_ibge = uacom.cod_ibge
+            INNER JOIN cd ON uacom_assunto.cod_ibge = cd.cod_ibge
+            INNER JOIN municipio ON uacom_assunto.cod_ibge = municipio.cod_ibge
+            ORDER BY munic ASC";
             $stmt = $pdo->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll(); // fetchAll() retorna um array contendo varios dados. 
