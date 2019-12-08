@@ -81,6 +81,8 @@ class ClassEntidadeDAO {
 
     // apagar registro pelo id
     public function apagarEntidade(ClassEntidade $apagarEntidade) {
+        //var_dump($apagarEntidade);
+            //die;
         try {
             $pdo = Conexao::getInstance();
             $sql = "DELETE FROM entidade WHERE cnpj = ?";

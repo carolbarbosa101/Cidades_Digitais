@@ -20,12 +20,12 @@ $novoLoteItens->setPreco($preco);
 
 
 $classLoteItensDAO = new ClassLoteItensDAO();
-$loteitens = $classLoteItensDAO->update($novoLoteItens);
+$loteItens = $classLoteItensDAO->update($novoLoteItens);
 
-//var_dump($loteitens);
+//var_dump($loteItens);
 //die();
 
-if($loteitens == TRUE){
+if($loteItens == TRUE){
     $_SESSION['msg'] = '
         <div class="alert alert-success" role="alert">
             Editado com sucesso!
@@ -35,7 +35,7 @@ if($loteitens == TRUE){
 } else {
     $_SESSION['msg'] = '
         <div class="alert alert-danger" role="alert">
-            Erro! Não foi possível atualizar os dados . '.$loteitens.'
+            Erro! Não foi possível atualizar os dados . '.$loteItens.'
         </div>
     ';
     header('Location:../View/LoteItens.php');

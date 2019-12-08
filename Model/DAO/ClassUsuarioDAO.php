@@ -51,4 +51,44 @@ class ClassUsuarioDAO {
         }
     }
 
+    public function update(ClassUsuario $editarUsuario) {
+        try {
+            $pdo = Conexao::getInstance();
+            $sql = "UPDATE usuario SET nome = ?, email = ?, status = ?, login = ?, senha = ?
+            WHERE cod_usuario = ? ";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(1, $editarUsuario->getNome());
+            $stmt->bindValue(2, $editarUsuario->getEmail());
+            $stmt->bindValue(3, $editarUsuario->getStatus());
+            $stmt->bindValue(4, $editarUsuario->getLogin());
+            $stmt->bindValue(5, $editarUsuario->getSenha());
+
+            $stmt->bindValue(6, $editarUsuario->getCod_usuario());
+           
+            $stmt->execute();
+            return TRUE;
+        } catch (PDOException $exc) {
+            echo $exc->getMessage();
+        }
+    }
+
+    public function visualizarUsuario(ClassUsuario $visualizarUsuario){
+        try {
+            $pdo = Conexao::getInstance();
+
+            $sql = "SELECT * 
+            FROM usuario 
+            WHERE cod_usuario = ?";
+
+            $stmt = $pdo->prepare($sql);
+
+            $stmt->bindValue(1, $visualizarUsuario->getCod_usuario());
+
+            $stmt->execute();
+            return $stmt->fetchAll(); // fetchAll() retorna um array contendo varios dados. 
+        } catch (PDOException $ex) {
+            return $ex->getMessage();
+        }
+    }
+
 }

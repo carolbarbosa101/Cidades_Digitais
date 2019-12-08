@@ -5,8 +5,6 @@ class ClassItensFatura {
     private $cod_tipo_item, $valor, $quantidade;
 
 
-
-
     function getNum_nf() {
         return $this->num_nf;
     }       
@@ -28,7 +26,7 @@ class ClassItensFatura {
     function getQuantidade() {
         return $this->quantidade;
     }
-    
+   
 	
     function setNum_nf($num_nf) {
         $this->num_nf = $num_nf;
@@ -42,5 +40,18 @@ class ClassItensFatura {
         $this->cod_empenho = $cod_empenho;
     }
     
-    
+    function setCod_item($cod_item) {
+        $this->cod_item = $cod_item;
+    }
+
+	function setCod_tipo_item($cod_tipo_item) {
+        $this->cod_tipo_item = $cod_tipo_item;
+    }
+
+    function setValor($valor) {
+        $this->valor = $valor;
+    }
+    function setQuantidade($quantidade) {
+        $this->quantidade = $quantidade;
+    }
 }

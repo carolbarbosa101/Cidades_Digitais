@@ -4,6 +4,8 @@ class ClassCdDAO {
 
     public function cadastrar(ClassCd $cadastrarCd) {
         try {
+            //var_dump($cadastrarCd);
+            //die;
             $pdo = Conexao::getInstance();
             $sql = "INSERT INTO cd (cod_ibge,cod_lote,os_pe,data_pe,os_imp,data_imp) values (?,?,?,?,?,?)";
             $stmt = $pdo->prepare($sql);
@@ -49,7 +51,8 @@ class ClassCdDAO {
         try {
             $pdo = Conexao::getInstance();
             $sql = "SELECT CONCAT(municipio.nome_municipio,  ' - ' , municipio.uf,': ',cd.cod_ibge) AS ibge,
-            cd.cod_lote,cd.os_pe,cd.data_pe,cd.os_imp,cd.data_imp, municipio.cod_ibge, cd.cod_ibge
+            cd.cod_lote, cd.os_pe,cd.data_pe,cd.os_imp, cd.data_imp,cd.cod_ibge,  municipio.cod_ibge
+            
             FROM cd 
             INNER JOIN municipio ON cd.cod_ibge = municipio.cod_ibge
             ORDER BY ibge ASC";

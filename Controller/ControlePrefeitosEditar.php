@@ -4,7 +4,7 @@ require_once '../Model/ClassPrefeitos.php';
 require_once '../Model/DAO/ClassPrefeitosDAO.php';
 
 
-
+$cod_prefeito = @$_POST['cod_prefeito'];
 $cod_ibge = @$_POST['cod_ibge'];
 $nome = @$_POST['nome'];
 $cpf = @$_POST['cpf'];
@@ -14,6 +14,7 @@ $exercicio = @$_POST['exercicio'];
 
 
 $novoPrefeito = new ClassPrefeitos();
+$novoPrefeito->setCod_prefeito($cod_prefeito);
 $novoPrefeito->setCod_ibge($cod_ibge);
 $novoPrefeito->setNome($nome);
 $novoPrefeito->setCpf($cpf);
@@ -22,10 +23,10 @@ $novoPrefeito->setPartido($partido);
 $novoPrefeito->setExercicio($exercicio);
 
 
-$classPrefeitoDAO = new ClassPrefeitoDAO();
+$classPrefeitoDAO = new ClassPrefeitosDAO();
 $prefeito = $classPrefeitoDAO->update($novoPrefeito);
 
-//var_dump($prefeito);
+//var_dump($novoPrefeito);
 //die();
 
 if($prefeito == TRUE){
