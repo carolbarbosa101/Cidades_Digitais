@@ -1,6 +1,10 @@
 <?php
 
-define("URL", "http://172.25.117.58:88/Cidades_Digitais/");
+//define("URL", "http://172.25.117.58:88/Cidades_Digitais/");
+
+define("URL", "http://172.25.116.2:83/Cidades_Digitais/"); // IP do computador da Carol
+
+
 
   session_start();
   include_once("_menu.php");
