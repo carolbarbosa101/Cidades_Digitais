@@ -10,6 +10,8 @@
     "Entidade" => '<i class="fas fa-boxes"></i>',
     "Etapa" => '<i class="fas fa-align-justify"></i>',
     "Fatura"=> '<i class="fas fa-file-alt"></i>',
+    "FaturaOtb"=> '<i class="fas fa-file-alt"></i>',
+    "ItensFatura"=> '<i class="fas fa-file-alt"></i>',
     "ItensEmpenho"=> '<i class="fas fa-sliders-h"></i>',
     "Lote" =>'<i class="fas fa-clone"></i>',
     "LoteItens" =>'<i class="fas fa-clone"></i>',
