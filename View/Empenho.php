@@ -11,7 +11,7 @@
     
     <!-- Conteudo -->
     <main id="main">
-
+      <div class="container">
         <div class="row mb-5">
           <div id="mainHeader" class="col-md-6 d-flex align-items-center">
             <span id="mainHeaderIcon">
@@ -29,7 +29,7 @@
             </button>
           </div>
         </div>
-
+      </div>
         <div class="container">
 
             <?php
@@ -125,13 +125,13 @@
                     </select>
                   </div>
                     
-                
+
                   <div class="form-group col-md-12">
-                    <label for="recipient-data" class="col-form-label"></label>
+                    <label for="recipient-data" class="col-form-label">Data:</label>
                     <input 
                       name="data"
-                      value="<?php echo date('Y-m-d H:i:s') ?>"
-                      type="hidden" 
+                      placeholder=""
+                      type="datetime-local" 
                       class="form-control"
                       maxlength="" 
                       id="recipient-data">

@@ -66,10 +66,10 @@ class ClassUacomDAO {
         }
     }
 
-    public function todosUacom(){
+    public function todosCd(){
         try {
             $pdo = Conexao::getInstance();
-            $sql = "SELECT cod_ibge, data, titulo, relato FROM uacom ORDER BY cod_ibge ASC";
+            $sql = "SELECT cod_ibge, nome_municipio FROM municipio ORDER BY nome_municipio ASC";
             $stmt = $pdo->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll(); // fetchAll() retorna um array contendo varios dados. 
