@@ -3,9 +3,10 @@
     include_once("_cabecalho.php");
     ?>
     
-   
+    
     <main id="main">
-
+    
+      <div class="container">
         <div class="row mb-2">
           <div id="mainHeader" class="col-md-6 d-flex align-items-center">
             <span id="mainHeaderIcon">
@@ -16,7 +17,7 @@
             </span>
           </div>
         </div>
-
+      
         <div class="row">
         
           <p onclick="carregar('')"></p>
@@ -24,7 +25,7 @@
         <div>
     <iframe src="https://app.powerbi.com/view?r=eyJrIjoiMjUxYzY3MTItY2M1OC00MDNjLWJkNjQtYjVlOGNiYzFjODY2IiwidCI6Ijg4MGRkN2YxLWQwMmMtNGUxOS04MTVmLTQ2NDlkMzNmNWM2MyJ9" scrolling="no" frameborder="no"></iframe>
     </div>
-
+    </div>
     </main>
 
     <?php

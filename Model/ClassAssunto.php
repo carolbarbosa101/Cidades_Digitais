@@ -1,4 +1,9 @@
 <?php
+/**
+ * Description of ClassAssunto
+ *
+ * @author Carol
+ */
 
 class ClassAssunto {
     private $cod_assunto, $descricao;
