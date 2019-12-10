@@ -9,17 +9,19 @@
     ?>
     
     <!-- Conteudo -->
-    <main id="main_conteudo">
-
+    <main id="main">
+    <div class="container">
         <div class="row mb-5">
           <div id="mainHeader" class="col-md-6 d-flex align-items-center">
-          
+            <span id="mainHeaderIcon">
+            <i class="fas fa-globe-asia"></i>
+            </span>
             <span>
-              <h3 class="mb-0">Editar Prefeito</h3>
+              <h3 class="mb-0">Editar Prefeitos</h3>
             </span>
           </div>
- 
         </div>
+      </div>
 
         <div class="container">
 

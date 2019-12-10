@@ -13,22 +13,25 @@
     
     <!-- Conteudo -->
     <main id="main">
-
+      <div class="container">
         <div class="row mb-5">
           <div id="mainHeader" class="col-md-6 d-flex align-items-center">
             <span id="mainHeaderIcon">
             <i class="fas fa-globe-asia"></i>
             </span>
             <span>
-              <h3 class="mb-0">Itens Empenho</h3>
+              <h3 class="mb-0">ItensEmpenho</h3>
               <small>Descrição</small>
             </span>
           </div>
           <div class="col-md-6 text-right">
-            
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".cadastrar-itens_empenho-modal-lg">
+              <i class="far fa-plus-square"></i>
+              Cadastrar
+            </button>
           </div>
         </div>
-
+      </div>
         <div class="container">
 
             <?php
@@ -73,7 +76,9 @@
                               <a href="<?php echo URL ?>View/ItensEmpenhoEditar.php?cod_empenho=<?php echo $value['cod_empenho'] ?>&cod_item=<?php echo $value['cod_item'] ?>&cod_tipo_item=<?php echo $value['cod_tipo_item'] ?>&cod_previsao_empenho=<?php echo $value['cod_previsao_empenho'] ?>&valor=<?php echo $value['valor'] ?>&quantidade=<?php echo $value['quantidade'] ?>" class="btn btn-warning mr-1">
                               Editar
                             </a> 
-                          
+                            <button onclick="apagarDados('<?php echo URL ?>Controller/ControleApagarItensEmpenho.php?cod_empenho=<?php echo $value['cod_empenho'] ?>')" class="btn btn-danger">
+                              Excluir
+                            </button> 
                             </span>
                           </td>
 
@@ -107,13 +112,8 @@
           <form action="../Controller/ControleItensEmpenho.php" method="post">
 
             <div class="modal-body">
-<<<<<<< HEAD
             <div class="form-group col-md-12">
                     <label for="recipient-cod_empenho" class="col-form-label">Código Empenho:</label>
-=======
-            
-            <label for="recipient-cod_empenho" class="col-form-label">Cód. Empenho:</label>
->>>>>>> f7961ace1fc56860d5daf4bd18f196451c9ad1f5
                     <select name="cod_empenho" class="form-control" id="recipient-cod_empenho">
                       <option value="">Selecionar Item</option>
                       <?php 

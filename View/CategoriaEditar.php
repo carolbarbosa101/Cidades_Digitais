@@ -3,7 +3,9 @@
     require_once("../Controller/ControleCategoriaVisualizar.php");
 
     ?>
+    
     <main id="main_conteudo">
+      <div class="container">
         <div class="row mb-5">
           <div id="mainHeader" class="col-md-6 d-flex align-items-center">
             <span>
@@ -12,7 +14,7 @@
           </div>
  
         </div>
-
+      </div>
         <div class="container">
 
             <?php
@@ -65,7 +67,7 @@
 
             </div>
 
-            <div class="modal-footer">
+            <div class="modal-footer ">
               <a href="<?php echo URL ?>View/Categoria.php" class="btn btn-secondary">Cancelar</a>
               <button type="submit" class="btn btn-primary">
                 Salvar

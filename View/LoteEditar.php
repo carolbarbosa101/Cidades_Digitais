@@ -9,8 +9,8 @@
     ?>
     
     <!-- Conteudo -->
-    <main id="main_conteudo">
-
+    <main id="main">
+     <div class="container">
         <div class="row mb-5">
           <div id="mainHeader" class="col-md-6 d-flex align-items-center">
             <span id="mainHeaderIcon">
@@ -21,7 +21,7 @@
              
             </span>
           </div>
- 
+        </div>
         </div>
 
         <div class="container">

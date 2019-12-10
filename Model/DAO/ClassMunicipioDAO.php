@@ -6,7 +6,7 @@ class ClassMunicipioDAO {
     public function cadastrar(ClassMunicipio $cadastrarMunicipio) {
         try {
             $pdo = Conexao::getInstance();
-            $sql = "INSERT INTO municipio (cod_ibge, nome_municipio, populacao, uf, regiao, cnpj, dist_capital, endereco, numero, complemento, bairro, idhm, latitude, longitude) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            $sql = "INSERT INTO municipio (cod_ibge, nome_municipio, populacao, uf, regiao, cnpj, dist_capital, endereco, numero, complemento, bairro, idhm, latitude, longitude) values (?,?, ?, ?,?,?,?,?,?,?,?,?,?,?)";
             $stmt = $pdo->prepare($sql);
             $stmt->bindValue(1, $cadastrarMunicipio->getCod_ibge());
             $stmt->bindValue(2, $cadastrarMunicipio->getNome_municipio());
