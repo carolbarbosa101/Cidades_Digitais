@@ -16,6 +16,7 @@
     "Lote" =>'<i class="fas fa-clone"></i>',
     "LoteItens" =>'<i class="fas fa-clone"></i>',
     "Municipios" => '<i class="fas fa-globe-asia"></i>',
+    "Otb" => '<i class="fas fa-globe-asia"></i>',
     "Pid"=> '<i class="fas fa-sliders-h"></i>',
     "Prefeitos"=> '<i class="fas fa-sliders-h"></i>',
     "PrevisaoEmpenho"=> '<i class="fas fa-sliders-h"></i>',

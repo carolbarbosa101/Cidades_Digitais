@@ -17,7 +17,7 @@
                 <i class="fas fa-globe-asia"></i>
             </span>
             <span>
-            <h3 class="mb-0"> Ordem de Transferência Bancária</h3>
+            <h3 class="mb-0"> Fatura da Ordem de Transferência Bancária</h3>
             <small>Descrição</small>
             </span>
             </div>

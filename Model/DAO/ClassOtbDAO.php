@@ -1,20 +1,20 @@
 <?php
 /**
- * Description of ClassAssunto
+ * Description of ClassOtb
  * @author Carol
  */
 require_once 'Conexao.php';
-class ClassAssuntoDAO {
-  //  var_dump($cadastrarAssunto);
+class ClassOtbDAO {
+  //  var_dump($cadastrarOtb);
     //die();
-    public function cadastrar(ClassAssunto $cadastrarAssunto) {
+    public function cadastrar(ClassOtb $cadastrarOtb) {
         try {
             $pdo = Conexao::getInstance();
-            $sql = "INSERT INTO assunto (cod_assunto, descricao) values (?,?)";
+            $sql = "INSERT INTO otb (cod_otb, dt_pgto) values (?,?)";
             $stmt = $pdo->prepare($sql);
             
-			$stmt->bindValue(1, $cadastrarAssunto->getCod_assunto());
-			$stmt->bindValue(2, $cadastrarAssunto->getDescricao());
+			$stmt->bindValue(1, $cadastrarOtb->getCod_otb());
+			$stmt->bindValue(2, $cadastrarOtb->getDt_pgto());
 
             $stmt->execute();
             return TRUE;
@@ -22,17 +22,16 @@ class ClassAssuntoDAO {
             echo $exc->getMessage();
         }
     }
-    public function update(ClassAssunto $editarAssunto) {
+    public function update(ClassOtb $editarOtb) {
         try {
             $pdo = Conexao::getInstance();
-            $sql = "UPDATE assunto SET descricao = ?
-            WHERE cod_assunto = ? ";
+            $sql = "UPDATE otb SET dt_pgto = ?
+            WHERE cod_otb = ? ";
             $stmt = $pdo->prepare($sql);
-            $stmt->bindValue(1, $editarAssunto->getDescricao());
+            $stmt->bindValue(1, $$editarOtb->getDt_pgto());
 
-            $stmt->bindValue(2, $editarAssunto->getCod_assunto());
+            $stmt->bindValue(2, $$editarOtb->getcod_otb());
     
-           
             $stmt->execute();
             return TRUE;
         } catch (PDOException $exc) {
@@ -40,10 +39,10 @@ class ClassAssuntoDAO {
         }
     }
     
-    public function listarAssunto(){
+    public function listarOtb(){
         try {
             $pdo = Conexao::getInstance();
-            $sql = "SELECT cod_assunto, descricao FROM assunto ORDER BY cod_assunto ASC";
+            $sql = "SELECT cod_otb, dt_pgto FROM otb ORDER BY cod_otb ASC";
             $stmt = $pdo->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll(); // fetchAll() retorna um array contendo varios dados. 
@@ -53,12 +52,12 @@ class ClassAssuntoDAO {
     }
 
     // apagar registro pelo id
-    public function apagarAssunto(ClassAssunto $apagarAssunto) {
+    public function apagarOtb(ClassOtb $apagarOtb) {
         try {
             $pdo = Conexao::getInstance();
-            $sql = "DELETE FROM assunto WHERE cod_assunto = ?";
+            $sql = "DELETE FROM otb WHERE cod_otb = ?";
             $stmt = $pdo->prepare($sql);
-            $stmt->bindValue(1, $apagarAssunto->getCod_assunto());
+            $stmt->bindValue(1, $apagarOtb->getCod_assunto());
            
             $stmt->execute();
             return TRUE;
@@ -68,17 +67,29 @@ class ClassAssuntoDAO {
     }
 
     
-    public function visualizarAssunto(ClassAssunto $visualizarAssunto){
+    public function visualizarOtb(ClassOtb $visualizarOtb){
         try {
             $pdo = Conexao::getInstance();
 
-            $sql = "SELECT cod_assunto, descricao
-            FROM assunto  
-            WHERE cod_assunto = ?";
+            $sql = "SELECT cod_otb, dt_pgto
+            FROM otb  
+            WHERE cod_otb = ?";
 
             $stmt = $pdo->prepare($sql);
 
-            $stmt->bindValue(1, $visualizarAssunto->getCod_assunto());
+            $stmt->bindValue(1, $visualizarOtb->getCod_otb());
+            $stmt->execute();
+            return $stmt->fetchAll(); // fetchAll() retorna um array contendo varios dados. 
+        } catch (PDOException $ex) {
+            return $ex->getMessage();
+        }
+    }
+
+    public function todosOtb(){
+        try {
+            $pdo = Conexao::getInstance();
+            $sql = "SELECT cod_otb, dt_pgto FROM otb ORDER BY cod_otb ASC";
+            $stmt = $pdo->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll(); // fetchAll() retorna um array contendo varios dados. 
         } catch (PDOException $ex) {
