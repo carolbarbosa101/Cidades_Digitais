@@ -1,9 +1,4 @@
 <?php
-/**
- * Description of ClassOtb
- *
- * @author Carol
- */
 
 class ClassOtb {
     private $cod_otb, $dt_pgto;
@@ -26,9 +21,6 @@ class ClassOtb {
         $this->dt_pgto = $dt_pgto;
     }
 
-   
-
-   
 
     
 }

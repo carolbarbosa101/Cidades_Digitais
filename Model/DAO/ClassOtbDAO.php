@@ -1,12 +1,7 @@
 <?php
-/**
- * Description of ClassOtb
- * @author Carol
- */
 require_once 'Conexao.php';
 class ClassOtbDAO {
-  //  var_dump($cadastrarOtb);
-    //die();
+  
     public function cadastrar(ClassOtb $cadastrarOtb) {
         try {
             $pdo = Conexao::getInstance();

@@ -3,11 +3,11 @@
 //define("URL", "http://172.25.117.58:88/Cidades_Digitais/"); // IP Daniel
 
 define("URL", "http://172.25.116.2:83/Cidades_Digitais/"); // IP do computador da Carol
+
 //define("URL", "http://localhost/Cidades_Digitais/"); // IP notebook Carol
 
-
-  session_start();
-  include_once("_menu.php");
+ session_start();
+ include_once("_menu.php");
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
