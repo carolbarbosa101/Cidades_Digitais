@@ -1,7 +1,6 @@
 <?php
     // Cabeçalho
     include_once("_cabecalho.php");
-
     
     require_once("../Controller/ControleListarOtb.php");
     
@@ -103,16 +102,7 @@
                  
 
                 <div class="form-group col-md-12">
-                    <label for="recipient-otb" class="col-form-label">Ordem de Transferência Bancária:</label>
-                    <input 
-                      name="otb"
-                      placeholder=""
-                      type="number" 
-                      class="form-control"
-                      maxlength="11"
-                      id="recipient-otb">
-                  </div>
-
+                   
 
                   <div class="form-group col-md-12">
                     <label for="recipient-dt_pgto" class="col-form-label">Data do Pagamento:</label>
