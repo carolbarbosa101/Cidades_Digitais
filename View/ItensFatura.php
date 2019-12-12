@@ -1,5 +1,4 @@
 <?php
-  // Cabeçalho
   include_once("_cabecalho.php");
 
   // Buscar todos os cadastros no banco
@@ -8,9 +7,8 @@
   require_once("../Controller/ControleEmpenhoSelect.php");
   require_once("../Controller/ControleItensSelect.php");
   require_once("../Controller/ControleTipoItemSelect.php");
-  // $array_dados
   ?>
-  
+
   <!-- Conteudo -->
   <main id="main">
 

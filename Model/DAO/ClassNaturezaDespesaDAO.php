@@ -2,19 +2,14 @@
 
 require_once 'Conexao.php';
 class ClassNaturezaDespesaDAO {
-    
     /**
      * Buscar todos naturezas despesas para exibir em tabelas que precisa
      * do codigo cod_natureza_despesa, ou seja tabela de relacionamento com natureza_despesa
-     * 
-     * 
-     * 
+
      * 
      * Esse código foi alterado pois o anterior apenas mostrava as opções que estivessem relacionadas com a tabela previsao_empenho. 
      * Caso precise do antigo código, ele está logo abaixo sem modificações, apenas comentado.
-     * 
-     * 
-     * 
+
      * 
      * SELECT      previsao_empenho.cod_previsao_empenho,
             CONCAT(natureza_despesa.cod_natureza_despesa, ' - ', natureza_despesa.descricao) AS descricao

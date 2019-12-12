@@ -33,20 +33,18 @@ class ClassOtbDAO {
             echo $exc->getMessage();
         }
     }
-    
     public function listarOtb(){
         try {
             $pdo = Conexao::getInstance();
             $sql = "SELECT cod_otb, dt_pgto FROM otb ORDER BY cod_otb ASC";
             $stmt = $pdo->prepare($sql);
             $stmt->execute();
-            return $stmt->fetchAll(); // fetchAll() retorna um array contendo varios dados. 
+            return $stmt->fetchAll();
         } catch (PDOException $ex) {
             return $ex->getMessage();
         }
     }
 
-    // apagar registro pelo id
     public function apagarOtb(ClassOtb $apagarOtb) {
         try {
             $pdo = Conexao::getInstance();
@@ -61,7 +59,6 @@ class ClassOtbDAO {
         }
     }
 
-    
     public function visualizarOtb(ClassOtb $visualizarOtb){
         try {
             $pdo = Conexao::getInstance();
@@ -74,7 +71,7 @@ class ClassOtbDAO {
 
             $stmt->bindValue(1, $visualizarOtb->getCod_otb());
             $stmt->execute();
-            return $stmt->fetchAll(); // fetchAll() retorna um array contendo varios dados. 
+            return $stmt->fetchAll(); 
         } catch (PDOException $ex) {
             return $ex->getMessage();
         }
@@ -86,10 +83,9 @@ class ClassOtbDAO {
             $sql = "SELECT cod_otb, dt_pgto FROM otb ORDER BY cod_otb ASC";
             $stmt = $pdo->prepare($sql);
             $stmt->execute();
-            return $stmt->fetchAll(); // fetchAll() retorna um array contendo varios dados. 
+            return $stmt->fetchAll(); 
         } catch (PDOException $ex) {
             return $ex->getMessage();
         }
     }
-
 }

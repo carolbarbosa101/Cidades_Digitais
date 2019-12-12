@@ -5,10 +5,8 @@
   // Buscar todos os cadastros no banco
   require_once("../Controller/ControleListarLote.php");
   require_once("../Controller/ControleEntidadeSelect.php");
-  // $array_dados
   ?>
   
-  <!-- Conteudo -->
   <main id="main">
     <div class="container">
       <div class="row mb-5">

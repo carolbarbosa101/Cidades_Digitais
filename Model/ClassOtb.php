@@ -1,8 +1,7 @@
 <?php
 
 class ClassOtb {
-    private $cod_otb, $dt_pgto;
-                  
+    private $cod_otb, $dt_pgto;         
     function getCod_otb() {
         return $this->cod_otb;
     }
@@ -10,7 +9,6 @@ class ClassOtb {
     function getDt_pgto() {
         return $this->dt_pgto;
     }
-    
     
 
     function setCod_otb($cod_otb) {
@@ -21,6 +19,4 @@ class ClassOtb {
         $this->dt_pgto = $dt_pgto;
     }
 
-
-    
 }
