@@ -5,7 +5,7 @@
     // Buscar todos os cadastros no banco
     require_once("../Controller/ControleListarFaturaOtb.php");
     require_once("../Controller/ControleFaturaSelect.php");
-    //require_once("../Controller/ControleOtbSelect.php");
+    require_once("../Controller/ControleOtbSelect.php");
     // $array_dados
     ?>
     
@@ -108,7 +108,7 @@
                     <select name="cod_otb" class="form-control" id="recipient-cod_otb">
                       <option value="">Selecionar OTB</option>
                       <?php 
-                        foreach($array_select as $chave => $valor){
+                        foreach($array_selectOtb as $chave => $valor){
                         ?>
                         <option value="<?= $valor['cod_otb'] ?>"><?= $valor['cod_otb'] ?></option>
                         <?php 

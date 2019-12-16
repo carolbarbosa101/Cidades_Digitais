@@ -1,20 +1,20 @@
 <?php
 session_start();
 
-$cod_otb = @$_GET["cod_otb"]; // id unico da tabela, chave primaria
+$cod_otb = @$_GET["cod_otb"]; 
 
 if (empty($cod_otb)) {
 	header('Location:../View/Otb.php');
 }
-
 require_once '../Model/ClassOtb.php';
 require_once '../Model/DAO/ClassOtbDAO.php';
-$apagarOtb = new ClassOtbDAO(); // instanciando um objeto
+$apagarOtb = new ClassOtbDAO(); 
 $otb = new ClassOtb();
 $otb->setCod_otb($cod_otb);
 $otb->setDt_pgto($dt_pgto);
 
-$resultado = $apagarOtb->apagarOtb($otb); // chamando metodo para listar todos os usuários do banco
+$resultado = $apagarOtb->apagarOtb($otb);
+
 
 if($resultado) { // se existir algum municipio no banco então passar o array de dados para a variavel $array_dados
     $_SESSION['msg'] = '

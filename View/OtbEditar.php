@@ -88,9 +88,6 @@
     </main>
 
 
-
-
-
    <!-- Modal de Cadastro -->
    <div class="modal fade cadastrar-otb-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myOtbModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg">
@@ -111,18 +108,6 @@
                 <!-- Input cod_assunto -->
                 <div class="form-row">
                  
-
-                <div class="form-group col-md-12">
-                    <label for="recipient-otb" class="col-form-label">Ordem de Transferência Bancária:</label>
-                    <input 
-                      name="otb"
-                      placeholder=""
-                      type="number" 
-                      class="form-control"
-                      maxlength="15"
-                      id="recipient-otb">
-                  </div>
-
 
                   <div class="form-group col-md-12">
                     <label for="recipient-dt_pgto" class="col-form-label">Data do Pagamento:</label>

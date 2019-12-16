@@ -5,7 +5,6 @@ class ClassEtapas {
     function getCod_ibge() {
         return $this->cod_ibge;
     }
-
     function getCod_etapa() {
         return $this->cod_etapa;
     }

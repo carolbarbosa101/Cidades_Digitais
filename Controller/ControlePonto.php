@@ -17,7 +17,6 @@ $latitude = @$_POST['latitude'];
 $longitude = @$_POST['longitude'];
 
 
-
 $novoPonto = new ClassPonto();
 $novoPonto->setCod_ponto($cod_ponto);
 $novoPonto->setCod_categoria($cod_categoria);

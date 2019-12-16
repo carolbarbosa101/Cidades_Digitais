@@ -10,15 +10,11 @@ $novoOtb = new ClassOtb();
 $novoOtb->setCod_otb($cod_otb);
 $novoOtb->setDt_pgto($dt_pgto);
 
-
-
-
 $classOtbDAO = new ClassOtbDAO();
 $otb = $classOtbDAO->cadastrar($novoOtb);
 
-var_dump($otb);
-die();
-
+//var_dump($otb);
+//die();
 
 if($otb == TRUE){
     $_SESSION['msg'] = '
