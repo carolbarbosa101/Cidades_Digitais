@@ -17,6 +17,7 @@ class ClassOtbDAO {
             echo $exc->getMessage();
         }
     }
+    
     public function update(ClassOtb $editarOtb) {
         try {
             $pdo = Conexao::getInstance();

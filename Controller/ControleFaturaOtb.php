@@ -20,7 +20,7 @@ $novaFaturaOtb->setCod_ibge($cod_ibge);
 $classFaturaOtbDAO = new ClassFaturaOtbDAO();
 $fatura_otb = $classFaturaOtbDAO->cadastrar($novaFaturaOtb);
 
-//var_dump($fatura);
+//var_dump($fatura_otb);
 //die();
 
 if($fatura_otb == TRUE){

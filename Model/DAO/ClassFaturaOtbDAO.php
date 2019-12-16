@@ -15,7 +15,7 @@ class ClassFaturaOtbDAO {
             
 			$stmt->bindValue(1, $cadastrarFaturaOtb->getCod_otb());
             $stmt->bindValue(2, $cadastrarFaturaOtb->getNum_nf());
-            $stmt->bindValue(1, $cadastrarFaturaOtb->getCod_ibge());
+            $stmt->bindValue(3, $cadastrarFaturaOtb->getCod_ibge());
 
             $stmt->execute();
             return TRUE;
