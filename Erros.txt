@@ -3,12 +3,8 @@ ERROS
 - Corrigir hora do servidor.
 - Fazer Join em faturaOTB
 - O Itens Fatura Erro no Cod_item.
-
-Itens empenho fala ser editado com sucesso, mesmo quando não é o caso, e provavelmente precisa de um defalt
-
-Itens Fatura possui esse erro quando tentando cadastrar: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'cod_item' cannot be nullNULL
-
-Lote, na coluna Data Reaj., aceita valores que são invalidos como 01/01/70, ou outros valores em casos raros, além de não conseguir excluir registros
+- Itens Empenho Edita mais de um.
+- Lote Não exclui registros
 
 Itens do lote consegue editar e excluir, mas não cadastrar
 
