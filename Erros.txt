@@ -6,7 +6,6 @@ ERROS
 - Itens Empenho Edita mais de um.
 - Lote Não exclui registros
 
-Itens do lote consegue editar e excluir, mas não cadastrar
 
 Municipios parece possuir 4 erros:
 -população não aceita por algum motivo
