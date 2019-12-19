@@ -20,10 +20,7 @@
             </span>
             </div>
             <div class="col-md-6 text-right">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".cadastrar-loteitens-modal-lg">
-                <i class="far fa-plus-square"></i>
-                Cadastrar
-                </button>
+             
             </div>
         </div>
       </div>
@@ -66,8 +63,7 @@
                             <a href="<?php echo URL ?>View/LoteItensEditar.php?cod_lote=<?php echo $value['cod_lote'] ?>&cod_item=<?php echo $value['cod_item'] ?>&cod_tipo_item=<?php echo $value['cod_tipo_item'] ?>&preco=<?php echo $value['preco'] ?>" class="btn btn-warning mr-1">
                                 Editar
                             </a>
-                              <button onclick="apagarDados('<?php echo URL ?>Controller/ControleApagarLoteItens.php?cod_lote=<?php echo $value['cod_lote'] ?>&cod_item=<?php echo $value['cod_item'] ?>&cod_tipo_item=<?php echo $value['cod_tipo_item'] ?>')" class="btn btn-danger">Excluir</button> 
-                            </span>
+                             </span>
                           </td>
                         </tr>
                         <?php
