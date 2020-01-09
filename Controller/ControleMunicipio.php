@@ -19,7 +19,8 @@ $idhm = @$_POST['idhm'];
 $latitude = @$_POST['latitude'];
 $longitude = @$_POST['longitude'];
 
-
+//var_dump($populacao);
+//die();
 
 $novoMunicipio = new ClassMunicipio ();
 $novoMunicipio->setCod_ibge($cod_ibge);
@@ -36,6 +37,10 @@ $novoMunicipio->setBairro($bairro);
 $novoMunicipio->setIdhm($idhm);
 $novoMunicipio->setLatitude($latitude);
 $novoMunicipio->setLongitude($longitude);
+
+
+//var_dump($novoMunicipio);
+//die();
 
 
 $classMunicipioDAO = new ClassMunicipioDAO();

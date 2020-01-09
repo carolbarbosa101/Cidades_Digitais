@@ -86,7 +86,7 @@
                       value="<?php echo $preco ?>"
                       name="preco"
                       placeholder=""
-                      type="number" 
+                      type="text" 
                       class="form-control"
                       maxlength="45" 
                       id="recipient-preco">

@@ -94,10 +94,30 @@ class ClassFaturaDAO {
         }
     }
 
+    
+    public function todosIBGE(){
+        try {
+            $pdo = Conexao::getInstance();
+            $sql = "SELECT distinct cod_ibge from fatura;
+
+            SELECT num_nf from fatura
+            where cod_ibge = cod_ibge";
+            $stmt = $pdo->prepare($sql);
+
+
+            $stmt->execute();
+            return $stmt->fetchAll(); // fetchAll() retorna um array contendo varios dados. 
+        } catch (PDOException $ex) {
+            return $ex->getMessage();
+        }
+    }
+
     public function todosFatura(){
         try {
             $pdo = Conexao::getInstance();
-            $sql = "SELECT num_nf, cod_ibge, dt_nf FROM fatura ORDER BY num_nf ASC";
+            $sql = "SELECT CONCAT (num_nf ,' - ', cod_ibge) AS itens, num_nf, cod_ibge, dt_nf
+            FROM fatura
+            ORDER BY num_nf ";
             $stmt = $pdo->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll(); // fetchAll() retorna um array contendo varios dados. 

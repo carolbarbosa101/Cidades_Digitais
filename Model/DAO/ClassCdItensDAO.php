@@ -40,6 +40,8 @@ class ClassCdItensDAO {
             $stmt->bindValue(5, $editarCdItens->getCod_item());
             $stmt->bindValue(6, $editarCdItens->getCod_tipo_item());
            
+            
+
             $stmt->execute();
             return TRUE;
         } catch (PDOException $exc) {

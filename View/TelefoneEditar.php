@@ -58,7 +58,7 @@
                     <label for="recipient-cod_telefone" class="col-form-label">Codigo Telefone:</label>
                     <input disabled 
                       value="<?php echo $cod_telefone ?>"
-                      type="int" 
+                      type="number" 
                       class="form-control"
                       id="recipient-cod_telefone">
                   </div>
