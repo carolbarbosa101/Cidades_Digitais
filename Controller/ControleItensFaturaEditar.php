@@ -12,9 +12,6 @@ $cod_tipo_item = @$_POST['cod_tipo_item'];
 $valor = @$_POST['valor'];
 $quantidade = @$_POST['quantidade'];
 
-//var_dump($cod_item);
-//die();
-
 
 $novoItensFatura = new ClassItensFatura ();
 $novoItensFatura->setNum_nf($num_nf);
@@ -23,29 +20,30 @@ $novoItensFatura->setCod_empenho($cod_empenho);
 $novoItensFatura->setCod_item($cod_item);
 $novoItensFatura->setCod_tipo_item($cod_tipo_item);
 $novoItensFatura->setValor($valor);
-$novoItensFatura->setQuantidade ($quantidade);
+$novoItensFatura->setQuantidade($quantidade);
 
 //var_dump($novoItensFatura);
 //die();
 
 $classItensFaturaDAO = new ClassItensFaturaDAO();
-$itensfatura = $classItensFaturaDAO->cadastrar($novoItensFatura);
+$itens_fatura = $classItensFaturaDAO->update($novoItensFatura);
 
 
+//var_dump($itens_fatura);
+//die();
 
-if($itensfatura == TRUE){
+if($itens_fatura == TRUE){
     $_SESSION['msg'] = '
         <div class="alert alert-success" role="alert">
-            Cadastro realizado com sucesso!
+        Editado com sucesso!
         </div>
     ';
     header('Location:../View/ItensFatura.php');
 } else {
     $_SESSION['msg'] = '
         <div class="alert alert-danger" role="alert">
-            Erro! Cadastro não realizado . '.$itensfatura.'
+        Erro! Não foi possível atualizar os dados . '.$itens_fatura.'
         </div>
     ';
     header('Location:../View/ItensFatura.php');
 }
-

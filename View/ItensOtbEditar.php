@@ -3,8 +3,8 @@
     include_once("_cabecalho.php");
 
     // Buscar todos os cadastros no banco
-    require_once("../Controller/ControleItensEmpenhoVisualizar.php");
-    require_once("../Controller/ControleCdSelect.php");
+    require_once("../Controller/ControleItensOtbVisualizar.php");
+
     
     ?>
     
@@ -18,7 +18,7 @@
             <i class="fas fa-globe-asia"></i>
             </span>
             <span>
-              <h3 class="mb-0">Editar Itens Empenho</h3>
+              <h3 class="mb-0">Editar Cd itens</h3>
             </span>
           </div>
         </div>
@@ -41,18 +41,46 @@
           ?>
 
           <!-- FORMULARIO -->
-          <form action="../Controller/ControleItensEmpenhoEditar.php" method="post">
+          <form action="../Controller/ControleItensOtbEditar.php" method="post">
 
             <div class="modal-body">
 
                   <!-- Chave primaria para saber qual registro editar do banco | input hidden para que o usuario não visualize -->
-
+                  <input type="hidden" name="cod_otb" value="<?php echo $cod_otb ?>" />
+                  <input type="hidden" name="num_nf" value="<?php echo $num_nf ?>" />
+                  <input type="hidden" name="cod_ibge" value="<?php echo $cod_ibge ?>" />
                   <input type="hidden" name="cod_empenho" value="<?php echo $cod_empenho ?>" />
                   <input type="hidden" name="cod_item" value="<?php echo $cod_item ?>" />
                   <input type="hidden" name="cod_tipo_item" value="<?php echo $cod_tipo_item ?>" />
-                  <input type="hidden" name="cod_previsao_empenho" value="<?php echo $cod_previsao_empenho ?>" />
                   
                   <div class="form-row">
+                  <div class="form-group col-md-4">
+                    <label for="recipient-cod_otb" class="col-form-label">Otb:</label>
+                    <input disabled 
+                      value="<?php echo $cod_otb ?>"
+                      type="text" 
+                      class="form-control"
+                      id="recipient-cod_otb">
+                  </div>
+
+                  <div class="form-group col-md-4">
+                    <label for="recipient-num_nf" class="col-form-label">Nota Fiscal:</label>
+                    <input disabled 
+                      value="<?php echo $num_nf ?>"
+                      type="text" 
+                      class="form-control"
+                      id="recipient-num_nf">
+                  </div>
+
+                  <div class="form-group col-md-4">
+                    <label for="recipient-municipioIbge" class="col-form-label">Município:</label>
+                    <input disabled 
+                      value="<?php echo $municipioIbge ?>"
+                      type="text" 
+                      class="form-control"
+                      id="recipient-municipioIbge">
+                  </div>
+
                   <div class="form-group col-md-4">
                     <label for="recipient-cod_empenho" class="col-form-label">Cod Empenho:</label>
                     <input disabled 
@@ -65,19 +93,10 @@
                   <div class="form-group col-md-4">
                     <label for="recipient-descricaoItem" class="col-form-label">Item:</label>
                     <input disabled 
-                      value="<?php echo $descricaoItem ?>"
+                      value="<?php echo $descricaoItens ?>"
                       type="text" 
                       class="form-control"
                       id="recipient-descricaoItem">
-                  </div>
-
-                  <div class="form-group col-md-4">
-                    <label for="recipient-cod_previsao_empenho" class="col-form-label">Previsao de Empenho:</label>
-                    <input disabled 
-                      value="<?php echo $cod_previsao_empenho ?>"
-                      type="text" 
-                      class="form-control"
-                      id="recipient-cod_previsao_empenho">
                   </div>
 
                   <div class="form-group col-md-4">
@@ -106,10 +125,12 @@
 
                 </div>
 
+                </div>
+
             </div>
 
             <div class="modal-footer">
-              <a href="<?php echo URL ?>View/ItensEmpenho.php" class="btn btn-secondary">Cancelar</a>
+              <a href="<?php echo URL ?>View/ItensOtb.php" class="btn btn-secondary">Cancelar</a>
               <button type="submit" class="btn btn-primary">
                 Salvar
               </button>
@@ -130,44 +151,56 @@
 
 
     <!-- Modal de Cadastro -->
-    <div class="modal fade cadastrar-cditens-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myItensEmpenhoModalLabel" aria-hidden="true">
+    <div class="modal fade cadastrar-cditens-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myItensOtbModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           
           <div class="modal-header">
-            <h5 class="modal-title" id="myItensEmpenhoModalLabel">
+            <h5 class="modal-title" id="myItensOtbModalLabel">
               <i class="far fa-plus-square"></i>
-              Cadastrar Itens Empenho
+              Cadastrar CD Itens
             </h5>
           </div>
 
           <!-- FORMULARIO -->
-          <form action="../Controller/ControleItensEmpenhoEditar.php" method="post">
+          <form action="../Controller/ControleItensOtbEditar.php" method="post">
 
             <div class="modal-body">
 
 
                   <div class="form-group col-md-12">
-                    <label for="recipient-valor" class="col-form-label">Valor:</label>
+                    <label for="recipient-quantidade_previsto" class="col-form-label">Quantidade Previsto :</label>
                     <input 
-                      name="valor"
+                      name="quantidade_previsto"
                       placeholder=""
                       type="number" 
                       class="form-control"
                       maxlength="" 
-                      id="recipient-valor">
+                      id="recipient-quantidade_previsto">
                   </div>
 
                   <div class="form-group col-md-12">
-                    <label for="recipient-quantidade" class="col-form-label">Quantidade:</label>
+                    <label for="recipient-quantidade_projeto_executivo" class="col-form-label">Quantidade Projeto Executivo:</label>
                     <input 
-                      name="quantidade"
+                      name="quantidade_projeto_executivo"
                       placeholder=""
                       type="number" 
                       class="form-control"
                       maxlength="" 
-                      id="recipient-quantidade">
+                      id="recipient-quantidade_projeto_executivo">
                   </div>
+
+                  <div class="form-group col-md-12">
+                    <label for="recipient-quantidade_termo_instalacao" class="col-form-label">Quantidade Termo Instalação:</label>
+                    <input 
+                      name="quantidade_termo_instalacao"
+                      placeholder=""
+                      type="number" 
+                      class="form-control"
+                      maxlength=""
+                      id="recipient-quantidade_termo_instalacao">
+                  </div>
+
                 </div>
 
             </div>

@@ -3,6 +3,8 @@ require_once 'Conexao.php';
 class ClassOtbDAO {
   
     public function cadastrar(ClassOtb $cadastrarOtb) {
+        //var_dump($cadastrarOtb);
+        //die();
         try {
             $pdo = Conexao::getInstance();
             $sql = "INSERT INTO otb (cod_otb, dt_pgto) values (?,?)";
@@ -24,9 +26,9 @@ class ClassOtbDAO {
             $sql = "UPDATE otb SET dt_pgto = ?
             WHERE cod_otb = ? ";
             $stmt = $pdo->prepare($sql);
-            $stmt->bindValue(1, $$editarOtb->getDt_pgto());
+            $stmt->bindValue(1, $editarOtb->getDt_pgto());
 
-            $stmt->bindValue(2, $$editarOtb->getcod_otb());
+            $stmt->bindValue(2, $editarOtb->getcod_otb());
     
             $stmt->execute();
             return TRUE;
@@ -51,7 +53,7 @@ class ClassOtbDAO {
             $pdo = Conexao::getInstance();
             $sql = "DELETE FROM otb WHERE cod_otb = ?";
             $stmt = $pdo->prepare($sql);
-            $stmt->bindValue(1, $apagarOtb->getCod_assunto());
+            $stmt->bindValue(1, $apagarOtb->getCod_otb());
            
             $stmt->execute();
             return TRUE;

@@ -25,6 +25,9 @@ class ClassEntidadeDAO {
     }
 
     public function update(ClassEntidade $editarEntidade) {
+        
+    //var_dump($editarEntidade);
+    //die();
         try {
             $pdo = Conexao::getInstance();
             $sql = "UPDATE entidade SET nome = ?, endereco = ?, numero = ?, bairro = ?, cep = ?, nome_municipio = ?, uf =? , observacao = ? WHERE cnpj = ? ";
@@ -39,7 +42,10 @@ class ClassEntidadeDAO {
             $stmt->bindValue(8, $editarEntidade->getObservacao());
 
             $stmt->bindValue(9, $editarEntidade->getCnpj());
-           
+            
+
+            //var_dump($editarEntidade);
+            //die();
             $stmt->execute();
             return TRUE;
         } catch (PDOException $exc) {

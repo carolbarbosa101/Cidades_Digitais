@@ -11,8 +11,10 @@
     "Etapa" => '<i class="fas fa-align-justify"></i>',
     "Fatura"=> '<i class="fas fa-file-alt"></i>',
     "FaturaOtb"=> '<i class="fas fa-file-alt"></i>',
-    "ItensFatura"=> '<i class="fas fa-file-alt"></i>',
-    "ItensEmpenho"=> '<i class="fas fa-sliders-h"></i>',
+    "ItensEmpenho"=> '<i class="fas fa-file-alt"></i>',
+    "ItensFatura"=> '<i class="fas fa-sliders-h"></i>',
+    "ItensOtb"=> '<i class="fas fa-sliders-h"></i>',
+    "ItensPrevisaoEmpenho"=> '<i class="fas fa-sliders-h"></i>',
     "Lote" =>'<i class="fas fa-clone"></i>',
     "LoteItens" =>'<i class="fas fa-clone"></i>',
     "Municipios" => '<i class="fas fa-globe-asia"></i>',
@@ -99,7 +101,7 @@ body {
 </head>
 <body>
 
-<div class="w3-sidebar w3-bar-block w3-animate-left" style="width:226px;display:none;z-index:5" id="mySidebar">
+<div class="w3-sidebar w3-bar-block w3-animate-left" style="width:265px;display:none;z-index:5" id="mySidebar">
 
   <?php
     // Laço de repetição para exibir menu
