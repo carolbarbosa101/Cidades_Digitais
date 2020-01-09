@@ -1,7 +1,9 @@
 <?php
 session_start();
+require_once("../Controller/ControleItensPrevisaoEmpenhoVisualizar.php");
 require_once '../Model/ClassItensPrevisaoEmpenho.php';
 require_once '../Model/DAO/ClassItensPrevisaoEmpenhoDAO.php';
+
 
 
 $cod_previsao_empenho = @$_POST['cod_previsao_empenho'];
@@ -19,17 +21,15 @@ $novoItensPrevisaoEmpenho->setCod_lote($cod_lote);
 $novoItensPrevisaoEmpenho->setValor($valor);
 $novoItensPrevisaoEmpenho->setQuantidade($quantidade);
 
-//var_dump($novoItensPrevisaoEmpenho);
-//die();
 
 $classItensPrevisaoEmpenhoDAO = new ClassItensPrevisaoEmpenhoDAO();
-$itens_fatura = $classItensPrevisaoEmpenhoDAO->update($novoItensPrevisaoEmpenho);
+$itens_previsao_empenho = $classItensPrevisaoEmpenhoDAO->update($novoItensPrevisaoEmpenho);
 
 
-//var_dump($itens_fatura);
+//var_dump($itens_previsao_empenho);
 //die();
 
-if($itens_fatura == TRUE){
+if($itens_previsao_empenho == TRUE){
     $_SESSION['msg'] = '
         <div class="alert alert-success" role="alert">
         Editado com sucesso!
@@ -39,7 +39,7 @@ if($itens_fatura == TRUE){
 } else {
     $_SESSION['msg'] = '
         <div class="alert alert-danger" role="alert">
-        Erro! Não foi possível atualizar os dados . '.$itens_fatura.'
+        Erro! Não foi possível atualizar os dados . '.$itens_previsao_empenho.'
         </div>
     ';
     header('Location:../View/ItensPrevisaoEmpenho.php');

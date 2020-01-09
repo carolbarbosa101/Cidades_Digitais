@@ -120,9 +120,19 @@
 
                 </div>
 
+                <?php 
+                  if($quantidade>$quant_calc+$quantidade){
+                    echo '<script>alert("ERRO: O valor da quantidade é maior que o permitido!!");</script>';
+
+                    echo '<div class="alert alert-danger" role="alert">';
+                    echo ' ERRO: A quantidade: "';echo $quantidade ,'" é maior que o permitido!!';
+                    echo '</div>';
+                    //$_SESSION['msg'] = "<div class='alert alert-danger' role='alert'> ERRO: A quantidade: ";echo $quantidade ," é maior que o permitido!!'</div>";
+                  }?>
             </div>
 
             <div class="modal-footer">
+          
               <a href="<?php echo URL ?>View/ItensPrevisaoEmpenho.php" class="btn btn-secondary">Cancelar</a>
               <button type="submit" class="btn btn-primary">
                 Salvar
