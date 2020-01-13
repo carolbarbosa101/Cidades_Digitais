@@ -16,6 +16,8 @@ $novaFaturaOtb->setCod_otb($cod_otb);
 $novaFaturaOtb->setNum_nf($num_nf);
 $novaFaturaOtb->setCod_ibge($cod_ibge);
 
+//var_dump($novaFaturaOtb);
+//die();
 
 $classFaturaOtbDAO = new ClassFaturaOtbDAO();
 $fatura_otb = $classFaturaOtbDAO->cadastrar($novaFaturaOtb);

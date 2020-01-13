@@ -24,10 +24,13 @@ class ClassItensFaturaDAO {
     }
 
     public function update(ClassItensFatura $editarItensFatura) {
+        //var_dump($editarItensFatura);
+        //die();
+
         try {
             $pdo = Conexao::getInstance();
             $sql = "UPDATE itens_fatura SET valor = ?, quantidade = ?
-            WHERE num_nf = ? AND  cod_ibge = ? AND cod_empenho = ? AND cod_item = ?  AND cod_tipo_item =? ";
+            WHERE num_nf = ? AND  cod_ibge = ? AND cod_empenho = ? AND cod_item = ?  AND cod_tipo_item = ? ";
             $stmt = $pdo->prepare($sql);
             
             $stmt->bindValue(1, $editarItensFatura->getValor());
@@ -39,7 +42,9 @@ class ClassItensFaturaDAO {
             $stmt->bindValue(5, $editarItensFatura->getCod_empenho());
             $stmt->bindValue(6, $editarItensFatura->getCod_item());
             $stmt->bindValue(7, $editarItensFatura->getCod_tipo_item());
-       
+            
+            //var_dump($editarItensFatura);
+            //die();
            
             $stmt->execute();
             return TRUE;
@@ -51,8 +56,13 @@ class ClassItensFaturaDAO {
     public function listarItensFatura(){
         try {
             $pdo = Conexao::getInstance();
-            $sql = "SELECT num_nf, cod_ibge, cod_empenho, cod_item, cod_tipo_item, valor, quantidade
-            FROM itens_fatura
+            $sql = "SELECT 
+			CONCAT (municipio.nome_municipio, ' - ', municipio.cod_ibge) AS municipioIbge, 
+            CONCAT (itens_fatura.cod_tipo_item, '.', itens_fatura.cod_item, ' - ', itens.descricao) AS descricaoItem, 
+            itens_fatura.*
+            FROM itens_fatura 
+            INNER JOIN municipio ON itens_fatura.cod_ibge = municipio.cod_ibge
+            INNER JOIN itens ON itens_fatura.cod_item = itens.cod_item AND itens_fatura.cod_tipo_item = itens.cod_tipo_item
             ORDER BY num_nf ASC";
             $stmt = $pdo->prepare($sql);
             $stmt->execute();
@@ -63,39 +73,67 @@ class ClassItensFaturaDAO {
     }
 
     public function visualizarItensFatura(ClassItensFatura $visualizarItensFatura){
+        //var_dump($visualizarItensFatura);
+        //die;
         try {
             $pdo = Conexao::getInstance();
-            $sql = "SELECT num_nf, cod_ibge, cod_empenho, cod_item, cod_tipo_item, valor, quantidade
+            $sql = "SELECT 
+            (
+            SELECT itens_empenho.quantidade AS quant_empenho
+            FROM itens_empenho
+            where itens_empenho.cod_empenho = ? AND itens_empenho.cod_tipo_item = ? AND itens_empenho.cod_item = ?
+            )
+            -
+            (
+            SELECT SUM(itens_fatura.quantidade) AS quant_fatura
+            FROM itens_fatura
+            where itens_fatura.cod_empenho = ? AND itens_fatura.cod_tipo_item = ? AND itens_fatura.cod_item = ?
+            ) AS quant_calc,
+            CONCAT (municipio.nome_municipio, ' - ', municipio.cod_ibge) AS municipioIbge, 
+            CONCAT (itens_fatura.cod_tipo_item, '.', itens_fatura.cod_item, ' - ', itens.descricao) AS descricaoItem, 
+            itens_fatura.*, itens_empenho.valor as valor_empenho
             FROM itens_fatura 
-            WHERE num_nf = ? AND cod_ibge = ? AND cod_empenho = ? AND cod_item = ? AND cod_tipo_item =?";
-
+            INNER JOIN municipio ON itens_fatura.cod_ibge = municipio.cod_ibge
+            INNER JOIN itens ON itens_fatura.cod_item = itens.cod_item AND itens_fatura.cod_tipo_item = itens.cod_tipo_item
+            INNER JOIN itens_empenho ON itens_fatura.cod_empenho = itens_empenho.cod_empenho AND itens_fatura.cod_tipo_item = itens_empenho.cod_tipo_item AND itens_fatura.cod_item = itens_empenho.cod_item
+            WHERE itens_fatura.num_nf = ? AND itens_fatura.cod_ibge = ? AND itens_fatura.cod_empenho = ? AND itens_fatura.cod_tipo_item = ? AND itens_fatura.cod_item = ?
+            ;";
             $stmt = $pdo->prepare($sql);
 
-            $stmt->bindValue(1, $visualizarItensFatura->getNum_nf());
-            $stmt->bindValue(2, $visualizarItensFatura->getCod_ibge());
-            $stmt->bindValue(3, $visualizarItensFatura->getCod_empenho());
-            $stmt->bindValue(4, $visualizarItensFatura->getCod_item());
+            $stmt->bindValue(1, $visualizarItensFatura->getCod_empenho());
+            $stmt->bindValue(2, $visualizarItensFatura->getCod_tipo_item());
+            $stmt->bindValue(3, $visualizarItensFatura->getCod_item());
+            $stmt->bindValue(4, $visualizarItensFatura->getCod_empenho());
             $stmt->bindValue(5, $visualizarItensFatura->getCod_tipo_item());
+            $stmt->bindValue(6, $visualizarItensFatura->getCod_item());
+            $stmt->bindValue(7, $visualizarItensFatura->getNum_nf());
+            $stmt->bindValue(8, $visualizarItensFatura->getCod_ibge());
+            $stmt->bindValue(9, $visualizarItensFatura->getCod_empenho());
+            $stmt->bindValue(10, $visualizarItensFatura->getCod_tipo_item());
+            $stmt->bindValue(11, $visualizarItensFatura->getCod_item());
 
             $stmt->execute();
-            return $stmt->fetchAll(); // fetchAll() retorna um array contendo varios dados. 
+            $resultado = $stmt->fetchAll();
+            //var_dump($resultado);
+            //die;
+            return $resultado;
         } catch (PDOException $ex) {
             return $ex->getMessage();
         }
     }
 
     // apagar registro pelo id
-    public function apagarFatura(ClassFatura $apagarFatura) {
+    public function apagarItensFatura(ClassItensFatura $apagarItensFatura) {
         try {
             $pdo = Conexao::getInstance();
             $sql = "DELETE FROM itens_fatura WHERE num_nf = ? AND cod_ibge = ? AND cod_empenho = ? AND cod_item = ? AND cod_tipo_item =?";
             $stmt = $pdo->prepare($sql);
             
-            $stmt->bindValue(1, $apagarFatura->getNum_nf());
-            $stmt->bindValue(2, $apagarFatura->getCod_ibge());
-            $stmt->bindValue(3, $apagarFatura->getCod_empenho());
-            $stmt->bindValue(4, $apagarFatura->getCod_item());
-            $stmt->bindValue(5, $apagarFatura->getCod_tipo_item());
+            $stmt->bindValue(1, $apagarItensFatura->getNum_nf());
+            $stmt->bindValue(2, $apagarItensFatura->getCod_ibge());
+            $stmt->bindValue(3, $apagarItensFatura->getCod_empenho());
+            $stmt->bindValue(4, $apagarItensFatura->getCod_item());
+            $stmt->bindValue(5, $apagarItensFatura->getCod_tipo_item());
            
             $stmt->execute();
             return TRUE;
@@ -104,6 +142,29 @@ class ClassItensFaturaDAO {
         }
     }
 
+    public function todosItensFatura(){
+        //var_dump($todosItensFatura);
+        try {
+            $pdo = Conexao::getInstance();
+            $sql = "SELECT 
+			CONCAT (municipio.nome_municipio, ' - ', municipio.cod_ibge) AS municipioIbge, 
+            CONCAT (itens_fatura.cod_tipo_item, '.', itens_fatura.cod_item, ' - ', itens.descricao) AS descricaoItem, 
+            itens_fatura.*
+            FROM itens_fatura 
+            INNER JOIN municipio ON itens_fatura.cod_ibge = municipio.cod_ibge
+            INNER JOIN itens ON itens_fatura.cod_item = itens.cod_item AND itens_fatura.cod_tipo_item = itens.cod_tipo_item
+            ";
+            $stmt = $pdo->prepare($sql);
+
+            $stmt->execute();
+            $resultado = $stmt->fetchAll();
+            //var_dump($resultado);
+            //die;
+            return $resultado;
+        } catch (PDOException $ex) {
+            return $ex->getMessage();
+        }
+    }
 
 
 }

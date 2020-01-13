@@ -2,12 +2,13 @@
   include_once("_cabecalho.php");
 
   // Buscar todos os cadastros no banco
-  require_once("../Controller/ControleListarItensFatura.php");
+  require_once("../Controller/ControleListarItensOtb.php");
+  require_once("../Controller/ControleOtbSelect.php");
   require_once("../Controller/ControleFaturaSelect.php");
+  require_once("../Controller/ControleMunicipioSelect.php");
   require_once("../Controller/ControleEmpenhoSelect.php");
   require_once("../Controller/ControleItensSelect.php");
   require_once("../Controller/ControleTipoItemSelect.php");
-  require_once("../Controller/ControleAjudaSelect.php");
   ?>
 
   <!-- Conteudo -->
@@ -19,12 +20,12 @@
           <i class="fas fa-globe-asia"></i>
           </span>
           <span>
-            <h3 class="mb-0">Itens Fatura</h3>
+            <h3 class="mb-0">Itens Otb</h3>
             <small>Descrição</small>
           </span>
         </div>
         <div class="col-md-6 text-right">
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".cadastrar-itensfatura-modal-lg">
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".cadastrar-itens_otb-modal-lg">
             <i class="far fa-plus-square"></i>
             Cadastrar
           </button>
@@ -48,7 +49,8 @@
               <table class="table">
                 <thead>
                   <tr>
-                    <th scope="col">Nota Fiscal</th>
+                    <th scope="col">Ordem de Transferência Bancária</th>
+                    <th scope="col">Nota fiscal:</th>
                     <th scope="col">Municipio - IBGE</th>
                     <th scope="col">Cód. Empenho</th>
                     <th scope="col">Item</th>
@@ -64,6 +66,7 @@
                   foreach ($array_dados as $key => $value) {
                       ?>
                       <tr>
+                        <td><?php echo $value['cod_otb'] ?></td>
                         <td><?php echo $value['num_nf'] ?></td>
                         <td><?php echo $value['municipioIbge'] ?></td>
                         <td><?php echo $value['cod_empenho'] ?></td>
@@ -72,9 +75,9 @@
                         <td><?php echo $value['quantidade'] ?></td>
                         <td> 
                           <span class="d-flex">
-                          <a href="<?php echo URL ?>View/ItensFaturaEditar.php?num_nf=<?php echo $value['num_nf'] ?>&cod_ibge=<?php echo $value['cod_ibge'] ?>&cod_empenho=<?php echo $value['cod_empenho'] ?>&cod_item=<?php echo $value['cod_item'] ?>&cod_tipo_item=<?php echo $value['cod_tipo_item'] ?>" class="btn btn-warning mr-1"> Editar
+                          <a href="<?php echo URL ?>View/ItensOtbEditar.php?cod_otb=<?php echo $value['cod_otb'] ?>&num_nf=<?php echo $value['num_nf'] ?>&cod_ibge=<?php echo $value['cod_ibge'] ?>&cod_empenho=<?php echo $value['cod_empenho'] ?>&cod_item=<?php echo $value['cod_item'] ?>&cod_tipo_item=<?php echo $value['cod_tipo_item'] ?>" class="btn btn-warning mr-1"> Editar
                           </a>
-                          <button onclick="apagarDados('<?php echo URL ?>Controller/ControleApagarItensFatura.php?num_nf=<?php echo $value['num_nf'] ?>&cod_ibge=<?php echo $value['cod_ibge'] ?>&cod_empenho=<?php echo $value['cod_empenho'] ?>&cod_item=<?php echo $value['cod_item'] ?>&cod_tipo_item=<?php echo $value['cod_tipo_item'] ?>')" class="btn btn-danger">Excluir</button> 
+                          <button onclick="apagarDados('<?php echo URL ?>Controller/ControleApagarItensOtb.php?cod_otb=<?php echo $value['cod_otb'] ?>&num_nf=<?php echo $value['num_nf'] ?>&cod_ibge=<?php echo $value['cod_ibge'] ?>&cod_empenho=<?php echo $value['cod_empenho'] ?>&cod_item=<?php echo $value['cod_item'] ?>&cod_tipo_item=<?php echo $value['cod_tipo_item'] ?>')" class="btn btn-danger">Excluir</button> 
                           </span>
                         </td>
 
@@ -93,19 +96,19 @@
   </main>
 
   <!-- Modal de Cadastro -->
-  <div class="modal fade cadastrar-itensfatura-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myItensFaturaModalLabel" aria-hidden="true">
+  <div class="modal fade cadastrar-itens_otb-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myItensOtbModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         
         <div class="modal-header">
-          <h5 class="modal-title" id="myItensFaturaModalLabel">
+          <h5 class="modal-title" id="myItensOtbModalLabel">
             <i class="far fa-plus-square"></i>
-            Cadastrar Itens da Fatura
+            Cadastrar Itens Otb
           </h5>
         </div>
 
         <!-- FORMULARIO -->
-        <form action="../Controller/ControleItensFatura.php" method="post">
+        <form action="../Controller/ControleItensOtb.php" method="post">
 
           <div class="modal-body">
 
@@ -113,13 +116,13 @@
             <div class="form-row">
 
             <div class="form-group col-md-12">
-                <label for="recipient-ajuda" class="col-form-label">Ajuda:</label>
-                      <select name="ajuda" class="form-control" id="recipient-ajuda">
-                      <option value="">Selecionar Ajuda</option>
+                <label for="recipient-cod_otb" class="col-form-label">Ordem de Transferência Bancária:</label>
+                      <select name="cod_otb" class="form-control" id="recipient-cod_otb">
+                      <option value="">Selecionar Ordem de Transferência Bancária</option>
                       <?php 
-                        foreach($array_selectAjuda as $chave => $valor){
+                        foreach($array_selectOtb as $chave => $valor){
                         ?>
-                        <option value="<?= $valor['ajuda'] ?>"><?= $valor['ajuda'] ?></option>
+                        <option value="<?= $valor['cod_otb'] ?>"><?= $valor['cod_otb'] ?></option>
                         <?php 
                         }
                       ?>
@@ -146,9 +149,9 @@
                       <select name="cod_ibge" class="form-control" id="recipient-cod_ibge">
                       <option value="">Selecionar Código IBGE</option>
                       <?php 
-                        foreach($array_selectFatura as $chave => $valor){
+                        foreach($array_selectMunicipios as $chave => $valor){
                         ?>
-                        <option value="<?= $valor['cod_ibge'] ?>"><?= $valor['itens'] ?></option>
+                        <option value="<?= $valor['cod_ibge'] ?>"><?= $valor['municipioIbge'] ?></option>
                         <?php 
                         }
                       ?>
@@ -169,7 +172,7 @@
                       ?>
                     </select>
               </div>
-
+              
               <div class="form-group col-md-12">
                 <label for="recipient-cod_tipo_item" class="col-form-label">Cód. Tipo Item:</label>
                       <select name="cod_tipo_item" class="form-control" id="recipient-cod_tipo_item">
@@ -197,29 +200,7 @@
                       ?>
                     </select>
               </div>
-<!--            
-              <div class="form-group col-md-12">
-                <label for="recipient-valor" class="col-form-label">Valor:</label>
-                <input
-                name="valor"
-                placeholder=""
-                type="float"
-                class="form-control"
-                maxlength="12"
-                id="recipient-valor">
-              </div>
 
-              <div class="form-group col-md-12">
-                <label for="recipient-quantidade" class="col-form-label">Quantidade:</label>
-                <input
-                name="quantidade"
-                placeholder=""
-                type="number"
-                class="form-control"
-                maxlength=""
-                id="recipient-quantidade">
-              </div>
- -->
             </div>
 
             <div class="modal-footer">

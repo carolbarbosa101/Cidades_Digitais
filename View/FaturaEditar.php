@@ -53,7 +53,7 @@
                     <input disable
                       value="<?php echo $num_nf ?>"
                       placeholder=""
-                      type="int" 
+                      type="number" 
                       class="form-control"
                       maxlength="14"
                       id="recipient-num_nf">
@@ -64,7 +64,7 @@
                     <input disable
                       value="<?php echo $cod_ibge ?>"
                       placeholder=""
-                      type="int" 
+                      type="number" 
                       class="form-control"
                       maxlength="7"
                       id="recipient-cod_ibge">

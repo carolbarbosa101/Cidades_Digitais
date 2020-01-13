@@ -82,17 +82,13 @@ class ClassItensEmpenhoDAO {
     public function listarItensEmpenho(){
         try {
             $pdo = Conexao::getInstance();
-            $sql = "SELECT CONCAT(empenho.cod_empenho, ' - ', empenho.data) AS empenhoLista, 
-            CONCAT(itens.cod_item, ' - ', itens.descricao, ' - ', itens.unidade) AS itemLista,
-            CONCAT(tipo_item.cod_tipo_item, ' - ', tipo_item.descricao) AS tipo_itemLista,
-            CONCAT(previsao_empenho.cod_previsao_empenho, ' - ', previsao_empenho.data) AS previsaoLista,
-            empenho.cod_empenho, itens.cod_item, tipo_item.cod_tipo_item, previsao_empenho.cod_previsao_empenho, itens_empenho.valor, itens_empenho.quantidade
+            $sql = "SELECT itens_empenho.cod_empenho AS empenhoLista, 
+            CONCAT(itens.cod_tipo_item, '.', itens.cod_item, ' - ', itens.descricao) AS itemLista,
+            itens_empenho.cod_previsao_empenho AS previsaoLista,
+            itens_empenho.cod_empenho, itens.cod_item, itens.cod_tipo_item, itens_empenho.cod_previsao_empenho, itens_empenho.valor, itens_empenho.quantidade
             FROM itens_empenho
-            INNER JOIN empenho ON itens_empenho.cod_empenho = empenho.cod_empenho
-            INNER JOIN itens ON itens_empenho.cod_item = itens.cod_item
-            INNER JOIN tipo_item ON itens_empenho.cod_tipo_item = tipo_item.cod_tipo_item
-            INNER JOIN previsao_empenho ON itens_empenho.cod_previsao_empenho = previsao_empenho.cod_previsao_empenho
-            ORDER BY itens_empenho.cod_empenho ASC";
+            INNER JOIN itens ON itens_empenho.cod_item = itens.cod_item AND itens_empenho.cod_tipo_item = itens.cod_tipo_item 
+            ORDER BY itens_empenho.cod_empenho, itens_empenho.cod_tipo_item, itens_empenho.cod_item ASC";
 
             $stmt = $pdo->prepare($sql);
             $stmt->execute();
@@ -123,30 +119,52 @@ class ClassItensEmpenhoDAO {
             INNER JOIN previsao_empenho ON itens_empenho.cod_previsao_empenho = previsao_empenho.cod_previsao_empenho
             ORDER BY itens_empenho.cod_empenho ASC */
 
-    public function visualizarItensEmpenho(ClassItensEmpenho $visualizarItensEmpenho){
-        //var_dump($visualizarItensEmpenho);
-        //die;
-        try {
-            $pdo = Conexao::getInstance();
-            $sql = "SELECT *
-            FROM itens_empenho 
-            WHERE cod_empenho = ? AND cod_item = ? AND cod_tipo_item = ? AND cod_previsao_empenho = ?";
-            $stmt = $pdo->prepare($sql);
-
-            $stmt->bindValue(1, $visualizarItensEmpenho->getCod_empenho());
-            $stmt->bindValue(2, $visualizarItensEmpenho->getCod_item());
-            $stmt->bindValue(3, $visualizarItensEmpenho->getCod_tipo_item());
-            $stmt->bindValue(3, $visualizarItensEmpenho->getCod_previsao_empenho());
-
-            $stmt->execute();
-            $resultado = $stmt->fetchAll();
-            //var_dump($resultado);
-            //die;
-            return $resultado;
-        } catch (PDOException $ex) {
-            return $ex->getMessage();
-        }
-    }
+            public function visualizarItensEmpenho(ClassItensEmpenho $visualizarItensEmpenho){
+                //var_dump($visualizarItensEmpenho);
+                //die;
+                try {
+                    $pdo = Conexao::getInstance();
+                    $sql = "SELECT 
+                    (
+                    SELECT SUM(itens_previsao_empenho.quantidade) AS quant_itens_prev
+                    FROM itens_previsao_empenho
+                    where itens_previsao_empenho.cod_tipo_item = ? AND itens_previsao_empenho.cod_item = ? AND itens_previsao_empenho.cod_previsao_empenho = ?
+                    )
+                    -
+                    (
+                    SELECT SUM(itens_empenho.quantidade) AS quant_previsao
+                    FROM itens_empenho
+                    where itens_empenho.cod_tipo_item = ? AND itens_empenho.cod_item = ? AND itens_empenho.cod_previsao_empenho = ?
+                    ) AS quant_calc,
+                    CONCAT (itens_empenho.cod_tipo_item, '.', itens_empenho.cod_item, ' - ', itens.descricao) AS descricaoItem, 
+                    itens_empenho.*
+                    FROM itens_empenho 
+                    INNER JOIN itens ON itens_empenho.cod_item = itens.cod_item AND itens_empenho.cod_tipo_item = itens.cod_tipo_item
+                    WHERE itens_empenho.cod_empenho = ? AND itens_empenho.cod_tipo_item = ? AND itens_empenho.cod_item = ? AND itens_empenho.cod_previsao_empenho = ?
+                ;
+                ";
+                    $stmt = $pdo->prepare($sql);
+                    
+                    $stmt->bindValue(1, $visualizarItensEmpenho->getCod_tipo_item());
+                    $stmt->bindValue(2, $visualizarItensEmpenho->getCod_item());
+                    $stmt->bindValue(3, $visualizarItensEmpenho->getCod_previsao_empenho());
+                    $stmt->bindValue(4, $visualizarItensEmpenho->getCod_tipo_item());
+                    $stmt->bindValue(5, $visualizarItensEmpenho->getCod_item());
+                    $stmt->bindValue(6, $visualizarItensEmpenho->getCod_previsao_empenho());
+                    $stmt->bindValue(7, $visualizarItensEmpenho->getCod_empenho());
+                    $stmt->bindValue(8, $visualizarItensEmpenho->getCod_tipo_item());
+                    $stmt->bindValue(9, $visualizarItensEmpenho->getCod_item());
+                    $stmt->bindValue(10, $visualizarItensEmpenho->getCod_previsao_empenho());
+        
+                    $stmt->execute();
+                    $resultado = $stmt->fetchAll();
+                    //var_dump($resultado);
+                    //die;
+                    return $resultado;
+                } catch (PDOException $ex) {
+                    return $ex->getMessage();
+                }
+            }
 
 
 }

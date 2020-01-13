@@ -8,8 +8,7 @@ class ClassTipoItemDAO {
             $pdo = Conexao::getInstance();
             $sql = "SELECT CONCAT(tipo_item.cod_tipo_item, ' - ', tipo_item.descricao) AS tipo, 
             tipo_item.cod_tipo_item
-            FROM itens
-            INNER JOIN tipo_item ON itens.cod_tipo_item = tipo_item.cod_tipo_item
+            FROM tipo_item
             ORDER BY  tipo_item.cod_tipo_item ASC";
             $stmt = $pdo->prepare($sql);
             $stmt->execute();

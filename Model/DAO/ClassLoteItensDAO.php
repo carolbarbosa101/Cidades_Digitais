@@ -37,6 +37,25 @@ class ClassLoteItensDAO {
         }
     }
     
+    public function listarPreco($cod_previsao_empenho){
+        try {
+            $pdo = Conexao::getInstance();
+
+            $sql = "SELECT lote_itens.*, itens_previsao_empenho.cod_previsao_empenho FROM itens_previsao_empenho
+            INNER JOIN lote_itens ON itens_previsao_empenho.cod_lote = lote_itens.cod_lote AND itens_previsao_empenho.cod_item = lote_itens.cod_item AND itens_previsao_empenho.cod_tipo_item = lote_itens.cod_tipo_item
+            WHERE itens_previsao_empenho.cod_previsao_empenho = $cod_previsao_empenho";
+
+            $stmt = $pdo->prepare($sql);
+            //AND cod_lote = ? 
+            // $stmt->bindValue(2, $visualizarReajuste->getCod_lote());
+
+            $stmt->execute();
+            return $stmt->fetchAll(); // fetchAll() retorna um array contendo varios dados. 
+        } catch (PDOException $ex) {
+            return $ex->getMessage();
+        }
+    }
+
     public function listarLoteItens(){
         try {
             $pdo = Conexao::getInstance();

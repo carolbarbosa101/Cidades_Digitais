@@ -78,7 +78,7 @@
                       value="<?php echo $percentual ?>"
                       name="percentual"
                       placeholder=""
-                      type="number" 
+                      type="float" 
                       class="form-control"
                       maxlength="" 
                       id="recipient-percentual">

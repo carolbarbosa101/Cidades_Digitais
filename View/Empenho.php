@@ -63,8 +63,8 @@
                         
                           <td><?php echo $value['cod_empenho'] ?></td>
                           <td><?php echo $value['previsao'] ?></td>
-                          <td><?php echo date('d/m/Y H:i:s', strtotime($value['data']))?> </td>
-
+                          <td><?php echo date('d/m/Y', strtotime($value['data']))?> </td>
+                          <!--<td><?php echo date('d/m/Y H:i:s', strtotime($value['data']))?> </td> -->
                           
                           
                           </td>
@@ -131,18 +131,31 @@
                     <input 
                       name="data"
                       placeholder=""
-                      type="datetime-local" 
+                      type="date" 
                       class="form-control"
                       maxlength="" 
                       id="recipient-data">
                   </div>
 
-                  <!--<div class="form-group col-md-12">
+                  <!--
+                    
+                    <div class="form-group col-md-12">
+                    <label for="recipient-data" class="col-form-label">Data:</label>
+                    <input 
+                      name="data"
+                      placeholder=""
+                      type="datetime-local" 
+                      class="form-control"
+                      maxlength="" 
+                      id="recipient-data">
+                  </div>
+                    
+                    <div class="form-group col-md-12">
                     <label for="recipient-contador" class="col-form-label">Contador:</label>
                     <input 
                       name="contador"
                       placeholder=""
-                      type="int" 
+                      type="number" 
                       class="form-control"
                       maxlength="" 
                       id="recipient-contador">

@@ -5,6 +5,7 @@
     // Buscar todos os cadastros no banco
     require_once("../Controller/ControleListarFaturaOtb.php");
     require_once("../Controller/ControleFaturaSelect.php");
+    require_once("../Controller/ControleFaturaSelectIBGE.php");
     require_once("../Controller/ControleOtbSelect.php");
     // $array_dados
     ?>
@@ -63,11 +64,7 @@
                           <td><?php echo $value['cod_ibge'] ?></td>
                           <td> 
                             <span class="d-flex">
-                            <a href="<?php echo URL ?>View/FaturaOtbEditar.php?cod_assunto=<?php echo $value['cod_otb'] ?>" 
-                                class="btn btn-warning mr-1">
-                                Editar
-                          </a>
-                              <button onclick="apagarDados('<?php echo URL ?>Controller/ControleApagarFaturaOtb.php?cod_otb=<?php echo $value['cod_otb'] ?>')" class="btn btn-danger">Excluir</button> 
+                              <button onclick="apagarDados('<?php echo URL ?>Controller/ControleApagarFaturaOtb.php?cod_otb=<?php echo $value['cod_otb'] ?>&num_nf=<?php echo $value['num_nf'] ?>&cod_ibge=<?php echo $value['cod_ibge'] ?>')" class="btn btn-danger">Excluir</button> 
                             </span>
                           </td>
                         </tr>
@@ -117,14 +114,19 @@
                     </select>
                   </div>
 
-                  <div class="form-group col-md-12">
-                    <label for="recipient-num_nf" class="col-form-label">Nota Fiscal:</label>
-                    <select name="num_nf" class="form-control" id="recipient-num_nf">
+
+                        <!-- O Código da Nota fiscal e o Código de IBGE tem que ser os mesmos relacionados na tabela fatura -->
+
+
+                        <div class="form-group col-md-12">
+                    <label for="recipient-cod_ibge" class="col-form-label">IBGE:</label>
+                    <select name="cod_ibge" class="form-control" id="recipient-cod_ibge">
                       <option value="">Selecionar Categoria</option>
                       <?php 
                         foreach($array_selectFatura as $chave => $valor){
                         ?>
-                        <option value="<?= $valor['num_nf'] ?>"><?= $valor['num_nf'] ?></option>
+                        <option value="<?= $valor['cod_ibge']?>"><?= $valor['cod_ibge'] ?></option>
+                        
                         <?php 
                         }
                       ?>
@@ -132,18 +134,21 @@
                   </div>
 
                   <div class="form-group col-md-12">
-                    <label for="recipient-cod_ibge" class="col-form-label">IBGE:</label>
-                    <select name="cod_ibge" class="form-control" id="recipient-cod_ibge">
-                      <option value="">Selecionar IBGE</option>
+                    <label for="recipient-num_nf" class="col-form-label">Nota Fiscal:</label>
+                    <select name="num_nf" class="form-control" id="recipient-num_nf">
+                      <option value="">Selecionar Categoria</option>
                       <?php 
                         foreach($array_selectFatura as $chave => $valor){
                         ?>
-                        <option value="<?= $valor['cod_ibge'] ?>"><?= $valor['cod_ibge'] ?></option>
+                        <option value="<?= $valor['num_nf']?>"><?= $valor['num_nf'] ?></option>
+                        
                         <?php 
                         }
                       ?>
                     </select>
                   </div>
+
+                  
                  
                 
 

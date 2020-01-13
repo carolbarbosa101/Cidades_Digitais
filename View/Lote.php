@@ -65,7 +65,7 @@
                         <td><?php echo $value['contrato'] ?></td>
                         <td><?php echo date('d/m/Y', strtotime($value['dt_inicio_vig']))?> </td>
                         <td><?php echo date('d/m/Y', strtotime($value['dt_final_vig']))?> </td>
-                        <td><?php echo date('d/m', strtotime($value['dt_reajuste']))?> </td>
+                        <td><?php echo $value['dt_reajuste']?> </td>
                       
                         <td> 
                           <span class="d-flex">
@@ -173,7 +173,7 @@
                 <label for="recipient-dt_reajuste" class="col-form-label">Data Reajuste:</label>
                 <input
                 name="dt_reajuste"
-                placeholder="dd-mm"
+                placeholder="mm-dd"
                 type="text"
                 class="form-control"
                 maxlength="8"

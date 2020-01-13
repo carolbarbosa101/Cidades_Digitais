@@ -4,6 +4,10 @@ require_once 'Conexao.php';
 class ClassMunicipioDAO {
     
     public function cadastrar(ClassMunicipio $cadastrarMunicipio) {
+
+        //var_dump($cadastrarMunicipio);
+        //die();
+
         try {
             $pdo = Conexao::getInstance();
             $sql = "INSERT INTO municipio (cod_ibge, nome_municipio, populacao, uf, regiao, cnpj, dist_capital, endereco, numero, complemento, bairro, idhm, latitude, longitude) values (?,?, ?, ?,?,?,?,?,?,?,?,?,?,?)";
@@ -99,7 +103,8 @@ class ClassMunicipioDAO {
     public function todosMunicipios(){
         try {
             $pdo = Conexao::getInstance();
-            $sql = "SELECT cod_ibge, nome_municipio FROM municipio ORDER BY nome_municipio ASC";
+            $sql = "SELECT CONCAT(nome_municipio, ' - ', cod_ibge) municipioIbge,
+            cod_ibge, nome_municipio FROM municipio ORDER BY nome_municipio ASC";
             $stmt = $pdo->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll(); // fetchAll() retorna um array contendo varios dados. 
