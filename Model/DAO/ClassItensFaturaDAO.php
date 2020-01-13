@@ -78,20 +78,39 @@ class ClassItensFaturaDAO {
         try {
             $pdo = Conexao::getInstance();
             $sql = "SELECT 
-			CONCAT (municipio.nome_municipio, ' - ', municipio.cod_ibge) AS municipioIbge, 
+            (
+            SELECT itens_empenho.quantidade AS quant_empenho
+            FROM itens_empenho
+            where itens_empenho.cod_empenho = ? AND itens_empenho.cod_tipo_item = ? AND itens_empenho.cod_item = ?
+            )
+            -
+            (
+            SELECT SUM(itens_fatura.quantidade) AS quant_fatura
+            FROM itens_fatura
+            where itens_fatura.cod_empenho = ? AND itens_fatura.cod_tipo_item = ? AND itens_fatura.cod_item = ?
+            ) AS quant_calc,
+            CONCAT (municipio.nome_municipio, ' - ', municipio.cod_ibge) AS municipioIbge, 
             CONCAT (itens_fatura.cod_tipo_item, '.', itens_fatura.cod_item, ' - ', itens.descricao) AS descricaoItem, 
-            itens_fatura.*
+            itens_fatura.*, itens_empenho.valor as valor_empenho
             FROM itens_fatura 
             INNER JOIN municipio ON itens_fatura.cod_ibge = municipio.cod_ibge
             INNER JOIN itens ON itens_fatura.cod_item = itens.cod_item AND itens_fatura.cod_tipo_item = itens.cod_tipo_item
-            WHERE itens_fatura.num_nf = ? AND itens_fatura.cod_ibge = ? AND itens_fatura.cod_empenho = ? AND itens_fatura.cod_item = ? AND itens_fatura.cod_tipo_item = ?";
+            INNER JOIN itens_empenho ON itens_fatura.cod_empenho = itens_empenho.cod_empenho AND itens_fatura.cod_tipo_item = itens_empenho.cod_tipo_item AND itens_fatura.cod_item = itens_empenho.cod_item
+            WHERE itens_fatura.num_nf = ? AND itens_fatura.cod_ibge = ? AND itens_fatura.cod_empenho = ? AND itens_fatura.cod_tipo_item = ? AND itens_fatura.cod_item = ?
+            ;";
             $stmt = $pdo->prepare($sql);
 
-            $stmt->bindValue(1, $visualizarItensFatura->getNum_nf());
-            $stmt->bindValue(2, $visualizarItensFatura->getCod_ibge());
-            $stmt->bindValue(3, $visualizarItensFatura->getCod_empenho());
-            $stmt->bindValue(4, $visualizarItensFatura->getCod_item());
+            $stmt->bindValue(1, $visualizarItensFatura->getCod_empenho());
+            $stmt->bindValue(2, $visualizarItensFatura->getCod_tipo_item());
+            $stmt->bindValue(3, $visualizarItensFatura->getCod_item());
+            $stmt->bindValue(4, $visualizarItensFatura->getCod_empenho());
             $stmt->bindValue(5, $visualizarItensFatura->getCod_tipo_item());
+            $stmt->bindValue(6, $visualizarItensFatura->getCod_item());
+            $stmt->bindValue(7, $visualizarItensFatura->getNum_nf());
+            $stmt->bindValue(8, $visualizarItensFatura->getCod_ibge());
+            $stmt->bindValue(9, $visualizarItensFatura->getCod_empenho());
+            $stmt->bindValue(10, $visualizarItensFatura->getCod_tipo_item());
+            $stmt->bindValue(11, $visualizarItensFatura->getCod_item());
 
             $stmt->execute();
             $resultado = $stmt->fetchAll();

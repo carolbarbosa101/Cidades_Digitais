@@ -96,7 +96,7 @@
                       value="<?php echo $valor ?>"
                       name="valor"
                       placeholder=""
-                      type="number" 
+                      type="float" 
                       class="form-control"
                       maxlength="" 
                       id="recipient-valor">
@@ -134,9 +134,10 @@
             <div class="modal-footer">
           
               <a href="<?php echo URL ?>View/ItensPrevisaoEmpenho.php" class="btn btn-secondary">Cancelar</a>
-              <button type="submit" class="btn btn-primary">
+              
+                <button type="submit" class="btn btn-primary">
                 Salvar
-              </button>
+                </button>
             </div>
 
           </form>

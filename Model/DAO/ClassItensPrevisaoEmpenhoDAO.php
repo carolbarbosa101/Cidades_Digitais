@@ -165,5 +165,55 @@ class ClassItensPrevisaoEmpenhoDAO {
         }
     }
 
+    public function selectItensPrevisaoEmpenho(ClassItensPrevisaoEmpenho $selectItensPrevisaoEmpenho){
+        //var_dump($selectItensPrevisaoEmpenho);
+        //die;
+        try {
+            $pdo = Conexao::getInstance();
+            $sql = "SELECT 
+            (
+            SELECT SUM(cd_itens.quantidade_termo_instalacao) AS quant_cidade
+            FROM itens_previsao_empenho
+            INNER JOIN lote ON itens_previsao_empenho.cod_lote = lote.cod_lote
+            INNER JOIN cd ON lote.cod_lote = cd.cod_lote
+            INNER JOIN cd_itens ON cd.cod_ibge = cd_itens.cod_ibge AND itens_previsao_empenho.cod_tipo_item = cd_itens.cod_tipo_item AND itens_previsao_empenho.cod_item = cd_itens.cod_item
+            where cd_itens.cod_tipo_item = ? AND cd_itens.cod_item = ? AND itens_previsao_empenho.cod_previsao_empenho = ?
+            )
+            -
+            (
+            SELECT  SUM(itens_previsao_empenho.quantidade) AS quant_itens_prev
+            FROM itens_previsao_empenho
+            where itens_previsao_empenho.cod_lote = ? AND itens_previsao_empenho.cod_tipo_item = ? AND itens_previsao_empenho.cod_item = ?
+            ) AS quant_calc,
+            CONCAT (itens_previsao_empenho.cod_tipo_item, '.', itens_previsao_empenho.cod_item, ' - ', itens.descricao) AS itensLista, 
+            itens_previsao_empenho.*, lote.cod_lote
+            FROM itens_previsao_empenho 
+            INNER JOIN itens ON itens_previsao_empenho.cod_item = itens.cod_item AND itens_previsao_empenho.cod_tipo_item = itens.cod_tipo_item
+            INNER JOIN lote ON itens_previsao_empenho.cod_lote = lote.cod_lote
+            WHERE itens_previsao_empenho.cod_previsao_empenho = ? AND itens_previsao_empenho.cod_tipo_item = ? AND itens_previsao_empenho.cod_item = ?  AND itens_previsao_empenho.cod_lote = ?
+        ;";
+            $stmt = $pdo->prepare($sql);
+            
+            $stmt->bindValue(1, $selectItensPrevisaoEmpenho->getCod_tipo_item());
+            $stmt->bindValue(2, $selectItensPrevisaoEmpenho->getCod_item());
+            $stmt->bindValue(3, $selectItensPrevisaoEmpenho->getCod_previsao_empenho());
+            $stmt->bindValue(4, $selectItensPrevisaoEmpenho->getCod_lote());
+            $stmt->bindValue(5, $selectItensPrevisaoEmpenho->getCod_tipo_item());
+            $stmt->bindValue(6, $selectItensPrevisaoEmpenho->getCod_item());
+            $stmt->bindValue(7, $selectItensPrevisaoEmpenho->getCod_previsao_empenho());
+            $stmt->bindValue(8, $selectItensPrevisaoEmpenho->getCod_tipo_item());
+            $stmt->bindValue(9, $selectItensPrevisaoEmpenho->getCod_item());
+            $stmt->bindValue(10, $selectItensPrevisaoEmpenho->getCod_lote());
+
+            $stmt->execute();
+            $resultado = $stmt->fetchAll();
+            //var_dump($resultado);
+            //die;
+            return $resultado;
+        } catch (PDOException $ex) {
+            return $ex->getMessage();
+        }
+    }
+
 
 }

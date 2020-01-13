@@ -18,7 +18,7 @@
             <i class="fas fa-globe-asia"></i>
             </span>
             <span>
-              <h3 class="mb-0">Editar Cd itens</h3>
+              <h3 class="mb-0">Editar Itens Otb</h3>
             </span>
           </div>
         </div>
@@ -100,19 +100,19 @@
                   </div>
 
                   <div class="form-group col-md-4">
-                    <label for="recipient-valor" class="col-form-label">Valor:</label>
+                  <label for="recipient-valor" class="col-form-label">Valor: (No empenho R$<?=$valor_fatura?> )</label>
                     <input 
                       value="<?php echo $valor ?>"
                       name="valor"
                       placeholder=""
-                      type="number" 
+                      type="float" 
                       class="form-control"
                       maxlength="12" 
                       id="recipient-valor">
                   </div>
 
                   <div class="form-group col-md-4">
-                    <label for="recipient-quantidade" class="col-form-label">Quantidade:</label>
+                  <label for="recipient-quantidade" class="col-form-label">Quantidade: (Disponível: <?=$quant_calc?> )</label>
                     <input 
                       value="<?php echo $quantidade ?>"
                       name="quantidade"

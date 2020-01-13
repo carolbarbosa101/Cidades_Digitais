@@ -7,7 +7,16 @@
     require_once("../Controller/ControleCdSelect.php");
     
     ?>
-    
+    <style>
+    li {
+      padding: 20px;
+      display: none;
+    }
+      
+    span:hover + li {
+      display: block;
+    }
+    </style>
     
     <!-- Conteudo -->
     <main id="main">
@@ -86,14 +95,15 @@
                       value="<?php echo $valor ?>"
                       name="valor"
                       placeholder=""
-                      type="number" 
+                      type="float" 
                       class="form-control"
                       maxlength="12" 
                       id="recipient-valor">
                   </div>
 
                   <div class="form-group col-md-4">
-                    <label for="recipient-quantidade" class="col-form-label">Quantidade:</label>
+                  <span><label for="recipient-quantidade" class="col-form-label">Quantidade:</label></span>
+                    <li>Quantidade disponível: <?php printf($quant_calc) ?> </li>
                     <input 
                       value="<?php echo $quantidade ?>"
                       name="quantidade"
@@ -104,6 +114,17 @@
                       id="recipient-quantidade">
                   </div>
 
+                  <div class="form-group col-md-4">
+                  <?php 
+                  if($quantidade>$quant_calc+$quantidade){
+                    echo '<script>alert("ERRO: O valor da quantidade é maior que o permitido!!");</script>';
+
+                    echo '<div class="alert alert-danger" role="alert">';
+                    echo ' ERRO: A quantidade: "';echo $quantidade ,'" é maior que o permitido!!';
+                    echo '</div>';
+                    //$_SESSION['msg'] = "<div class='alert alert-danger' role='alert'> ERRO: A quantidade: ";echo $quantidade ," é maior que o permitido!!'</div>";
+                  }?>
+                  </div>
                 </div>
 
             </div>

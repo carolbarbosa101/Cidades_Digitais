@@ -125,17 +125,36 @@ class ClassItensEmpenhoDAO {
                 try {
                     $pdo = Conexao::getInstance();
                     $sql = "SELECT 
+                    (
+                    SELECT SUM(itens_previsao_empenho.quantidade) AS quant_itens_prev
+                    FROM itens_previsao_empenho
+                    where itens_previsao_empenho.cod_tipo_item = ? AND itens_previsao_empenho.cod_item = ? AND itens_previsao_empenho.cod_previsao_empenho = ?
+                    )
+                    -
+                    (
+                    SELECT SUM(itens_empenho.quantidade) AS quant_previsao
+                    FROM itens_empenho
+                    where itens_empenho.cod_tipo_item = ? AND itens_empenho.cod_item = ? AND itens_empenho.cod_previsao_empenho = ?
+                    ) AS quant_calc,
                     CONCAT (itens_empenho.cod_tipo_item, '.', itens_empenho.cod_item, ' - ', itens.descricao) AS descricaoItem, 
                     itens_empenho.*
                     FROM itens_empenho 
                     INNER JOIN itens ON itens_empenho.cod_item = itens.cod_item AND itens_empenho.cod_tipo_item = itens.cod_tipo_item
-                    WHERE itens_empenho.cod_empenho = ? AND itens_empenho.cod_item = ? AND itens_empenho.cod_tipo_item = ? AND itens_empenho.cod_previsao_empenho = ?";
+                    WHERE itens_empenho.cod_empenho = ? AND itens_empenho.cod_tipo_item = ? AND itens_empenho.cod_item = ? AND itens_empenho.cod_previsao_empenho = ?
+                ;
+                ";
                     $stmt = $pdo->prepare($sql);
                     
-                    $stmt->bindValue(1, $visualizarItensEmpenho->getCod_empenho());
+                    $stmt->bindValue(1, $visualizarItensEmpenho->getCod_tipo_item());
                     $stmt->bindValue(2, $visualizarItensEmpenho->getCod_item());
-                    $stmt->bindValue(3, $visualizarItensEmpenho->getCod_tipo_item());
-                    $stmt->bindValue(4, $visualizarItensEmpenho->getCod_previsao_empenho());
+                    $stmt->bindValue(3, $visualizarItensEmpenho->getCod_previsao_empenho());
+                    $stmt->bindValue(4, $visualizarItensEmpenho->getCod_tipo_item());
+                    $stmt->bindValue(5, $visualizarItensEmpenho->getCod_item());
+                    $stmt->bindValue(6, $visualizarItensEmpenho->getCod_previsao_empenho());
+                    $stmt->bindValue(7, $visualizarItensEmpenho->getCod_empenho());
+                    $stmt->bindValue(8, $visualizarItensEmpenho->getCod_tipo_item());
+                    $stmt->bindValue(9, $visualizarItensEmpenho->getCod_item());
+                    $stmt->bindValue(10, $visualizarItensEmpenho->getCod_previsao_empenho());
         
                     $stmt->execute();
                     $resultado = $stmt->fetchAll();

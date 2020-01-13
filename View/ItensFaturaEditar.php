@@ -90,7 +90,7 @@
                   </div>
 
                   <div class="form-group col-md-4">
-                    <label for="recipient-valor" class="col-form-label">Valor:</label>
+                    <label for="recipient-valor" class="col-form-label">Valor: (No empenho R$<?=$valor_empenho?> )</label>
                     <input 
                       value="<?php echo $valor ?>"
                       name="valor"
@@ -102,7 +102,7 @@
                   </div>
 
                   <div class="form-group col-md-4">
-                    <label for="recipient-quantidade" class="col-form-label">Quantidade:</label>
+                    <label for="recipient-quantidade" class="col-form-label">Quantidade: (Disponível: <?=$quant_calc?> )</label>
                     <input 
                       value="<?php echo $quantidade ?>"
                       name="quantidade"

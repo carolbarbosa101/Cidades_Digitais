@@ -201,31 +201,6 @@
                     </select>
               </div>
 
-            
-              
-           
-              <div class="form-group col-md-12">
-                <label for="recipient-valor" class="col-form-label">Valor:</label>
-                <input
-                name="valor"
-                placeholder=""
-                type="number"
-                class="form-control"
-                maxlength="12"
-                id="recipient-valor">
-              </div>
-
-              <div class="form-group col-md-12">
-                <label for="recipient-quantidade" class="col-form-label">Quantidade:</label>
-                <input
-                name="quantidade"
-                placeholder=""
-                type="number"
-                class="form-control"
-                maxlength=""
-                id="recipient-quantidade">
-              </div>
-
             </div>
 
             <div class="modal-footer">
