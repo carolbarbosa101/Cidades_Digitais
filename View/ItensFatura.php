@@ -7,6 +7,7 @@
   require_once("../Controller/ControleEmpenhoSelect.php");
   require_once("../Controller/ControleItensSelect.php");
   require_once("../Controller/ControleTipoItemSelect.php");
+  require_once("../Controller/ControleAjudaSelect.php");
   ?>
 
   <!-- Conteudo -->
@@ -112,6 +113,20 @@
             <div class="form-row">
 
             <div class="form-group col-md-12">
+                <label for="recipient-ajuda" class="col-form-label">Ajuda:</label>
+                      <select name="ajuda" class="form-control" id="recipient-ajuda">
+                      <option value="">Selecionar Ajuda</option>
+                      <?php 
+                        foreach($array_selectAjuda as $chave => $valor){
+                        ?>
+                        <option value="<?= $valor['ajuda'] ?>"><?= $valor['ajuda'] ?></option>
+                        <?php 
+                        }
+                      ?>
+                    </select>
+              </div>
+
+              <div class="form-group col-md-12">
                 <label for="recipient-num_nf" class="col-form-label">Nota Fiscal:</label>
                       <select name="num_nf" class="form-control" id="recipient-num_nf">
                       <option value="">Selecionar Nota Fiscal</option>
@@ -133,7 +148,7 @@
                       <?php 
                         foreach($array_selectFatura as $chave => $valor){
                         ?>
-                        <option value="<?= $valor['cod_ibge'] ?>"><?= $valor['cod_ibge'] ?></option>
+                        <option value="<?= $valor['cod_ibge'] ?>"><?= $valor['itens'] ?></option>
                         <?php 
                         }
                       ?>
@@ -182,7 +197,7 @@
                       ?>
                     </select>
               </div>
-           
+<!--            
               <div class="form-group col-md-12">
                 <label for="recipient-valor" class="col-form-label">Valor:</label>
                 <input
@@ -204,7 +219,7 @@
                 maxlength=""
                 id="recipient-quantidade">
               </div>
-
+ -->
             </div>
 
             <div class="modal-footer">

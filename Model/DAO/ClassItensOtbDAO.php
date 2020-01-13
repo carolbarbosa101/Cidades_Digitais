@@ -80,21 +80,44 @@ class ClassItensOtbDAO {
         try {
             $pdo = Conexao::getInstance();
             $sql = "SELECT 
-			CONCAT (municipio.nome_municipio, ' - ', municipio.cod_ibge) AS municipioIbge, 
+            (
+            SELECT itens_fatura.quantidade AS quant_fatura
+            FROM itens_fatura
+            where itens_fatura.num_nf = ? AND itens_fatura.cod_ibge = ? AND itens_fatura.cod_empenho = ? AND itens_fatura.cod_tipo_item = ? AND itens_fatura.cod_item = ?
+            )
+            -
+            (
+            SELECT SUM(itens_otb.quantidade) AS quant_otb
+            FROM itens_otb
+            where itens_otb.num_nf = ? AND itens_otb.cod_ibge = ? AND itens_otb.cod_empenho = ? AND itens_otb.cod_tipo_item = ? AND itens_otb.cod_item = ? 
+            ) AS quant_calc,
+        
+            CONCAT (municipio.nome_municipio, ' - ', municipio.cod_ibge) AS municipioIbge, 
             CONCAT (itens_otb.cod_tipo_item, '.', itens_otb.cod_item, ' - ', itens.descricao) AS descricaoItens, 
-            itens_otb.*
+            itens_otb.*, f.valor as valor_fatura
             FROM itens_otb 
             INNER JOIN municipio ON itens_otb.cod_ibge = municipio.cod_ibge
             INNER JOIN itens ON itens_otb.cod_item = itens.cod_item AND itens_otb.cod_tipo_item = itens.cod_tipo_item
-            WHERE itens_otb.cod_otb = ? AND itens_otb.num_nf = ? AND itens_otb.cod_ibge = ? AND itens_otb.cod_empenho = ? AND itens_otb.cod_item = ? AND itens_otb.cod_tipo_item = ?";
+            INNER JOIN itens_fatura as f ON f.num_nf = itens_otb.num_nf AND f.cod_ibge = itens_otb.cod_ibge AND f.cod_empenho = itens_otb.cod_empenho AND f.cod_item = itens_otb.cod_item AND f.cod_tipo_item = itens_otb.cod_tipo_item
+            WHERE itens_otb.cod_otb = ? AND itens_otb.num_nf = ? AND itens_otb.cod_ibge = ? AND itens_otb.cod_empenho = ? AND itens_otb.cod_tipo_item = ? AND itens_otb.cod_item = ?;";
             $stmt = $pdo->prepare($sql);
 
-            $stmt->bindValue(1, $visualizarItensOtb->getCod_otb());
-            $stmt->bindValue(2, $visualizarItensOtb->getNum_nf());
-            $stmt->bindValue(3, $visualizarItensOtb->getCod_ibge());
-            $stmt->bindValue(4, $visualizarItensOtb->getCod_empenho());
+            $stmt->bindValue(1, $visualizarItensOtb->getNum_nf());
+            $stmt->bindValue(2, $visualizarItensOtb->getCod_ibge());
+            $stmt->bindValue(3, $visualizarItensOtb->getCod_empenho());
+            $stmt->bindValue(4, $visualizarItensOtb->getCod_tipo_item());
             $stmt->bindValue(5, $visualizarItensOtb->getCod_item());
-            $stmt->bindValue(6, $visualizarItensOtb->getCod_tipo_item());
+            $stmt->bindValue(6, $visualizarItensOtb->getNum_nf());
+            $stmt->bindValue(7, $visualizarItensOtb->getCod_ibge());
+            $stmt->bindValue(8, $visualizarItensOtb->getCod_empenho());
+            $stmt->bindValue(9, $visualizarItensOtb->getCod_tipo_item());
+            $stmt->bindValue(10, $visualizarItensOtb->getCod_item());
+            $stmt->bindValue(11, $visualizarItensOtb->getCod_otb());
+            $stmt->bindValue(12, $visualizarItensOtb->getNum_nf());
+            $stmt->bindValue(13, $visualizarItensOtb->getCod_ibge());
+            $stmt->bindValue(14, $visualizarItensOtb->getCod_empenho());
+            $stmt->bindValue(15, $visualizarItensOtb->getCod_tipo_item());
+            $stmt->bindValue(16, $visualizarItensOtb->getCod_item());
 
             $stmt->execute();
             $resultado = $stmt->fetchAll();
