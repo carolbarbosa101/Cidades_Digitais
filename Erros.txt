@@ -5,23 +5,13 @@ ERROS
 - O Itens Fatura Erro no Cod_item.
 - Itens Empenho Edita mais de um.
 - Lote Não exclui registros
+- Municipios
 
+- Pid possui o erro de latitude e longitude tambêm
 
-Municipios parece possuir 4 erros:
--população não aceita por algum motivo
--numero devia ser char mas não é
--IDHM devia ser float, mas não aceita tal valor
--latitude e longitude aceia valores de char embora seja decimal e cause erro na tabela por isso
+- Telefone, o campo de telefone devia ser char, mas não é
 
-Pid possui o erro de latitude e longitude tambêm
-
-Previsão de empenho possui mesmo problema no campo ano que o primeiro
-
-Em telefone, o campo de telefone devia ser char, mas não é
-
-Uacom assunto possui esse erro:
+- Uacom assunto possui esse erro:
 SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`cidades_digitais_db`.`uacom_assunto`, CONSTRAINT `fk_uacom_has_assunto_uacom1` FOREIGN KEY (`cod_ibge`, `data`) REFERENCES `uacom` (`cod_ibge`, `data`) ON DELETE NO ACTION ON UPDATE NO ACTION)NULL
+Tentativa de exclusão ou edição causa erro, dizendo que o objeto não foi encontrado.
 
-no entanto, apos outra tentativa, apareceu a menagem "bool(true)" e outro valor foi cadastrado apos voltar. Tentativa de exclusão ou edição causa erro, dizendo que o objeto não foi encontrado
-
-Qualquer item da lista que não fizer sentido pode me perguntar
