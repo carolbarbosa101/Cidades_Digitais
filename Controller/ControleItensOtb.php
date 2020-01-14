@@ -10,8 +10,8 @@ $cod_ibge = @$_POST['cod_ibge'];
 $cod_empenho = @$_POST['cod_empenho'];
 $cod_item = @$_POST['cod_item'];
 $cod_tipo_item = @$_POST['cod_tipo_item'];
-$valor = @$_POST['valor'];
-$quantidade = @$_POST['quantidade'];
+$valor = 0;
+$quantidade = 0;
 
 $novoItensOtb = new ClassItensOtb();
 $novoItensOtb->setCod_otb($cod_otb);

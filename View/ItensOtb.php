@@ -9,6 +9,7 @@
   require_once("../Controller/ControleEmpenhoSelect.php");
   require_once("../Controller/ControleItensSelect.php");
   require_once("../Controller/ControleTipoItemSelect.php");
+  require_once("../Controller/ControleQuantidadeOtbSelect.php");
   ?>
 
   <!-- Conteudo -->
@@ -114,6 +115,23 @@
 
             <!-- Input cod_lote -->
             <div class="form-row">
+            
+            <div class="form-group col-md-12">
+                <label for="recipient-ajuda" class="col-form-label">Ajuda:</label>
+                  <?php
+                    echo "<select name='ajuda' class='form-control' id='recipient-ajuda'>";
+                    foreach($array_selectOtbAjuda as $chave => $valor){
+                      $num_nf = $valor[0];
+                      $municipioIbge = $valor[1];
+                      $cod_empenho = $valor[2];
+                      $tipo = $valor[3];
+                      $quantidade = $valor[4];
+                    echo "<option>" . $num_nf. " |  ".$municipioIbge. " |  ".$cod_empenho. " |  ".$tipo. " |  ".$quantidade. " Disponível" ."</option>";
+                    }
+                    echo "</select>";
+
+                  ?>
+              </div>
 
             <div class="form-group col-md-12">
                 <label for="recipient-cod_otb" class="col-form-label">Ordem de Transferência Bancária:</label>
@@ -128,6 +146,8 @@
                       ?>
                     </select>
               </div>
+
+              
 
               <div class="form-group col-md-12">
                 <label for="recipient-num_nf" class="col-form-label">Nota Fiscal:</label>
