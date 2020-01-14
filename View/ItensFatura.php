@@ -7,7 +7,9 @@
   require_once("../Controller/ControleEmpenhoSelect.php");
   require_once("../Controller/ControleItensSelect.php");
   require_once("../Controller/ControleTipoItemSelect.php");
-  require_once("../Controller/ControleAjudaSelect.php");
+  require_once("../Controller/ControleQuantidadeFaturaSelect.php");
+  // var_dump($array_selectAjuda);
+  // die();
   ?>
 
   <!-- Conteudo -->
@@ -112,18 +114,36 @@
             <!-- Input cod_lote -->
             <div class="form-row">
 
-            <div class="form-group col-md-12">
+            <!-- <div class="form-group col-md-12">
                 <label for="recipient-ajuda" class="col-form-label">Ajuda:</label>
                       <select name="ajuda" class="form-control" id="recipient-ajuda">
                       <option value="">Selecionar Ajuda</option>
                       <?php 
                         foreach($array_selectAjuda as $chave => $valor){
+                          
                         ?>
-                        <option value="<?= $valor['ajuda'] ?>"><?= $valor['ajuda'] ?></option>
+                        <option value="<?= $valor['ajuda'] ?>"></option>
                         <?php 
                         }
+                        
                       ?>
+                      
                     </select>
+              </div> -->
+              
+            <div class="form-group col-md-12">
+                <label for="recipient-ajuda" class="col-form-label">Ajuda:</label>
+                  <?php
+                    echo "<select name='ajuda' class='form-control' id='recipient-ajuda'>";
+                    foreach($array_selectFaturaAjuda as $chave => $valor){
+                      $empenho = $valor[0];
+                      $tipo = $valor[1];
+                      $quantidade = $valor[2];
+                    echo "<option>" . $empenho. " | ".$tipo. " | ".$quantidade. " Disponível" ."</option>";
+                    }
+                    echo "</select>";
+
+                  ?>
               </div>
 
               <div class="form-group col-md-12">

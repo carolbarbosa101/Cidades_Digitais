@@ -1,0 +1,28 @@
+Cidades Digitais- não consigo cadastrar, editar, excluir(sem feedback)				--> V
+Entidades - não edita						       				--> V
+OTB- não cadastra						      				--> V
+Itens Fatura- não cadastra					       				--> V
+Itens Fatura- não edita						       				--> V
+Itens Fatura- não exclui					       				--> V
+itens_fatura- concatenar ibge - nome municipio e não trazer repetidos (distinct)		--> (Concatena mas não funciona o distinct)
+itens_fatura- o campo "valor" não irá aparecer no cadastro pois depende do cod_empenho		--> V
+itens_fatura- o campo "quantidade" não irá aparecer no cadastro pois depende do cod_empenho	--> V
+Itens Empenho- Tirar duvida					       				--> V
+Lote- Data reajuste não cadastra e edita certo							--> V
+Lote- Não exclui 										--> V
+Municipio - População não cadastrada e editada			      				--> V
+Alterar o concat de itens empenho, usando o exemplo do cd itens       				--> V
+Fatura OTB- não cadastra(É vinculado à OTB)			       				--> V
+Criar o excluir de Fatura Otb				               				--> V
+Criar o excluir de Itens Fatura					       				--> V	
+Ajustar o Itens Empenho		       				       				--> V	
+corrigir valors float/decimal das tabelas itens e reajuste campo valor e percentual		--> V
+itens_fatura editar - select do valor e colocar na label				   	--> V
+itens_fatura editar - select quantidade disponivel e colocar na label				--> V
+cadastrar itens_otb - o campo "valor" não irá aparecer no cadastro pois depende do num_nf	--> V
+cadastrar itens_otb - o campo "quantidade" não irá aparecer no cadastro pois depende do num_nf	--> V
+editar itens_otb - select do valor e colocar na label						--> V
+editar itens_otb - select quantidade disponivel e colocar na label				--> V
+
+
+

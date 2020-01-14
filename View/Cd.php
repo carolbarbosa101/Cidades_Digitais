@@ -74,7 +74,7 @@
                                 class="btn btn-warning mr-1">
                                 Editar
                               </a>
-                              <button onclick="apagarDados('<?php echo URL ?>Controller/ControleApagarCd.php?cod_ibge=<?php echo $value['cod_ibge'] ?>')" class="btn btn-danger">Excluir</button> 
+                              <!-- <button onclick="apagarDados('<?php echo URL ?>Controller/ControleApagarCd.php?cod_ibge=<?php echo $value['cod_ibge'] ?>')" class="btn btn-danger">Excluir</button>  -->
                             </span>
                           </td>
                         </tr>

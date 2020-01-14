@@ -115,7 +115,7 @@ class ClassFaturaDAO {
     public function todosFatura(){
         try {
             $pdo = Conexao::getInstance();
-            $sql = "SELECT DISTINCT CONCAT (municipio.nome_municipio ,' - ', fatura.cod_ibge) AS itens, fatura.num_nf, fatura.cod_ibge, fatura.dt_nf
+            $sql = "SELECT CONCAT (municipio.nome_municipio ,' - ', fatura.cod_ibge) AS itens, fatura.num_nf, fatura.cod_ibge, fatura.dt_nf
             FROM fatura
             INNER JOIN municipio ON fatura.cod_ibge = municipio.cod_ibge
             ORDER BY num_nf ";

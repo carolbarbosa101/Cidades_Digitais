@@ -57,16 +57,19 @@ class ClassLoteDAO {
 
     // apagar registro pelo id
     public function apagarLote(ClassLote $apagarLote) {
+        // var_dump($apagarLote);
+        //     die();
         try {
             $pdo = Conexao::getInstance();
-            $sql = "DELETE FROM lote WHERE cod_lote = ?";
+            $sql = "DELETE FROM lote_itens WHERE cod_lote = ?;
+            DELETE FROM lote WHERE cod_lote = ?;";
             $stmt = $pdo->prepare($sql);
             $stmt->bindValue(1, $apagarLote->getCod_lote());
+            $stmt->bindValue(2, $apagarLote->getCod_lote());
 
            
             $resultados = $stmt->execute();
-           // var_dump($apagarLote);
-            //die();
+            
             return TRUE;
 
         } catch (PDOException $exc) {
