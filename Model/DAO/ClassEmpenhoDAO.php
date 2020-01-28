@@ -91,7 +91,7 @@ class ClassEmpenhoDAO {
         try {
             $pdo = Conexao::getInstance();
             $sql = "SELECT CONCAT(empenho.cod_empenho,  ' - ' , empenho.data) AS empenho,
-            empenho.cod_empenho,empenho.data
+            empenho.cod_empenho,empenho.data,empenho.id_empenho
             FROM empenho 
             ORDER BY empenho ASC";
             $stmt = $pdo->prepare($sql);

@@ -48,7 +48,7 @@
                   <!-- Chave primaria para saber qual registro editar do banco | input hidden para que o usuario não visualize -->
                   <input type="hidden" name="num_nf" value="<?php echo $num_nf ?>" />
                   <input type="hidden" name="cod_ibge" value="<?php echo $cod_ibge ?>" />
-                  <input type="hidden" name="cod_empenho" value="<?php echo $cod_empenho ?>" />
+                  <input type="hidden" name="id_empenho" value="<?php echo $id_empenho ?>" />
                   <input type="hidden" name="cod_item" value="<?php echo $cod_item ?>" />
                   <input type="hidden" name="cod_tipo_item" value="<?php echo $cod_tipo_item ?>" />
                   

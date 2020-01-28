@@ -6,7 +6,8 @@ require_once '../Model/DAO/ClassItensEmpenhoDAO.php';
 $buscarItensEmpenho = new ClassItensEmpenhoDAO();
 $selectItensEmpenho = $buscarItensEmpenho->listarItensEmpenho();
 foreach($selectItensEmpenho as $key => $valor) {
-    $cod_empenhoE[] = $valor['cod_empenho'];
+    $id_empenhoE[] = $valor['id_empenho'];
+    $cod_empenho[] = $valor['empenhoLista'];
     $cod_itemE[] = (int)$valor['cod_item'];
     $cod_tipo_itemE[] = (int)$valor['cod_tipo_item'];
     $quantidadeEmpenho[] = (int)$valor['quantidade'];
@@ -17,12 +18,12 @@ foreach($selectItensEmpenho as $key => $valor) {
 $buscarItensFatura = new ClassItensFaturaDAO();
 $selectItensFatura = $buscarItensFatura->listarItensFatura();
 foreach($selectItensFatura as $key => $valor) {
-    $cod_empenhoF[] = $valor['cod_empenho'];
+    $id_empenhoF[] = $valor['id_empenho'];
     $cod_itemF[] = (int)$valor['cod_item'];
     $cod_tipo_itemF[] = (int)$valor['cod_tipo_item'];
     $quantidadeFatura[] = (int)$valor['quantidade'];
 }
-// var_dump($cod_empenhoE, $cod_itemE, $cod_tipo_itemE, $quantidadeEmpenho, $itemLista);
+// var_dump($id_empenhoE, $cod_itemE, $cod_tipo_itemE, $quantidadeEmpenho, $itemLista);
 // die();
 
 $quantidadeSomaFatura;
@@ -33,13 +34,13 @@ $quantidadeSomaFatura=0;
 
 
     for($y=0; $y<count($selectItensFatura); $y++){
-        if($cod_empenhoE[$i] == $cod_empenhoF[$y] && $cod_itemE[$i] == $cod_itemF[$y] && $cod_tipo_itemE[$i] == $cod_tipo_itemF[$y]){
+        if($id_empenhoE[$i] == $id_empenhoF[$y] && $cod_itemE[$i] == $cod_itemF[$y] && $cod_tipo_itemE[$i] == $cod_tipo_itemF[$y]){
             $quantidadeSomaFatura = $quantidadeSomaFatura + $quantidadeFatura[$y];
         }
     }
     $quantidadeAjuda = $quantidadeEmpenho[$i] - $quantidadeSomaFatura;
     if($quantidadeAjuda >0){
-        $selectAjuda[$contador]=array($cod_empenhoE[$i], $itemLista[$i], $quantidadeAjuda);
+        $selectAjuda[$contador]=array($cod_empenho[$i], $itemLista[$i], $quantidadeAjuda);
         $contador++;
     }
     $quantidadeAjuda=0;

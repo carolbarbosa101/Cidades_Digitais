@@ -68,7 +68,7 @@
                           <td><?php echo $value['quantidade'] ?></td>
                           <td> 
                             <span class="d-flex">
-                              <a href="<?php echo URL ?>View/ItensEmpenhoEditar.php?cod_empenho=<?php echo $value['cod_empenho'] ?>&cod_item=<?php echo $value['cod_item'] ?>&cod_tipo_item=<?php echo $value['cod_tipo_item'] ?>&cod_previsao_empenho=<?php echo $value['cod_previsao_empenho'] ?>" class="btn btn-warning mr-1">
+                              <a href="<?php echo URL ?>View/ItensEmpenhoEditar.php?id_empenho=<?php echo $value['id_empenho'] ?>&cod_item=<?php echo $value['cod_item'] ?>&cod_tipo_item=<?php echo $value['cod_tipo_item'] ?>&cod_previsao_empenho=<?php echo $value['cod_previsao_empenho'] ?>" class="btn btn-warning mr-1">
                               Editar
                             </a> 
                             

@@ -74,9 +74,9 @@
                         <td><?php echo $value['quantidade'] ?></td>
                         <td> 
                           <span class="d-flex">
-                          <a href="<?php echo URL ?>View/ItensFaturaEditar.php?num_nf=<?php echo $value['num_nf'] ?>&cod_ibge=<?php echo $value['cod_ibge'] ?>&cod_empenho=<?php echo $value['cod_empenho'] ?>&cod_item=<?php echo $value['cod_item'] ?>&cod_tipo_item=<?php echo $value['cod_tipo_item'] ?>" class="btn btn-warning mr-1"> Editar
+                          <a href="<?php echo URL ?>View/ItensFaturaEditar.php?num_nf=<?php echo $value['num_nf'] ?>&cod_ibge=<?php echo $value['cod_ibge'] ?>&id_empenho=<?php echo $value['id_empenho'] ?>&cod_item=<?php echo $value['cod_item'] ?>&cod_tipo_item=<?php echo $value['cod_tipo_item'] ?>" class="btn btn-warning mr-1"> Editar
                           </a>
-                          <button onclick="apagarDados('<?php echo URL ?>Controller/ControleApagarItensFatura.php?num_nf=<?php echo $value['num_nf'] ?>&cod_ibge=<?php echo $value['cod_ibge'] ?>&cod_empenho=<?php echo $value['cod_empenho'] ?>&cod_item=<?php echo $value['cod_item'] ?>&cod_tipo_item=<?php echo $value['cod_tipo_item'] ?>')" class="btn btn-danger">Excluir</button> 
+                          <button onclick="apagarDados('<?php echo URL ?>Controller/ControleApagarItensFatura.php?num_nf=<?php echo $value['num_nf'] ?>&cod_ibge=<?php echo $value['cod_ibge'] ?>&id_empenho=<?php echo $value['id_empenho'] ?>&cod_item=<?php echo $value['cod_item'] ?>&cod_tipo_item=<?php echo $value['cod_tipo_item'] ?>')" class="btn btn-danger">Excluir</button> 
                           </span>
                         </td>
 
@@ -177,13 +177,13 @@
 
            
               <div class="form-group col-md-12">
-                <label for="recipient-cod_empenho" class="col-form-label">Cód. Empenho:</label>
-                      <select name="cod_empenho" class="form-control" id="recipient-cod_empenho">
+                <label for="recipient-id_empenho" class="col-form-label">Cód. Empenho:</label>
+                      <select name="id_empenho" class="form-control" id="recipient-id_empenho">
                       <option value="">Selecionar Código do Empenho</option>
                       <?php 
                         foreach($array_selectEmpenho as $chave => $valor){
                         ?>
-                        <option value="<?= $valor['cod_empenho'] ?>"><?= $valor['cod_empenho'] ?></option>
+                        <option value="<?= $valor['id_empenho'] ?>"><?= $valor['cod_empenho'] ?></option>
                         <?php 
                         }
                       ?>

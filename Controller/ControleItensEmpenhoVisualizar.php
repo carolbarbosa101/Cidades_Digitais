@@ -3,14 +3,14 @@
 require_once '../Model/ClassItensEmpenho.php';
 require_once '../Model/DAO/ClassItensEmpenhoDAO.php';
 
-$cod_empenho = @$_GET['cod_empenho'];
+$id_empenho = @$_GET['id_empenho'];
 $cod_item = @$_GET['cod_item'];
 $cod_tipo_item = @$_GET['cod_tipo_item'];
 $cod_previsao_empenho = @$_GET['cod_previsao_empenho'];
 
 $visualizarItensEmpenho = new ClassItensEmpenho();
 
-$visualizarItensEmpenho->setCod_empenho($cod_empenho);
+$visualizarItensEmpenho->setCod_empenho($id_empenho);
 $visualizarItensEmpenho->setCod_item($cod_item);
 $visualizarItensEmpenho->setCod_tipo_item($cod_tipo_item);
 $visualizarItensEmpenho->setCod_previsao_empenho($cod_previsao_empenho);
