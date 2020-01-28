@@ -4,7 +4,7 @@ session_start();
 $cod_otb = @$_GET["cod_otb"];
 $num_nf = @$_GET["num_nf"];
 $cod_ibge = @$_GET["cod_ibge"];
-$cod_empenho = @$_GET["cod_empenho"]; 
+$id_empenho = @$_GET["id_empenho"]; 
 $cod_item = @$_GET['cod_item'];
 $cod_tipo_item = @$_GET['cod_tipo_item'];
 
@@ -19,7 +19,7 @@ $itens_otb = new ClassItensOtb();
 $itens_otb->setCod_otb($cod_otb);
 $itens_otb->setNum_nf($num_nf);
 $itens_otb->setCod_ibge($cod_ibge);
-$itens_otb->setCod_empenho($cod_empenho);
+$itens_otb->setId_empenho($id_empenho);
 $itens_otb->setCod_item($cod_item);
 $itens_otb->setCod_tipo_item($cod_tipo_item);
 

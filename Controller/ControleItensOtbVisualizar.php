@@ -6,7 +6,7 @@ require_once '../Model/DAO/ClassItensOtbDAO.php';
 $cod_otb = @$_GET['cod_otb'];
 $num_nf = @$_GET['num_nf'];
 $cod_ibge = @$_GET['cod_ibge'];
-$cod_empenho = @$_GET['cod_empenho'];
+$id_empenho = @$_GET['id_empenho'];
 $cod_item = @$_GET['cod_item'];
 $cod_tipo_item = @$_GET['cod_tipo_item'];
 
@@ -14,7 +14,7 @@ $visualizarItensOtb = new ClassItensOtb();
 $visualizarItensOtb->setCod_otb($cod_otb);
 $visualizarItensOtb->setNum_nf($num_nf);
 $visualizarItensOtb->setCod_ibge($cod_ibge);
-$visualizarItensOtb->setCod_empenho($cod_empenho);
+$visualizarItensOtb->setId_empenho($id_empenho);
 $visualizarItensOtb->setCod_item($cod_item);
 $visualizarItensOtb->setCod_tipo_item($cod_tipo_item);
 

@@ -3,7 +3,7 @@ session_start();
 
 $num_nf = @$_GET["num_nf"];
 $cod_ibge = @$_GET["cod_ibge"];
-$cod_empenho = @$_GET["cod_empenho"]; 
+$id_empenho = @$_GET["id_empenho"]; 
 $cod_item = @$_GET['cod_item'];
 $cod_tipo_item = @$_GET['cod_tipo_item'];
 
@@ -17,7 +17,7 @@ $apagarItensFatura = new ClassItensFaturaDAO(); // instanciando um objeto
 $itens_fatura = new ClassItensFatura();
 $itens_fatura->setNum_nf($num_nf);
 $itens_fatura->setCod_ibge($cod_ibge);
-$itens_fatura->setCod_empenho($cod_empenho);
+$itens_fatura->setId_empenho($id_empenho);
 $itens_fatura->setCod_item($cod_item);
 $itens_fatura->setCod_tipo_item($cod_tipo_item);
 

@@ -58,7 +58,7 @@ class ClassItensEmpenhoDAO {
         try {
             $pdo = Conexao::getInstance();
             $sql = "UPDATE itens_empenho SET valor = ?, quantidade = ? 
-            WHERE cod_empenho = ? AND cod_item = ? AND cod_tipo_item = ? AND cod_previsao_empenho = ?";
+            WHERE id_empenho = ? AND cod_item = ? AND cod_tipo_item = ? AND cod_previsao_empenho = ?";
             $stmt = $pdo->prepare($sql);
           
             $stmt->bindValue(1, $editarItensEmpenho->getValor());
@@ -82,13 +82,14 @@ class ClassItensEmpenhoDAO {
     public function listarItensEmpenho(){
         try {
             $pdo = Conexao::getInstance();
-            $sql = "SELECT itens_empenho.cod_empenho AS empenhoLista, 
+            $sql = "SELECT empenho.cod_empenho AS empenhoLista, 
             CONCAT(itens.cod_tipo_item, '.', itens.cod_item, ' - ', itens.descricao) AS itemLista,
             itens_empenho.cod_previsao_empenho AS previsaoLista,
-            itens_empenho.cod_empenho, itens.cod_item, itens.cod_tipo_item, itens_empenho.cod_previsao_empenho, itens_empenho.valor, itens_empenho.quantidade
+            itens_empenho.id_empenho, itens.cod_item, itens.cod_tipo_item, itens_empenho.cod_previsao_empenho, itens_empenho.valor, itens_empenho.quantidade
             FROM itens_empenho
             INNER JOIN itens ON itens_empenho.cod_item = itens.cod_item AND itens_empenho.cod_tipo_item = itens.cod_tipo_item 
-            ORDER BY itens_empenho.cod_empenho, itens_empenho.cod_tipo_item, itens_empenho.cod_item ASC";
+            INNER JOIN empenho ON itens_empenho.id_empenho = empenho.id_empenho
+            ORDER BY itens_empenho.id_empenho, itens_empenho.cod_tipo_item, itens_empenho.cod_item ASC";
 
             $stmt = $pdo->prepare($sql);
             $stmt->execute();
@@ -137,10 +138,11 @@ class ClassItensEmpenhoDAO {
                     where itens_empenho.cod_tipo_item = ? AND itens_empenho.cod_item = ? AND itens_empenho.cod_previsao_empenho = ?
                     ) AS quant_calc,
                     CONCAT (itens_empenho.cod_tipo_item, '.', itens_empenho.cod_item, ' - ', itens.descricao) AS descricaoItem, 
-                    itens_empenho.*
+                    itens_empenho.*, empenho.cod_empenho
                     FROM itens_empenho 
                     INNER JOIN itens ON itens_empenho.cod_item = itens.cod_item AND itens_empenho.cod_tipo_item = itens.cod_tipo_item
-                    WHERE itens_empenho.cod_empenho = ? AND itens_empenho.cod_tipo_item = ? AND itens_empenho.cod_item = ? AND itens_empenho.cod_previsao_empenho = ?
+                    INNER JOIN empenho ON itens_empenho.id_empenho = empenho.id_empenho
+                    WHERE itens_empenho.id_empenho = ? AND itens_empenho.cod_tipo_item = ? AND itens_empenho.cod_item = ? AND itens_empenho.cod_previsao_empenho = ?
                 ;
                 ";
                     $stmt = $pdo->prepare($sql);

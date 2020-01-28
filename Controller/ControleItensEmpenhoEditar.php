@@ -4,7 +4,7 @@ require_once '../Model/ClassItensEmpenho.php';
 require_once '../Model/DAO/ClassItensEmpenhoDAO.php';
 
 
-$cod_empenho = @$_POST['cod_empenho'];
+$id_empenho = @$_POST['id_empenho'];
 $cod_item = @$_POST['cod_item'];
 $cod_tipo_item = @$_POST['cod_tipo_item'];
 $cod_previsao_empenho = @$_POST['cod_previsao_empenho'];
@@ -13,7 +13,7 @@ $quantidade = @$_POST['quantidade'];
 
 
 $novoItensEmpenho = new ClassItensEmpenho ();
-$novoItensEmpenho->setCod_empenho($cod_empenho);
+$novoItensEmpenho->setCod_empenho($id_empenho);
 $novoItensEmpenho->setCod_item($cod_item);
 $novoItensEmpenho->setCod_tipo_item($cod_tipo_item);
 $novoItensEmpenho->setCod_previsao_empenho($cod_previsao_empenho);

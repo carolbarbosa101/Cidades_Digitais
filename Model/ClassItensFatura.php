@@ -1,7 +1,7 @@
 <?php
 
 class ClassItensFatura {
-    private $num_nf, $cod_ibge, $cod_empenho, $cod_item;
+    private $num_nf, $cod_ibge, $id_empenho, $cod_item;
     private $cod_tipo_item, $valor, $quantidade;
 
 
@@ -11,8 +11,8 @@ class ClassItensFatura {
     function getCod_ibge() {
         return $this->cod_ibge;
     }
-    function getCod_empenho() {
-        return $this->cod_empenho;
+    function getId_empenho() {
+        return $this->id_empenho;
     }
     function getCod_item() {
         return $this->cod_item;
@@ -36,8 +36,8 @@ class ClassItensFatura {
         $this->cod_ibge = $cod_ibge;
     }
 
-    function setCod_empenho($cod_empenho) {
-        $this->cod_empenho = $cod_empenho;
+    function setId_empenho($id_empenho) {
+        $this->id_empenho = $id_empenho;
     }
     
     function setCod_item($cod_item) {
