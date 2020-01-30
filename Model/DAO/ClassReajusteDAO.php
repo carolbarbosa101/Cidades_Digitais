@@ -35,6 +35,45 @@ class ClassReajusteDAO {
         }
     }
     
+    public function contador($ano_referencia){
+        try {
+            $pdo = Conexao::getInstance();
+
+            $sql = "SELECT Count(ano_ref) as contador
+            FROM reajuste 
+            WHERE ano_ref < $ano_referencia";
+
+            $stmt = $pdo->prepare($sql);
+            //AND cod_lote = ? 
+           // $stmt->bindValue(2, $visualizarReajuste->getCod_lote());
+
+            $stmt->execute();
+            return $stmt->fetchAll(); // fetchAll() retorna um array contendo varios dados. 
+        } catch (PDOException $ex) {
+            return $ex->getMessage();
+        }
+    }
+
+    public function listarPercentual($ano_referencia, $cod_lote){
+        try {
+            $pdo = Conexao::getInstance();
+
+            $sql = "SELECT percentual 
+            FROM reajuste 
+            WHERE ano_ref < $ano_referencia AND cod_lote = $cod_lote";
+
+            $stmt = $pdo->prepare($sql);
+            //AND cod_lote = ? 
+           // $stmt->bindValue(2, $visualizarReajuste->getCod_lote());
+
+            $stmt->execute();
+            return $stmt->fetchAll(); // fetchAll() retorna um array contendo varios dados. 
+        } catch (PDOException $ex) {
+            return $ex->getMessage();
+        }
+    }
+
+
     public function listarReajuste(){
         try {
             $pdo = Conexao::getInstance();

@@ -41,10 +41,8 @@ class ClassEmpenhoDAO {
             $pdo = Conexao::getInstance();
             
 
-            $sql = "SELECT		empenho.cod_empenho, CONCAT(previsao_empenho.cod_previsao_empenho, ' - ', natureza_despesa.descricao, ' - ', previsao_empenho.data) as previsao, empenho.data
+            $sql = "SELECT		empenho.cod_empenho, empenho.cod_previsao_empenho as previsao, empenho.data
             FROM empenho 
-            INNER JOIN previsao_empenho ON empenho.cod_previsao_empenho = previsao_empenho.cod_previsao_empenho
-            INNER JOIN natureza_despesa ON previsao_empenho.cod_natureza_despesa = natureza_despesa.cod_natureza_despesa
             ORDER BY empenho.cod_empenho ASC";
             $stmt = $pdo->prepare($sql);
             $stmt->execute();
@@ -93,7 +91,7 @@ class ClassEmpenhoDAO {
         try {
             $pdo = Conexao::getInstance();
             $sql = "SELECT CONCAT(empenho.cod_empenho,  ' - ' , empenho.data) AS empenho,
-            empenho.cod_empenho,empenho.data
+            empenho.cod_empenho,empenho.data,empenho.id_empenho
             FROM empenho 
             ORDER BY empenho ASC";
             $stmt = $pdo->prepare($sql);

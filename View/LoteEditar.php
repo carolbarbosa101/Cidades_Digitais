@@ -111,12 +111,12 @@
                   <div class="form-group col-md-12">
                     <label for="recipient-dt_reajuste" class="col-form-label">Data Reajuste:</label>
                     <input 
-                    value="<?php echo date('d/m/y',strtotime($dt_reajuste)); ?>"
+                    value="<?php $dt_reajuste ?>"
                     name="dt_reajuste"
-                      placeholder=""
+                      placeholder="mm/dd"
                       type="text" 
                       class="form-control"
-                      maxlength="" 
+                      maxlength="8" 
                       id="recipient-dt_reajuste">
                   </div>
 

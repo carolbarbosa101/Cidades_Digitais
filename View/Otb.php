@@ -57,7 +57,7 @@
                         ?>
                         <tr>
                           <td><?php echo $value['cod_otb'] ?></td>
-                          <td><?php echo $value['dt_pgto'] ?></td>
+                          <td><?php echo date('d/m/Y', strtotime($value['dt_pgto']))?> </td>
                           <td> 
                             <span class="d-flex">
                             <a href="<?php echo URL ?>View/OtbEditar.php?cod_otb=<?php echo $value['cod_otb'] ?>" 
@@ -102,7 +102,17 @@
                  
 
                 <div class="form-group col-md-12">
-                   
+
+                  <div class="form-group col-md-12">
+                    <label for="recipient-cod_otb" class="col-form-label">Código OTB:</label>
+                    <input 
+                      name="cod_otb"
+                      placeholder=""
+                      type="number" 
+                      class="form-control"
+                      maxlength=""
+                      id="recipient-cod_otb">
+                  </div>
 
                   <div class="form-group col-md-12">
                     <label for="recipient-dt_pgto" class="col-form-label">Data do Pagamento:</label>

@@ -1,11 +1,12 @@
 <?php
 
 class ClassEmpenho {
-    private $cod_empenho, $cod_previsao_empenho, $data, $contador;
+    private $id_empenho, $cod_empenho, $cod_previsao_empenho, $data, $contador;
 
 
-
-
+    function getId_empenho() {
+        return $this->id_empenho;
+    } 
     function getCod_empenho() {
         return $this->cod_empenho;
     }       
@@ -19,7 +20,9 @@ class ClassEmpenho {
         return $this->contador;
     }
     
-    
+    function setId_empenho($id_empenho) {
+        $this->id_empenho = $id_empenho;
+    }
 	
     function setCod_empenho($cod_empenho) {
         $this->cod_empenho = $cod_empenho;

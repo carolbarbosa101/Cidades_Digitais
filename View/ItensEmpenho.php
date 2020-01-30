@@ -25,10 +25,7 @@
             </span>
           </div>
           <div class="col-md-6 text-right">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".cadastrar-itens_empenho-modal-lg">
-              <i class="far fa-plus-square"></i>
-              Cadastrar
-            </button>
+            
           </div>
         </div>
       </div>
@@ -49,10 +46,9 @@
                 <table class="table">
                   <thead>
                     <tr>
-                        <th scope="col">Código de Empenho</th>
-                        <th scope="col">Código de Item</th>
-                        <th scope="col">Código Tipo de Item</th>
-                        <th scope="col">Código Previsão de Empenho</th>
+                        <th scope="col">Empenho</th>
+                        <th scope="col">Item</th>
+                        <th scope="col">Previsão de Empenho</th>
                         <th scope="col">Valor</th>
                         <th scope="col">Quantidade</th>
                     </tr>
@@ -67,18 +63,15 @@
 
                           <td><?php echo $value['empenhoLista'] ?></td>
                           <td><?php echo $value['itemLista'] ?></td>
-                          <td><?php echo $value['tipo_itemLista'] ?></td>
                           <td><?php echo $value['previsaoLista'] ?></td>
                           <td><?php echo $value['valor'] ?></td>
                           <td><?php echo $value['quantidade'] ?></td>
                           <td> 
                             <span class="d-flex">
-                              <a href="<?php echo URL ?>View/ItensEmpenhoEditar.php?cod_empenho=<?php echo $value['cod_empenho'] ?>&cod_item=<?php echo $value['cod_item'] ?>&cod_tipo_item=<?php echo $value['cod_tipo_item'] ?>" class="btn btn-warning mr-1">
+                              <a href="<?php echo URL ?>View/ItensEmpenhoEditar.php?id_empenho=<?php echo $value['id_empenho'] ?>&cod_item=<?php echo $value['cod_item'] ?>&cod_tipo_item=<?php echo $value['cod_tipo_item'] ?>&cod_previsao_empenho=<?php echo $value['cod_previsao_empenho'] ?>" class="btn btn-warning mr-1">
                               Editar
                             </a> 
-                            <button onclick="apagarDados('<?php echo URL ?>Controller/ControleApagarItensEmpenho.php?cod_empenho=<?php echo $value['cod_empenho'] ?>')" class="btn btn-danger">
-                              Excluir
-                            </button> 
+                            
                             </span>
                           </td>
 
@@ -187,7 +180,7 @@
                     <input 
                       name="quantidade"
                       placeholder=""
-                      type="int" 
+                      type="number" 
                       class="form-control"
                       maxlength="" 
                       id="recipient-quantidade">

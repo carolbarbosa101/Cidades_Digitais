@@ -6,29 +6,32 @@ require_once '../Model/DAO/ClassItensFaturaDAO.php';
 
 $num_nf = @$_POST['num_nf'];
 $cod_ibge = @$_POST['cod_ibge'];
-$cod_empenho = @$_POST['cod_empenho'];
+$id_empenho = @$_POST['id_empenho'];
 $cod_item = @$_POST['cod_item'];
 $cod_tipo_item = @$_POST['cod_tipo_item'];
-$valor = @$_POST['valor'];
-$quantidade = @$_POST['quantidade'];
+$valor = 0;
+$quantidade = 0;
+
+//var_dump($cod_item);
+//die();
 
 
-//Tem problema se mudar o "novo" pra "nova"?
+$novoItensFatura = new ClassItensFatura ();
+$novoItensFatura->setNum_nf($num_nf);
+$novoItensFatura->setCod_ibge($cod_ibge);
+$novoItensFatura->setId_empenho($id_empenho);
+$novoItensFatura->setCod_item($cod_item);
+$novoItensFatura->setCod_tipo_item($cod_tipo_item);
+$novoItensFatura->setValor($valor);
+$novoItensFatura->setQuantidade ($quantidade);
 
-$novaItensFatura = new ClassItensFatura ();
-$novaItensFatura->setNum_nf($num_nf);
-$novaItensFatura->setCod_ibge($cod_ibge);
-$novaItensFatura->setCod_empenho($cod_empenho);
-$novaItensFatura->setCod_item($cod_item);
-$novaItensFatura->setCod_tipo_item($cod_tipo_item);
-$novaItensFatura->setValor($valor);
-$novaItensFatura->setQuantidade ($quantidade);
+//var_dump($novoItensFatura);
+//die();
 
 $classItensFaturaDAO = new ClassItensFaturaDAO();
-$itensfatura = $classItensFaturaDAO->cadastrar($novaItensFatura);
+$itensfatura = $classItensFaturaDAO->cadastrar($novoItensFatura);
 
-var_dump($itensfatura);
-die();
+
 
 if($itensfatura == TRUE){
     $_SESSION['msg'] = '

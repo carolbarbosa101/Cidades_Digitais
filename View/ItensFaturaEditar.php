@@ -3,25 +3,25 @@
     include_once("_cabecalho.php");
 
     // Buscar todos os cadastros no banco
-    require_once("../Controller/ControleLoteVisualizar.php");
-    require_once("../Controller/ControleEntidadeSelect.php");
-    // $array_dados
+    require_once("../Controller/ControleItensFaturaVisualizar.php");
+    require_once("../Controller/ControleCdSelect.php");
+    
     ?>
     
+    
     <!-- Conteudo -->
-    <main id="main_conteudo">
-
+    <main id="main">
+      <div class="container">
         <div class="row mb-5">
           <div id="mainHeader" class="col-md-6 d-flex align-items-center">
             <span id="mainHeaderIcon">
             <i class="fas fa-globe-asia"></i>
             </span>
             <span>
-              <h3 class="mb-0">Editar Lote</h3>
-             
+              <h3 class="mb-0">Editar Itens Fatura</h3>
             </span>
           </div>
- 
+        </div>
         </div>
 
         <div class="container">
@@ -41,90 +41,84 @@
           ?>
 
           <!-- FORMULARIO -->
-          <form action="../Controller/ControleLoteEditar.php" method="post">
+          <form action="../Controller/ControleItensFaturaEditar.php" method="post">
 
-          <div class="form-row">
+            <div class="modal-body">
 
                   <!-- Chave primaria para saber qual registro editar do banco | input hidden para que o usuario não visualize -->
-                  <input name="cod_lote" type="hidden" value="<?php echo $cod_lote ?>"/>
-                 
-                 
+                  <input type="hidden" name="num_nf" value="<?php echo $num_nf ?>" />
+                  <input type="hidden" name="cod_ibge" value="<?php echo $cod_ibge ?>" />
+                  <input type="hidden" name="id_empenho" value="<?php echo $id_empenho ?>" />
+                  <input type="hidden" name="cod_item" value="<?php echo $cod_item ?>" />
+                  <input type="hidden" name="cod_tipo_item" value="<?php echo $cod_tipo_item ?>" />
+                  
+                  <div class="form-row">
                   <div class="form-group col-md-4">
-                    <label for="recipient-cod_lote" class="col-form-label">Cód. Lote:</label>
+                    <label for="recipient-num_nf" class="col-form-label">Nota Fiscal:</label>
                     <input disabled 
-                      value="<?php echo $cod_lote ?>"
+                      value="<?php echo $num_nf ?>"
                       type="text" 
                       class="form-control"
-                      id="recipient-cod_lote">
+                      id="recipient-num_nf">
                   </div>
 
                   <div class="form-group col-md-4">
-                    <label for="recipient-cnpj" class="col-form-label">Entidade:</label>
-                    <input 
-                      value="<?php echo $cnpj ?>"
-                      name="cnpj"
-                      placeholder=""
+                    <label for="recipient-municipioIbge" class="col-form-label">Município:</label>
+                    <input disabled 
+                      value="<?php echo $municipioIbge ?>"
                       type="text" 
                       class="form-control"
-                      maxlength="255" 
-                      id="recipient-cnpj">
+                      id="recipient-municipioIbge">
                   </div>
 
-                  <div class="form-group col-md-12">
-                    <label for="recipient-contrato" class="col-form-label">Contrato:</label>
-                    <input 
-                      value="<?php echo $contrato ?>"
-                      name="contrato"
-                      placeholder=""
+                  <div class="form-group col-md-4">
+                    <label for="recipient-cod_empenho" class="col-form-label">Cod Empenho:</label>
+                    <input disabled 
+                      value="<?php echo $cod_empenho ?>"
                       type="text" 
                       class="form-control"
-                      maxlength="10"
-                      id="recipient-contrato">
+                      id="recipient-cod_empenho">
                   </div>
 
-                  <div class="form-group col-md-12">
-                    <label for="recipient-dt_inicio_vig" class="col-form-label">Data inicio da Vigência:</label>
-                    <input 
-                      value="<?php echo $dt_inicio_vig ?>"
-                      name="dt_inicio_vig"
-                      placeholder=""
-                      type="date" 
-                      class="form-control"
-                      maxlength="" 
-                      id="recipient-dt_inicio_vig">
-                  </div>
-
-                  
-                  <div class="form-group col-md-12">
-                    <label for="recipient-dt_final_vig" class="col-form-label">Data final da Vigência:</label>
-                    <input 
-                      value="<?php echo $dt_final_vig ?>"
-                      name="dt_final_vig"
-                      placeholder=""
-                      type="date" 
-                      class="form-control"
-                      maxlength="" 
-                      id="recipient-dt_final_vig">
-                  </div>
-
-                  
-                  <div class="form-group col-md-12">
-                    <label for="recipient-dt_reajuste" class="col-form-label">Data Reajuste:</label>
-                    <input 
-                    value="<?php echo date('d-m',strtotime($dt_reajuste)); ?>"
-                      name="dt_reajuste"
-                      placeholder="dd-mm"
+                  <div class="form-group col-md-4">
+                    <label for="recipient-descricaoItem" class="col-form-label">Item:</label>
+                    <input disabled 
+                      value="<?php echo $descricaoItem ?>"
                       type="text" 
                       class="form-control"
-                      maxlength="10" 
-                      id="recipient-dt_reajuste">
-                  </div>                  
+                      id="recipient-descricaoItem">
+                  </div>
+
+                  <div class="form-group col-md-4">
+                    <label for="recipient-valor" class="col-form-label">Valor: (No empenho R$<?=$valor_empenho?> )</label>
+                    <input 
+                      value="<?php echo $valor ?>"
+                      name="valor"
+                      placeholder=""
+                      type="float" 
+                      class="form-control"
+                      maxlength="12" 
+                      id="recipient-valor">
+                  </div>
+
+                  <div class="form-group col-md-4">
+                    <label for="recipient-quantidade" class="col-form-label">Quantidade: (Disponível: <?=$quant_calc?> )</label>
+                    <input 
+                      value="<?php echo $quantidade ?>"
+                      name="quantidade"
+                      placeholder=""
+                      type="number" 
+                      class="form-control"
+                      maxlength=""
+                      id="recipient-quantidade">
+                  </div>
+
                 </div>
 
             </div>
 
             <div class="modal-footer">
-              <a href="<?php echo URL ?>View/Lote.php" class="btn btn-secondary">Cancelar</a>
+              <a href="<?php echo URL ?>View/ItensFatura.php" class="btn btn-secondary">Cancelar</a>
               <button type="submit" class="btn btn-primary">
                 Salvar
               </button>
@@ -145,84 +139,47 @@
 
 
     <!-- Modal de Cadastro -->
-    <div class="modal fade cadastrar-lote-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLoteModalLabel" aria-hidden="true">
+    <div class="modal fade cadastrar-cditens-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myItensFaturaModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           
           <div class="modal-header">
-            <h5 class="modal-title" id="myLoteModalLabel">
+            <h5 class="modal-title" id="myItensFaturaModalLabel">
               <i class="far fa-plus-square"></i>
-              Cadastrar Lote
+              Cadastrar Itens Fatura
             </h5>
           </div>
 
           <!-- FORMULARIO -->
-          <form action="../Controller/ControleLoteEditar.php" method="post">
+          <form action="../Controller/ControleItensFaturaEditar.php" method="post">
 
-           
-            <div class="form-row">
+            <div class="modal-body">
 
-            <div class="form-group col-md-12">
-                <label for="recipient-cnpj" class="col-form-label">Cnpj:</label>
-                      <select name="cnpj" class="form-control" id="recipient-cnpj">
-                      <option value="">Selecionar Entidade</option>
-                      <?php 
-                        foreach($array_selectEntidade as $chave => $valor){
-                        ?>
-                        <option value="<?= $valor['cnpj'] ?>"><?= $valor['nome'] ?></option>
-                        <?php 
-                        }
-                      ?>
-                    </select>
-              </div>
 
                   <div class="form-group col-md-12">
-                      <label for="recipient-contrato" class="col-form-label">Contrato:</label>
-                      <input
-                      name="contrato"
+                    <label for="recipient-valor" class="col-form-label">Valor:</label>
+                    <input 
+                      name="valor"
                       placeholder=""
-                      type="text"
+                      type="number" 
                       class="form-control"
-                      maxlength="10"
-                      id="recipient-contrato">
-                </div>
-                  
-                
-                <div class="form-group col-md-12">
-                    <label for="recipient-dt_inicio_vig" class="col-form-label">Data inicio da Vigência:</label>
-                    <input
-                    name="dt_inicio_vig"
-                    placeholder=""
-                    type="date"
-                    class="form-control"
-                    maxlength="2"
-                    id="recipient-dt_inicio_vig">
-                </div>
-                
-                <div class="form-group col-md-12">
-                      <label for="recipient-dt_final_vig" class="col-form-label">Data final da Vigência:</label>
-                      <input
-                      name="dt_final_vig"
+                      maxlength="" 
+                      id="recipient-valor">
+                  </div>
+
+                  <div class="form-group col-md-12">
+                    <label for="recipient-quantidade" class="col-form-label">Quantidade:</label>
+                    <input 
+                      name="quantidade"
                       placeholder=""
-                      type="date"
+                      type="number" 
                       class="form-control"
-                      maxlength="15"
-                      id="recipient-dt_final_vig">
+                      maxlength="" 
+                      id="recipient-quantidade">
+                  </div>
                 </div>
 
-                <div class="form-group col-md-12">
-                    <label for="recipient-dt_reajuste" class="col-form-label">Data Reajuste:</label>
-                    <input
-                    name="dt_reajuste"
-                    placeholder="dd-mm"
-                    type="text"
-                    class="form-control"
-                    maxlength="8"
-                    id="recipient-dt_reajuste">
-                </div>
-
-
-                </div>
+            </div>
 
             <div class="modal-footer">
               <button class="btn btn-secondary" data-dismiss="modal">Cancelar</button>

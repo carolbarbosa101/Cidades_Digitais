@@ -7,6 +7,9 @@
   require_once("../Controller/ControleEmpenhoSelect.php");
   require_once("../Controller/ControleItensSelect.php");
   require_once("../Controller/ControleTipoItemSelect.php");
+  require_once("../Controller/ControleQuantidadeFaturaSelect.php");
+  // var_dump($array_selectAjuda);
+  // die();
   ?>
 
   <!-- Conteudo -->
@@ -48,10 +51,9 @@
                 <thead>
                   <tr>
                     <th scope="col">Nota Fiscal</th>
-                    <th scope="col">Cód. IBGE</th>
+                    <th scope="col">Municipio - IBGE</th>
                     <th scope="col">Cód. Empenho</th>
-                    <th scope="col">Cód. Item</th>
-                    <th scope="col">Cód. Tipo Item</th>
+                    <th scope="col">Item</th>
                     <th scope="col">Valor</th>
                     <th scope="col">Quantidade</th>
                     <th scope="col">Ações</th>
@@ -65,17 +67,16 @@
                       ?>
                       <tr>
                         <td><?php echo $value['num_nf'] ?></td>
-                        <td><?php echo $value['cod_ibge'] ?></td>
+                        <td><?php echo $value['municipioIbge'] ?></td>
                         <td><?php echo $value['cod_empenho'] ?></td>
-                        <td><?php echo $value['cod_item'] ?></td>
-                        <td><?php echo $value['cod_tipo_item'] ?></td>
+                        <td><?php echo $value['descricaoItem'] ?></td>
                         <td><?php echo $value['valor'] ?></td>
                         <td><?php echo $value['quantidade'] ?></td>
                         <td> 
                           <span class="d-flex">
-                          <a href="<?php echo URL ?>View/ItensFaturaEditar.php?cod_lote=<?php echo $value['cod_lote'] ?>" class="btn btn-warning mr-1"> Editar
+                          <a href="<?php echo URL ?>View/ItensFaturaEditar.php?num_nf=<?php echo $value['num_nf'] ?>&cod_ibge=<?php echo $value['cod_ibge'] ?>&id_empenho=<?php echo $value['id_empenho'] ?>&cod_item=<?php echo $value['cod_item'] ?>&cod_tipo_item=<?php echo $value['cod_tipo_item'] ?>" class="btn btn-warning mr-1"> Editar
                           </a>
-                          <button onclick="apagarDados('<?php echo URL ?>Controller/ControleApagarLote.php?cod_lote=<?php echo $value['cod_lote'] ?>')" class="btn btn-danger">Excluir</button> 
+                          <button onclick="apagarDados('<?php echo URL ?>Controller/ControleApagarItensFatura.php?num_nf=<?php echo $value['num_nf'] ?>&cod_ibge=<?php echo $value['cod_ibge'] ?>&id_empenho=<?php echo $value['id_empenho'] ?>&cod_item=<?php echo $value['cod_item'] ?>&cod_tipo_item=<?php echo $value['cod_tipo_item'] ?>')" class="btn btn-danger">Excluir</button> 
                           </span>
                         </td>
 
@@ -113,7 +114,39 @@
             <!-- Input cod_lote -->
             <div class="form-row">
 
+            <!-- <div class="form-group col-md-12">
+                <label for="recipient-ajuda" class="col-form-label">Ajuda:</label>
+                      <select name="ajuda" class="form-control" id="recipient-ajuda">
+                      <option value="">Selecionar Ajuda</option>
+                      <?php 
+                        foreach($array_selectAjuda as $chave => $valor){
+                          
+                        ?>
+                        <option value="<?= $valor['ajuda'] ?>"></option>
+                        <?php 
+                        }
+                        
+                      ?>
+                      
+                    </select>
+              </div> -->
+              
             <div class="form-group col-md-12">
+                <label for="recipient-ajuda" class="col-form-label">Ajuda:</label>
+                  <?php
+                    echo "<select name='ajuda' class='form-control' id='recipient-ajuda'>";
+                    foreach($array_selectFaturaAjuda as $chave => $valor){
+                      $empenho = $valor[0];
+                      $tipo = $valor[1];
+                      $quantidade = $valor[2];
+                    echo "<option>" . $empenho. " | ".$tipo. " | ".$quantidade. " Disponível" ."</option>";
+                    }
+                    echo "</select>";
+
+                  ?>
+              </div>
+
+              <div class="form-group col-md-12">
                 <label for="recipient-num_nf" class="col-form-label">Nota Fiscal:</label>
                       <select name="num_nf" class="form-control" id="recipient-num_nf">
                       <option value="">Selecionar Nota Fiscal</option>
@@ -135,7 +168,7 @@
                       <?php 
                         foreach($array_selectFatura as $chave => $valor){
                         ?>
-                        <option value="<?= $valor['cod_ibge'] ?>"><?= $valor['cod_ibge'] ?></option>
+                        <option value="<?= $valor['cod_ibge'] ?>"><?= $valor['itens'] ?></option>
                         <?php 
                         }
                       ?>
@@ -144,55 +177,53 @@
 
            
               <div class="form-group col-md-12">
-                <label for="recipient-cod_empenho" class="col-form-label">Cód. Empenho:</label>
-                      <select name="cod_empenho" class="form-control" id="recipient-cod_empenho">
+                <label for="recipient-id_empenho" class="col-form-label">Cód. Empenho:</label>
+                      <select name="id_empenho" class="form-control" id="recipient-id_empenho">
                       <option value="">Selecionar Código do Empenho</option>
                       <?php 
                         foreach($array_selectEmpenho as $chave => $valor){
                         ?>
-                        <option value="<?= $valor['cod_empenho'] ?>"><?= $valor['cod_empenho'] ?></option>
+                        <option value="<?= $valor['id_empenho'] ?>"><?= $valor['cod_empenho'] ?></option>
                         <?php 
                         }
                       ?>
                     </select>
               </div>
 
-             
               <div class="form-group col-md-12">
-                <label for="recipient-item" class="col-form-label">Cód. Item:</label>
-                      <select name="item" class="form-control" id="recipient-item">
-                      <option value="">Selecionar Item</option>
-                      <?php 
-                        foreach($array_selectItens as $chave => $valor){
-                        ?>
-                        <option value="<?= $valor['item'] ?>"><?= $valor['item'] ?></option>
-                        <?php 
-                        }
-                      ?>
-                    </select>
-              </div>
-
-            
-              <div class="form-group col-md-12">
-                <label for="recipient-tipo" class="col-form-label">Cód. Tipo Item:</label>
-                      <select name="tipo" class="form-control" id="recipient-tipo">
+                <label for="recipient-cod_tipo_item" class="col-form-label">Cód. Tipo Item:</label>
+                      <select name="cod_tipo_item" class="form-control" id="recipient-cod_tipo_item">
                       <option value="">Selecionar Tipo do Item</option>
                       <?php 
                         foreach($selectTipoItem as $chave => $valor){
                         ?>
-                        <option value="<?= $valor['tipo'] ?>"><?= $valor['tipo'] ?></option>
+                        <option value="<?= $valor['cod_tipo_item'] ?>"><?= $valor['tipo'] ?></option>
                         <?php 
                         }
                       ?>
                     </select>
               </div>
-           
+             
+              <div class="form-group col-md-12">
+                <label for="recipient-cod_item" class="col-form-label">Cód. Item:</label>
+                      <select name="cod_item" class="form-control" id="recipient-cod_item">
+                      <option value="">Selecionar Item</option>
+                      <?php 
+                        foreach($array_selectItens as $chave => $valor){
+                        ?>
+                        <option value="<?= $valor['cod_item'] ?>"><?= $valor['item'] ?></option>
+                        <?php 
+                        }
+                      ?>
+                    </select>
+              </div>
+<!--            
               <div class="form-group col-md-12">
                 <label for="recipient-valor" class="col-form-label">Valor:</label>
                 <input
                 name="valor"
                 placeholder=""
-                type="number"
+                type="float"
                 class="form-control"
                 maxlength="12"
                 id="recipient-valor">
@@ -208,7 +239,7 @@
                 maxlength=""
                 id="recipient-quantidade">
               </div>
-
+ -->
             </div>
 
             <div class="modal-footer">

@@ -1,5 +1,6 @@
 <?php
 
+require_once '../Model/ClassFatura.php';
 require_once '../Model/DAO/ClassFaturaDAO.php';
 
 

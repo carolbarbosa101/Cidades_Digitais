@@ -4,15 +4,19 @@
 
     // Buscar todos os cadastros no banco
     require_once("../Controller/ControleItensEmpenhoVisualizar.php");
-    //require_once("../Controller/ControleEmpenhoSelect.php");
-
-
+    require_once("../Controller/ControleCdSelect.php");
     
-     
-     //var_dump($array_dados);
-     //die();
-     //$array_dados
     ?>
+    <style>
+    li {
+      padding: 20px;
+      display: none;
+    }
+      
+    span:hover + li {
+      display: block;
+    }
+    </style>
     
     <!-- Conteudo -->
     <main id="main">
@@ -38,11 +42,11 @@
                     unset($_SESSION['msg']); // após exibir a informação do alerta, destruir a variavel, para que ao recarregar a página o alerta não permanessa na pagina.
                 }
             ?>
-          
-          <?php 
-            //if(!empty($array_dados)){
 
-            //  extract($array_dados);
+          <?php 
+            if(!empty($array_dados)){
+
+              extract($array_dados);
           ?>
 
           <!-- FORMULARIO -->
@@ -51,81 +55,78 @@
             <div class="modal-body">
 
                   <!-- Chave primaria para saber qual registro editar do banco | input hidden para que o usuario não visualize -->
-                  <input name="cod_empenho" type="hidden" value="<?php echo $cod_empenho ?>"/>
 
-                  <div class="form-group col-md-12">
-                    <label for="recipient-cod_empenho" class="col-form-label">Código Empenho:</label>
-                    <input 
+                  <input type="hidden" name="id_empenho" value="<?php echo $id_empenho ?>" />
+                  <input type="hidden" name="cod_empenho" value="<?php echo $cod_empenho ?>" />
+                  <input type="hidden" name="cod_item" value="<?php echo $cod_item ?>" />
+                  <input type="hidden" name="cod_tipo_item" value="<?php echo $cod_tipo_item ?>" />
+                  <input type="hidden" name="cod_previsao_empenho" value="<?php echo $cod_previsao_empenho ?>" />
+                  
+                  <div class="form-row">
+                  
+                  <div class="form-group col-md-4">
+                    <label for="recipient-cod_empenho" class="col-form-label">Cod Empenho:</label>
+                    <input disabled 
                       value="<?php echo $cod_empenho ?>"
-                      name="cod_empenho"
-                      placeholder=""
                       type="text" 
                       class="form-control"
-                      maxlength="13"
                       id="recipient-cod_empenho">
                   </div>
-                  
-                  <div class="form-group col-md-12">
-                    <label for="recipient-cod_item" class="col-form-label">Código Item:</label>
-                    <input 
-                      value="<?php echo $cod_item ?>"
-                      name="cod_item"
-                      placeholder=""
-                      type="int" 
+
+                  <div class="form-group col-md-4">
+                    <label for="recipient-descricaoItem" class="col-form-label">Item:</label>
+                    <input disabled 
+                      value="<?php echo $descricaoItem ?>"
+                      type="text" 
                       class="form-control"
-                      maxlength=""
-                      id="recipient-cod_item">
+                      id="recipient-descricaoItem">
                   </div>
 
-                  <div class="form-group col-md-12">
-                    <label for="recipient-cod_tipo_item" class="col-form-label">Código Tipo Item:</label>
-                    <input 
-                      value="<?php echo $cod_tipo_item ?>"
-                      name="cod_tipo_item"
-                      placeholder=""
-                      type="int" 
-                      class="form-control"
-                      maxlength=""
-                      id="recipient-cod_tipo_item">
-                  </div>
-                  
-                  <div class="form-group col-md-12">
-                    <label for="recipient-cod_previsao_empenho" class="col-form-label">Código Previsão Empenho:</label>
-                    <input 
+                  <div class="form-group col-md-4">
+                    <label for="recipient-cod_previsao_empenho" class="col-form-label">Previsao de Empenho:</label>
+                    <input disabled 
                       value="<?php echo $cod_previsao_empenho ?>"
-                      name="cod_previsao_empenho"
-                      placeholder=""
-                      type="int" 
+                      type="text" 
                       class="form-control"
-                      maxlength=""
                       id="recipient-cod_previsao_empenho">
                   </div>
-                    
-                  <div class="form-group col-md-12">
+
+                  <div class="form-group col-md-4">
                     <label for="recipient-valor" class="col-form-label">Valor:</label>
                     <input 
                       value="<?php echo $valor ?>"
                       name="valor"
                       placeholder=""
-                      type="int" 
+                      type="float" 
                       class="form-control"
-                      maxlength="12"
+                      maxlength="12" 
                       id="recipient-valor">
                   </div>
-                  
-                  <div class="form-group col-md-12">
-                    <label for="recipient-quantidade" class="col-form-label">Quantidade:</label>
+
+                  <div class="form-group col-md-4">
+                  <span><label for="recipient-quantidade" class="col-form-label">Quantidade:</label></span>
+                    <li>Quantidade disponível: <?php printf($quant_calc) ?> </li>
                     <input 
                       value="<?php echo $quantidade ?>"
                       name="quantidade"
                       placeholder=""
-                      type="int" 
+                      type="number" 
                       class="form-control"
                       maxlength=""
                       id="recipient-quantidade">
                   </div>
 
+                  <div class="form-group col-md-4">
+                  <?php 
+                  if($quantidade>$quant_calc+$quantidade){
+                    echo '<script>alert("ERRO: O valor da quantidade é maior que o permitido!!");</script>';
 
+                    echo '<div class="alert alert-danger" role="alert">';
+                    echo ' ERRO: A quantidade: "';echo $quantidade ,'" é maior que o permitido!!';
+                    echo '</div>';
+                    //$_SESSION['msg'] = "<div class='alert alert-danger' role='alert'> ERRO: A quantidade: ";echo $quantidade ," é maior que o permitido!!'</div>";
+                  }?>
+                  </div>
                 </div>
 
             </div>
@@ -140,7 +141,7 @@
           </form>
 
           <?php 
-            //} // fim do if para verificar se existe dados para editar
+            } // fim do if para verificar se existe dados para editar
           ?>
 
         </div>
@@ -152,14 +153,14 @@
 
 
     <!-- Modal de Cadastro -->
-    <div class="modal fade cadastrar-empenho-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myItensEmpenhoModalLabel" aria-hidden="true">
+    <div class="modal fade cadastrar-cditens-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myItensEmpenhoModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           
           <div class="modal-header">
             <h5 class="modal-title" id="myItensEmpenhoModalLabel">
               <i class="far fa-plus-square"></i>
-              Cadastrar ItensEmpenho
+              Cadastrar Itens Empenho
             </h5>
           </div>
 
@@ -167,42 +168,29 @@
           <form action="../Controller/ControleItensEmpenhoEditar.php" method="post">
 
             <div class="modal-body">
-                <div class="form-group col-md-12">
-                    <label for="recipient-cod_empenho" class="col-form-label">Número da Nota Fiscal:</label>
-                    <input 
-                      name="cod_empenho"
-                      placeholder=""
-                      type="int" 
-                      class="form-control"
-                      maxlength="14" 
-                      id="recipient-cod_empenho">
-                  </div>
-                  
-                  <div class="form-group col-md-12">
-                    <label for="recipient-cod_previsao_empenho" class="col-form-label">Código IBGE:</label>
-                    <input 
-                      name="cod_previsao_empenho"
-                      placeholder=""
-                      type="int" 
-                      class="form-control"
-                      maxlength="7" 
-                      id="recipient-cod_previsao_empenho">
-                  </div>
-                    
+
 
                   <div class="form-group col-md-12">
-                    <label for="recipient-data" class="col-form-label">Data:</label>
+                    <label for="recipient-valor" class="col-form-label">Valor:</label>
                     <input 
-                      name="data"
+                      name="valor"
                       placeholder=""
-                      type="date" 
+                      type="number" 
                       class="form-control"
                       maxlength="" 
-                      id="recipient-data">
+                      id="recipient-valor">
                   </div>
 
-                  
-                  
+                  <div class="form-group col-md-12">
+                    <label for="recipient-quantidade" class="col-form-label">Quantidade:</label>
+                    <input 
+                      name="quantidade"
+                      placeholder=""
+                      type="number" 
+                      class="form-control"
+                      maxlength="" 
+                      id="recipient-quantidade">
+                  </div>
                 </div>
 
             </div>

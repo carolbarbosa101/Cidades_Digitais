@@ -59,8 +59,8 @@ class ClassMunicipio {
         $this->nome_municipio = $nome_municipio;
     }
 
-    function setPopulacao($email) {
-        $this->email = $email;
+    function setPopulacao($populacao) {
+        $this->populacao = $populacao;
     }
     function setUf($uf) {
         $this->uf = $uf;

@@ -9,7 +9,7 @@ $cnpj = @$_POST['cnpj'];
 $contrato = @$_POST['contrato'];
 $dt_inicio_vig = @$_POST['dt_inicio_vig'];
 $dt_final_vig = @$_POST['dt_final_vig'];
-$dt_reajuste = @$_POST['dt_reajuste'].'-0000';
+$dt_reajuste = '0000-'.@$_POST['dt_reajuste'];
 
 
 $novoLote = new ClassLote();
@@ -18,7 +18,7 @@ $novoLote->setCnpj($cnpj);
 $novoLote->setContrato($contrato);
 $novoLote->setDt_inicio_vig($dt_inicio_vig);
 $novoLote->setDt_final_vig($dt_final_vig);
-$novoLote->setDt_reajuste(date('Y-m-d', strtotime($dt_reajuste)));
+$novoLote->setDt_reajuste($dt_reajuste);
 
 
 $classLoteDAO = new ClassLoteDAO();
