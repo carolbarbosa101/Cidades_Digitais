@@ -1,7 +1,7 @@
 <html><br><br><br><br>
 <style>
 .cor-footer {
-  position: fixed;
+ 
   background-color: #2362bd;
   left: 0;
   bottom: 0;
@@ -24,7 +24,7 @@
 
     <!--Image-->
     <div class="view overlay z-depth-1-half">
-      <img src="http://www.mctic.gov.br/mctic/export/sites/institucional/arquivos/pictogramas/logo_mctic_horizontal_cor_gradiente_OLD.jpg" width="1000" height="1000" class="img-fluid"
+      <img src="http://www.mctic.gov.br/mctic/export/sites/institucional/arquivos/pictogramas/logo_mctic_horizontal_cor_gradiente_OLD.jpg" width="300" height="300" class="img-fluid"
         alt="">
       <a href="">
         <div class="mask rgba-white-light"></div>
