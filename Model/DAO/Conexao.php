@@ -3,7 +3,7 @@
 abstract class Conexao {
 
     public static function getInstance() {
-        $dsn = 'mysql:host=localhost;dbname=cidades_digitais_db';
+        $dsn = 'mysql:host=localhost;dbname=cidades_digitais_db;charset=utf8';
         $user = 'root';
         $pass = '';
         try {
