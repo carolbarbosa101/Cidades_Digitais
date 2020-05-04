@@ -2,7 +2,7 @@
 
 //define("URL", "http://172.25.117.58:88/Cidades_Digitais/"); // IP Daniel
 
-define("URL", "http://172.25.98.140:83/Cidades_Digitais/"); // IP do computador da Carol
+define("URL", "http://localhost:83/Cidades_Digitais/"); // IP do computador da Carol
 
 //define("URL", "http://localhost/Cidades_Digitais/"); // IP notebook Carol
 
