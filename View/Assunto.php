@@ -10,6 +10,7 @@
     <!-- Conteudo -->
     <main id="main">
       <div class="container">
+
         <div class="row mb-5">
           <div id="mainHeader" class="col-md-6 d-flex align-items-center">
             <span id="mainHeaderIcon">
@@ -27,6 +28,33 @@
                 </button>
             </div>
         </div>
+
+          <!-- FILTRO DE PESQUISA -->
+          <div class="row mt-2 mb-3">
+              <div class="col-12">
+                  <form action="" method="get" class="d-flex align-items-center">
+                      <label for="idPesquisaInput" class="m-0">
+                        <input
+                            type="text"
+                            name="pesquisa"
+                            class="form-control"
+                            id="idPesquisaInput"
+                            placeholder="Digite aqui..."
+                            value="<?= isset($_GET['pesquisa']) && !empty($_GET['pesquisa']) ? $_GET['pesquisa'] : '' ?>"
+                            required
+                        >
+                      </label>
+                      <button
+                          type="submit"
+                          class="btn btn-secondary ml-1">
+                          Pesquisar
+                      </button>
+                      <a href="<?= URL . 'View/'?>Assunto.php" class="btn btn-warning ml-1">Limpar</a>
+                  </form>
+              </div>
+          </div>
+          <!-- #END FILTRO DE PESQUISA -->
+
       </div>
       
         <div class="container">

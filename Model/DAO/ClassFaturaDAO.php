@@ -42,6 +42,7 @@ class ClassFaturaDAO {
     }
     
     public function listarFatura(){
+        
         try {
             $pdo = Conexao::getInstance();
             $sql = "SELECT num_nf, cod_ibge, dt_nf FROM fatura ORDER BY num_nf ASC";

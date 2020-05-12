@@ -24,7 +24,6 @@ class ClassCd {
     function getdata_imp() {
         return $this->data_imp;
     }
-   
     
 	
     function setCod_ibge($cod_ibge) {
@@ -47,5 +46,5 @@ class ClassCd {
     function setData_imp($data_imp) {
         $this->data_imp = $data_imp;
     }
-    
+
 }
