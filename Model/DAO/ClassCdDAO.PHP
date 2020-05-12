@@ -23,6 +23,8 @@ class ClassCdDAO {
             echo $exc->getMessage();
         }
     }
+
+
     public function update(ClassCd $editarCd) {
         try {
             $pdo = Conexao::getInstance();

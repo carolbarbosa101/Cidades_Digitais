@@ -9,6 +9,7 @@
     require_once("../Controller/ControleLoteSelect.php");
     ?>
     
+    
     <!-- Conteudo -->
     <main id="main">
       <div class="container">
@@ -27,9 +28,13 @@
                 <i class="far fa-plus-square"></i>
                 Cadastrar
                 </button>
+              
+
             </div>
         </div>
       </div>
+  
+
         <div class="container">
 
             <?php

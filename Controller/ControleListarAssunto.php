@@ -2,7 +2,25 @@
 
 require_once '../Model/DAO/ClassAssuntoDAO.php';
 $listar = new ClassAssuntoDAO(); // instanciando um objeto
-$dados = $listar->listarAssunto(); // chamando metodo para listar todos os usuários do banco
+
+$realizarPesquisa = filter_input(INPUT_GET, "pesquisa", FILTER_SANITIZE_STRING);
+/*
+ * Quando o usuario realizar uma pesquisa a variavel $realizarPesquisa
+ * vai ter valor, ou seja, não será vazia nem null,
+ * ai sera chamada o metodo DAO preparado pra receber o valor
+ * que está sendo pesquisado e então retornar os dados caso encontre algum
+ * compativel com o filtro
+ */
+if (!empty($realizarPesquisa)) {
+
+    $dados = $listar->listarAssuntoFiltrarPesquisa($realizarPesquisa); // chamando metodo para listar todos os usuários do banco
+
+} else {
+
+    $dados = $listar->listarAssunto(); // chamando metodo para listar todos os usuários do banco
+
+}
+
 
 if($dados) { // se existir algum municipio no banco então passar o array de dados para a variavel $array_dados
     $array_dados = $dados;
