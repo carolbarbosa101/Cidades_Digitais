@@ -55,7 +55,7 @@ class ClassAssuntoDAO {
     public function listarAssuntoFiltrarPesquisa($pesquisando){
 
         $pesquisaComLike = "%$pesquisando%";
-        $condicaoPesquisar = " ( cod_assunto = :codigo OR descricao LIKE :assunto OR descricao = :assuntoIgual ) ";
+        $condicaoPesquisar = " ( cod_assunto LIKE :codigo OR descricao LIKE :assunto OR descricao = :assuntoIgual) ";
 
         try {
             $pdo = Conexao::getInstance();
