@@ -102,11 +102,11 @@ class ClassItensEmpenhoDAO {
     public function listarItensEmpenhoFiltrarPesquisa($pesquisando){
 
         $pesquisaComLike = "%$pesquisando%";
-        $condicaoPesquisar = " ( cod_assunto LIKE :codigo OR descricao LIKE :assunto OR descricao = :assuntoIgual) ";
+        $condicaoPesquisar = " ( id_empenho LIKE :codigo OR descricao LIKE :cod_tipo_item OR descricao LIKE :cod_previsao_empenho OR descricao LIKE :valor OR descricao LIKE :quantidade OR descricao= :assuntoIgual) ";
 
         try {
             $pdo = Conexao::getInstance();
-            $sql = "SELECT cod_assunto, descricao FROM assunto WHERE {$condicaoPesquisar} ORDER BY cod_assunto ASC";
+            $sql = "SELECT id_empenho, cod_item, cod_tipo_item, cod_previsao_empenho, valor, quantidade FROM itens_empenho WHERE {$condicaoPesquisar} ORDER BY id_empenho ASC";
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':codigo', $pesquisando);
             $stmt->bindParam(':assunto', $pesquisaComLike);

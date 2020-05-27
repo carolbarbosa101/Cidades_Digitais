@@ -31,7 +31,6 @@
       </div>
 
 
-        <div class="container">
         
           <!-- FILTRO DE PESQUISA -->
           <div class="row mt-2 mb-3">
@@ -53,7 +52,7 @@
                                     class="btn btn-secondary ml-1">
                                     Pesquisar
                                 </button>
-                                <a href="<?= URL . 'View/'?>ItensEmpenho.php" class="btn btn-warning ml-1">Limpar</a>
+                                <a href="<?= URL .'View/'?>ItensEmpenho.php" class="btn btn-warning ml-1">Limpar</a>
                             </form>
                         </div>
                     </div>
