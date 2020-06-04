@@ -99,26 +99,24 @@ class ClassItensEmpenhoDAO {
         }
     }
 
-    /**SELECT valor, quantidade,
-            CONCAT(empenho.cod_empenho, ' - ', empenho.data) AS empenhoLista
-            FROM itens_empenho
-            INNER JOIN empenho ON itens_empenho.cod_empenho = empenho.cod_empenho
-            ORDER BY itens_empenho.cod_empenho ASC;
-            
-            SELECT CONCAT(itens.cod_item, ' - ', itens.descricao, ' - ', itens.unidade) AS itemLista
-            FROM itens_empenho
-            INNER JOIN itens ON itens_empenho.cod_item = itens.cod_item
-            ORDER BY itens_empenho.cod_empenho ASC;
-            
-            SELECT CONCAT(tipo_item.cod_tipo_item, ' - ', tipo_item.descricao) AS tipo_itemLista
-            FROM itens_empenho
-            INNER JOIN tipo_item ON itens_empenho.cod_tipo_item = tipo_item.cod_tipo_item
-            ORDER BY itens_empenho.cod_empenho ASC;
-            
-            SELECT CONCAT(previsao_empenho.cod_previsao_empenho, ' - ', previsao_empenho.data) AS previsaoLista
-            FROM itens_empenho
-            INNER JOIN previsao_empenho ON itens_empenho.cod_previsao_empenho = previsao_empenho.cod_previsao_empenho
-            ORDER BY itens_empenho.cod_empenho ASC */
+    public function listarItensEmpenhoFiltrarPesquisa($pesquisando){
+
+        $pesquisaComLike = "%$pesquisando%";
+        $condicaoPesquisar = " ( id_empenho LIKE :codigo OR item LIKE :assunto OR orevisao_empenho LIKE :assunto OR valor LIKE :assunto= :assuntoIgual) ";
+
+        try {
+            $pdo = Conexao::getInstance();
+            $sql = "SELECT id_empenho, cod_item, cod_tipo_item, cod_previsao_empenho, valor, quantidade FROM itens_empenho WHERE {$condicaoPesquisar} ORDER BY id_empenho ASC";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':codigo', $pesquisando);
+            $stmt->bindParam(':assunto', $pesquisaComLike);
+            $stmt->bindParam(':assuntoIgual', $pesquisando);
+            $stmt->execute();
+            return $stmt->fetchAll(); // fetchAll() retorna um array contendo varios dados.
+        } catch (PDOException $ex) {
+            return $ex->getMessage();
+        }
+    }
 
             public function visualizarItensEmpenho(ClassItensEmpenho $visualizarItensEmpenho){
                 //var_dump($visualizarItensEmpenho);
