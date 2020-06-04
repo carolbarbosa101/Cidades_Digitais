@@ -102,7 +102,7 @@ class ClassItensEmpenhoDAO {
     public function listarItensEmpenhoFiltrarPesquisa($pesquisando){
 
         $pesquisaComLike = "%$pesquisando%";
-        $condicaoPesquisar = " ( id_empenho LIKE :codigo OR descricao LIKE :cod_tipo_item OR descricao LIKE :cod_previsao_empenho OR descricao LIKE :valor OR descricao LIKE :quantidade OR descricao= :assuntoIgual) ";
+        $condicaoPesquisar = " ( id_empenho LIKE :codigo OR item LIKE :assunto OR orevisao_empenho LIKE :assunto OR valor LIKE :assunto= :assuntoIgual) ";
 
         try {
             $pdo = Conexao::getInstance();
