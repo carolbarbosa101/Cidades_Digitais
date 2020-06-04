@@ -24,8 +24,6 @@ class ClassItensFaturaDAO {
     }
 
     public function update(ClassItensFatura $editarItensFatura) {
-        //var_dump($editarItensFatura);
-        //die();
 
         try {
             $pdo = Conexao::getInstance();
