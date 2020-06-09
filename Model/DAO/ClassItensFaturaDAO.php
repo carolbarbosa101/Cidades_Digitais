@@ -24,6 +24,8 @@ class ClassItensFaturaDAO {
     }
 
     public function update(ClassItensFatura $editarItensFatura) {
+        //var_dump($editarItensFatura);
+        //die();
 
         try {
             $pdo = Conexao::getInstance();
@@ -70,6 +72,36 @@ class ClassItensFaturaDAO {
             return $ex->getMessage();
         }
     }
+
+
+
+
+    public function listarItensFaturaFiltrarPesquisa($pesquisando){
+
+        $pesquisaComLike = "%$pesquisando%";
+        $condicaoPesquisar = " ( num_nf LIKE :codigo OR cod_ibge LIKE :cod OR id_empenho LIKE :empenho
+         OR cod_item LIKE :item OR cod_tipo_item LIKE :codtipo OR valor LIKE :valor quantidade LIKE :quant  = :assuntoIgual) ";
+
+        try {
+            $pdo = Conexao::getInstance();
+            $sql = "SELECT cod_assunto, descricao FROM assunto WHERE {$condicaoPesquisar} ORDER BY cod_assunto ASC";
+           
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':codigo', $pesquisando);
+            $stmt->bindParam(':cod', $pesquisaComLike);
+            $stmt->bindParam(':empenho', $pesquisaComLike);
+            $stmt->bindParam(':item', $pesquisaComLike);
+            $stmt->bindParam(':codtipo', $pesquisaComLike); 
+            $stmt->bindParam(':valor', $pesquisaComLike);
+            $stmt->bindParam(':quant', $pesquisaComLike);
+            $stmt->bindParam(':assuntoIgual', $pesquisando);
+            $stmt->execute();
+            return $stmt->fetchAll(); // fetchAll() retorna um array contendo varios dados.
+        } catch (PDOException $ex) {
+            return $ex->getMessage();
+        }
+    }
+
 
     public function visualizarItensFatura(ClassItensFatura $visualizarItensFatura){
         //var_dump($visualizarItensFatura);

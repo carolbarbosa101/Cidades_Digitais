@@ -26,26 +26,6 @@ class ClassItensPrevisaoEmpenhoDAO {
         }
     }
 
-
-    public function listarItensEmpenhoFiltrarPesquisa($pesquisando){
-
-        $pesquisaComLike = "%$pesquisando%";
-        $condicaoPesquisar = " ( id_empenho LIKE :codigo OR item LIKE :assunto OR orevisao_empenho LIKE :assunto OR valor LIKE :assunto= :assuntoIgual) ";
-
-        try {
-            $pdo = Conexao::getInstance();
-            $sql = "SELECT id_empenho, cod_item, cod_tipo_item, cod_previsao_empenho, valor, quantidade FROM itens_empenho WHERE {$condicaoPesquisar} ORDER BY id_empenho ASC";
-            $stmt = $pdo->prepare($sql);
-            $stmt->bindParam(':codigo', $pesquisando);
-            $stmt->bindParam(':assunto', $pesquisaComLike);
-            $stmt->bindParam(':assuntoIgual', $pesquisando);
-            $stmt->execute();
-            return $stmt->fetchAll(); // fetchAll() retorna um array contendo varios dados.
-        } catch (PDOException $ex) {
-            return $ex->getMessage();
-        }
-    }
-
     public function updateNew($preco, $cod_previsao_empenho, $cod_item, $cod_tipo_item) {
         try {
             $pdo = Conexao::getInstance();
