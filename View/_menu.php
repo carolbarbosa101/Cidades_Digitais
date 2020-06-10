@@ -114,7 +114,7 @@ body {
       }
       ?>
 
-      <a href="<?php echo URL . "View/{$menu}.php" ?>" class="w3-bar-item w3-button w3-large abbr<?php echo $active ?>">
+      <a href="<?php echo URL . "View/{$menu}.php?pagina=1" ?>" class="w3-bar-item w3-button w3-large abbr<?php echo $active ?>">
         <span>
           <?php echo $icone ?>
         </span>

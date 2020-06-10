@@ -9,6 +9,9 @@
     require_once("../Controller/ControleTipoItemSelect.php");
     require_once("../Controller/ControlePrevisaoEmpenhoSelect.php");
     // $array_dados
+    // var_dump($total)
+
+    
     ?>
     
     <!-- Conteudo -->
@@ -84,10 +87,12 @@
                   <?php
                   //var_dump($array_dados);
                   //die();
+
+                  if($pgs > 1 ) {
                     foreach ($array_dados as $key => $value) {
                         ?>
                         <tr>
-
+                        
                           <td><?php echo $value['empenhoLista'] ?></td>
                           <td><?php echo $value['itemLista'] ?></td>
                           <td><?php echo $value['previsaoLista'] ?></td>
@@ -105,6 +110,22 @@
                         </tr>
                         <?php
                     }
+                  }
+                  // Mostragem de pagina
+                  if($menos > 0) {
+                    echo "<a href=".$_SERVER['PHP_SELF']."?pagina=$menos>Anterior</a> |  ";
+                  }
+                  // Listando as paginas
+                  for($i=1;$i <= $pgs;$i++) {
+                      if($i != $pagina) {
+                          echo " <a style='text-align:center' href=".$_SERVER['PHP_SELF']."?pagina=".($i).">$i</a> | ";
+                      } else {
+                          echo " <strong>".$i."</strong> | ";
+                      }
+                  }
+                  if($mais <= $pgs) {
+                      echo " <a href=".$_SERVER['PHP_SELF']."?pagina=$mais>Próxima</a>";
+                  }  
                   ?>
                   </tbody>
                 </table>

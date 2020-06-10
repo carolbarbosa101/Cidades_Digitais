@@ -78,7 +78,26 @@ class ClassItensEmpenhoDAO {
 
 
     
-    //Não sei como deveria ser a listagem da função listar e visualizar
+    public function listarItensEmpenhoPag($inicio, $maximo){
+        try {
+            $pdo = Conexao::getInstance();
+            $sql = "SELECT empenho.cod_empenho AS empenhoLista, 
+            CONCAT(itens.cod_tipo_item, '.', itens.cod_item, ' - ', itens.descricao) AS itemLista,
+            itens_empenho.cod_previsao_empenho AS previsaoLista,
+            itens_empenho.id_empenho, itens.cod_item, itens.cod_tipo_item, itens_empenho.cod_previsao_empenho, itens_empenho.valor, itens_empenho.quantidade
+            FROM itens_empenho
+            INNER JOIN itens ON itens_empenho.cod_item = itens.cod_item AND itens_empenho.cod_tipo_item = itens.cod_tipo_item 
+            INNER JOIN empenho ON itens_empenho.id_empenho = empenho.id_empenho
+            ORDER BY itens_empenho.id_empenho, itens_empenho.cod_tipo_item, itens_empenho.cod_item ASC LIMIT $inicio,$maximo";
+
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll();
+        } catch (PDOException $ex) {
+            return $ex->getMessage();
+        }
+    }
+
     public function listarItensEmpenho(){
         try {
             $pdo = Conexao::getInstance();
@@ -99,14 +118,14 @@ class ClassItensEmpenhoDAO {
         }
     }
 
-    public function listarItensEmpenhoFiltrarPesquisa($pesquisando){
+    public function listarItensEmpenhoFiltrarPesquisa($pesquisando,$inicio,$maximo){
 
         $pesquisaComLike = "%$pesquisando%";
         $condicaoPesquisar = " ( id_empenho LIKE :codigo OR item LIKE :assunto OR orevisao_empenho LIKE :assunto OR valor LIKE :assunto= :assuntoIgual) ";
 
         try {
             $pdo = Conexao::getInstance();
-            $sql = "SELECT id_empenho, cod_item, cod_tipo_item, cod_previsao_empenho, valor, quantidade FROM itens_empenho WHERE {$condicaoPesquisar} ORDER BY id_empenho ASC";
+            $sql = "SELECT id_empenho, cod_item, cod_tipo_item, cod_previsao_empenho, valor, quantidade FROM itens_empenho WHERE {$condicaoPesquisar} ORDER BY id_empenho ASC LIMIT $inicio,$maximo";
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':codigo', $pesquisando);
             $stmt->bindParam(':assunto', $pesquisaComLike);
