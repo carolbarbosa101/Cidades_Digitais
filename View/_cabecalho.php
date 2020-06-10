@@ -1,5 +1,5 @@
 <?php
-define("URL", "http://localhost:83/Cidades_Digitais/"); // IP do computador da Carol
+define("URL", "http://localhost:89/Cidades_Digitais/"); // IP do computador da Carol
 
 
  session_start();
