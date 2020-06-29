@@ -49,6 +49,25 @@ class ClassCdItensDAO {
         }
     }
     
+    public function listarCdItensPag($inicio, $maximo){
+        try {
+            $pdo = Conexao::getInstance();
+            $sql = "SELECT 
+            municipio.nome_municipio, 
+            CONCAT (itens.cod_tipo_item, '.', itens.cod_item, ' - ', itens.descricao) AS descricao, 
+            cd_itens.*
+            FROM cd_itens 
+            INNER JOIN municipio ON cd_itens.cod_ibge = municipio.cod_ibge
+            INNER JOIN itens ON cd_itens.cod_item = itens.cod_item AND cd_itens.cod_tipo_item = itens.cod_tipo_item
+            ORDER BY municipio.nome_municipio, itens.cod_tipo_item, itens.cod_item ASC LIMIT $inicio,$maximo";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll();
+        } catch (PDOException $ex) {
+            return $ex->getMessage();
+        }
+    }
+
     public function listarCdItens(){
         try {
             $pdo = Conexao::getInstance();

@@ -64,6 +64,18 @@ class ClassMunicipioDAO {
         }
     }
     
+    public function listarMunicipiosPag($inicio, $maximo){
+        try {
+            $pdo = Conexao::getInstance();
+            $sql = "SELECT cod_ibge, nome_municipio, populacao, uf, regiao, cnpj, dist_capital, endereco, numero, complemento, bairro, idhm, latitude, longitude FROM municipio ORDER BY nome_municipio ASC LIMIT $inicio,$maximo";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(); // fetchAll() retorna um array contendo varios dados. 
+        } catch (PDOException $ex) {
+            return $ex->getMessage();
+        }
+    }
+
     public function listarMunicipios(){
         try {
             $pdo = Conexao::getInstance();

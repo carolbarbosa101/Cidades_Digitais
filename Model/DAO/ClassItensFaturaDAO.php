@@ -53,6 +53,25 @@ class ClassItensFaturaDAO {
         }
     }
     
+    public function listarItensFaturaPag($inicio, $maximo){
+        try {
+            $pdo = Conexao::getInstance();
+            $sql = "SELECT 
+			CONCAT (municipio.nome_municipio, ' - ', municipio.cod_ibge) AS municipioIbge, 
+            CONCAT (itens_fatura.cod_tipo_item, '.', itens_fatura.cod_item, ' - ', itens.descricao) AS descricaoItem, 
+            itens_fatura.*, empenho.cod_empenho
+            FROM itens_fatura 
+            INNER JOIN municipio ON itens_fatura.cod_ibge = municipio.cod_ibge
+            INNER JOIN itens ON itens_fatura.cod_item = itens.cod_item AND itens_fatura.cod_tipo_item = itens.cod_tipo_item
+            INNER JOIN empenho ON itens_fatura.id_empenho = empenho.id_empenho
+            ORDER BY num_nf ASC LIMIT $inicio,$maximo";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(); // fetchAll() retorna um array contendo varios dados. 
+        } catch (PDOException $ex) {
+            return $ex->getMessage();
+        }
+    }
     public function listarItensFatura(){
         try {
             $pdo = Conexao::getInstance();

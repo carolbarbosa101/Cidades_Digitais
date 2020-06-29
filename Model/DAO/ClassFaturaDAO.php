@@ -41,6 +41,19 @@ class ClassFaturaDAO {
         }
     }
     
+    public function listarFaturaPag($inicio, $maximo){
+        
+        try {
+            $pdo = Conexao::getInstance();
+            $sql = "SELECT num_nf, cod_ibge, dt_nf FROM fatura ORDER BY num_nf ASC LIMIT $inicio,$maximo";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(); // fetchAll() retorna um array contendo varios dados. 
+        } catch (PDOException $ex) {
+            return $ex->getMessage();
+        }
+    }
+
     public function listarFatura(){
         
         try {

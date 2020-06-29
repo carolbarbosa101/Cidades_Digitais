@@ -56,6 +56,17 @@ class ClassLoteItensDAO {
         }
     }
 
+    public function listarLoteItensPag($inicio, $maximo){
+        try {
+            $pdo = Conexao::getInstance();
+            $sql = "SELECT cod_lote,cod_item,cod_tipo_item, preco FROM lote_itens ORDER BY cod_lote ASC LIMIT $inicio,$maximo";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(); 
+        } catch (PDOException $ex) {
+            return $ex->getMessage();
+        }
+    }
     public function listarLoteItens(){
         try {
             $pdo = Conexao::getInstance();

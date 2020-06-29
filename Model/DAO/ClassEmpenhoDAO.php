@@ -36,6 +36,21 @@ class ClassEmpenhoDAO {
         }
     }
     
+    public function listarEmpenhoPag($inicio, $maximo){
+        try {
+            $pdo = Conexao::getInstance();
+            
+
+            $sql = "SELECT		empenho.cod_empenho, empenho.cod_previsao_empenho as previsao, empenho.data
+            FROM empenho 
+            ORDER BY empenho.cod_empenho ASC LIMIT $inicio,$maximo";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(); // fetchAll() retorna um array contendo varios dados. 
+        } catch (PDOException $ex) {
+            return $ex->getMessage();
+        }
+    }
     public function listarEmpenho(){
         try {
             $pdo = Conexao::getInstance();

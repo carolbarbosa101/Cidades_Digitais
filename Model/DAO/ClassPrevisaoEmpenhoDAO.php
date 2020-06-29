@@ -37,6 +37,22 @@ class ClassPrevisaoEmpenhoDAO {
         }
     }*/
     
+    public function listarPrevisaoEmpenhoPag($inicio, $maximo){
+        try {
+            $pdo = Conexao::getInstance();
+            $sql = "SELECT      previsao_empenho.*,
+            CONCAT(natureza_despesa.cod_natureza_despesa, ' - ', natureza_despesa.descricao) AS descricao
+            FROM previsao_empenho 
+            JOIN natureza_despesa ON previsao_empenho.cod_natureza_despesa = natureza_despesa.cod_natureza_despesa
+			ORDER BY previsao_empenho.cod_previsao_empenho ASC LIMIT $inicio,$maximo";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(); // fetchAll() retorna um array contendo varios dados. 
+        } catch (PDOException $ex) {
+            return $ex->getMessage();
+        }
+    }
+
     public function listarPrevisaoEmpenho(){
         try {
             $pdo = Conexao::getInstance();
