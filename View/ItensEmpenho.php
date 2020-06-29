@@ -111,6 +111,7 @@
                         <?php
                     }
                   }
+                  echo "<center>";
                   // Mostragem de pagina
                   if($menos > 0) {
                     echo "<a href=".$_SERVER['PHP_SELF']."?pagina=$menos>Anterior</a> |  ";
@@ -125,7 +126,10 @@
                   }
                   if($mais <= $pgs) {
                       echo " <a href=".$_SERVER['PHP_SELF']."?pagina=$mais>Próxima</a>";
-                  }  
+                  }
+                  
+                  echo "</center>";  
+                  echo "<br>";   
                   ?>
                   </tbody>
                 </table>

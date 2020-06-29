@@ -77,6 +77,23 @@ class ClassItensPrevisaoEmpenhoDAO {
     //     }
     // }
 
+    public function listarItensPrevisaoEmpenhoPag($inicio, $maximo){
+        try {
+            $pdo = Conexao::getInstance();
+            $sql = "SELECT 	CONCAT(itens_previsao_empenho.cod_tipo_item, '.', itens_previsao_empenho.cod_item, ' - ', itens.descricao) AS itemLista,
+            itens_previsao_empenho.cod_lote, itens_previsao_empenho.cod_previsao_empenho, itens_previsao_empenho.cod_item, itens_previsao_empenho.cod_tipo_item, itens_previsao_empenho.valor, itens_previsao_empenho.quantidade
+            FROM itens_previsao_empenho
+            INNER JOIN itens ON itens_previsao_empenho.cod_item = itens.cod_item AND itens_previsao_empenho.cod_tipo_item = itens.cod_tipo_item
+            ORDER BY itens_previsao_empenho.cod_previsao_empenho, itens_previsao_empenho.cod_tipo_item, itens_previsao_empenho.cod_item ASC LIMIT $inicio,$maximo";
+
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll();
+        } catch (PDOException $ex) {
+            return $ex->getMessage();
+        }
+    }
+
     public function listarItensPrevisaoEmpenho(){
         try {
             $pdo = Conexao::getInstance();

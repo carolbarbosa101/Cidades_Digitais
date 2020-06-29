@@ -51,6 +51,7 @@
                   <?php
                   //var_dump($array_dados);
                   //die();
+                  if($pgs > 1 ) {
                     foreach($array_dados as $key => $value) {
                         ?>
                         <tr>
@@ -68,6 +69,26 @@
                         </tr>
                         <?php
                     }
+                  }
+                  echo "<center>";
+                  // Mostragem de pagina
+                  if($menos > 0) {
+                    echo "<a href=".$_SERVER['PHP_SELF']."?pagina=$menos>Anterior</a> |  ";
+                  }
+                  // Listando as paginas
+                  for($i=1;$i <= $pgs;$i++) {
+                      if($i != $pagina) {
+                          echo " <a style='text-align:center' href=".$_SERVER['PHP_SELF']."?pagina=".($i).">$i</a> | ";
+                      } else {
+                          echo " <strong>".$i."</strong> | ";
+                      }
+                  }
+                  if($mais <= $pgs) {
+                      echo " <a href=".$_SERVER['PHP_SELF']."?pagina=$mais>Próxima</a>";
+                  }
+
+                  echo "</center>";  
+                  echo "<br>";  
                   ?>
                   </tbody>
                 </table>
